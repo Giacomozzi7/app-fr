@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'mapa',
+    loadChildren: () => import('./mapa/mapa.module').then( m => m.MapaPageModule)
+  },
+  {
+    path: 'memoria',
+    loadChildren: () => import('./memoria/memoria.module').then( m => m.MemoriaPageModule)
+  },
 ];
 
 @NgModule({

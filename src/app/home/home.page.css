@@ -1,0 +1,17 @@
+ion-content{
+  --ion-background-color: white;
+}
+
+.grilla{
+  height:30%;
+  margin-top:40%;
+}
+
+.btn ion-label {
+  text-transform: none;
+  font-size: 1.6vh;
+}
+
+ion-label{
+  margin-left:2%;
+}

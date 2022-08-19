@@ -1,0 +1,77 @@
+<ion-content fullscreen="true">
+<ion-grid fixed="true" class="grilla">
+  <ion-row class="icons_row">
+    <ion-col>
+      <div>
+        <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" href="home">
+          <ion-icon name="arrow-back-circle" class="icon"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div>
+        <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" (click)="pressLeyenda()">
+          <ion-icon name="information-circle" class="icon"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div>
+        <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" (click)="ngOnInit()">
+          <ion-icon name="refresh" class="icon"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div>
+        <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" href="memoria">
+          <ion-icon name="images" class="icon"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-col>
+
+  </ion-row>
+  <ion-row>
+    <ion-col class="col_mapa">
+        <div id="map" size="10"></div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="icons_row"> 
+    <ion-col size="3">
+      <div>
+        <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" href="home">
+          <ion-icon name="funnel" class="icon"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-col>
+    <ion-col size="2" class="col_filtro">
+      <div>
+        <ion-button  expand="block" size="small" color="warning" class="btn_filtro" (click)="pressFiltro('Tipo')">
+          Tipo
+        </ion-button>
+      </div>
+    </ion-col>
+    <ion-col  size="2" class="col_filtro">
+      <div>
+        <ion-button  expand="block" size="small" color="warning" class="btn_filtro" (click)="pressFiltro('Zona')">
+          Zona
+        </ion-button>
+      </div>
+    </ion-col>
+    <ion-col size="2" class="col_filtro">
+      <div>
+        <ion-button  expand="block" size="small" color="warning" class="btn_filtro" (click)="quitarMarkers()">
+          Fecha
+        </ion-button>
+      </div>
+    </ion-col>
+    <ion-col size="3">
+      <div>
+        <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" href="home">
+          <ion-icon name="navigate" class="icon"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

@@ -1,20 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title>Menu</ion-title>
     </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  </ion-header>
+  
+  <ion-content fullscreen="true">
+    <ion-grid class="grilla">
+      <ion-row>
+        <ion-col size="10" offset="1">
+          <ion-button color="success" expand="block" size="large" class="btn" href="mapa">
+            <ion-icon name="map"></ion-icon> 
+            <ion-label>Ver mapa desastres naturales</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="5" offset="1">
+          <ion-button color="primary" expand="block" class="btn">
+            <ion-icon name="information-circle"></ion-icon>
+            <ion-label>Información</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col size="5">
+          <ion-button color="primary" expand="block" class="btn">
+            <ion-icon name="settings"></ion-icon>
+            <ion-label>Ajustes</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="5" offset="1">
+          <ion-button color="primary" expand="block" class="btn">
+            <ion-icon name="people"></ion-icon>
+            <ion-label>Acerca de</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col size="5">
+          <ion-button color="danger" expand="block" class="btn">
+            <ion-icon name="log-out"></ion-icon>
+            <ion-label>Cerrar Sesión</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>

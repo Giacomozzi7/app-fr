@@ -1,0 +1,45 @@
+
+#map {
+    height:80vh;
+    opacity: 0;
+    transition: opacity 150ms ease-in;
+}
+
+#map.show-map{
+    opacity: 1;
+}
+
+.col_mapa{
+    padding:0px;
+}
+
+.grilla{
+    background-color: white;
+    padding:0px;
+}
+
+.icons_row{
+    background-color: #1f1f1f;
+    height:10vh;
+    align-items: center;
+}
+
+.icon{
+    font-size:4vh;
+}
+
+.coord{
+    font-size: 1.2vh;
+    color:white;
+}
+
+.btn_filtro{
+    text-transform: none;
+    margin: 0px;
+    font-size:1.5vh;
+    
+}
+
+.col_filtro{
+    padding:1px;
+}

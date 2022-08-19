@@ -1,0 +1,52 @@
+ion-toolbar{
+    height:7vh;
+}
+
+ion-footer{
+    height: 7vh;
+}
+
+ion-content{
+    --background:white;
+}
+
+#grilla{
+    padding:0.2vh;
+}
+
+.parrafo-zona{
+    margin:0px;
+    padding-top: 2vh;
+    font-weight: bold;
+    color:black;
+}
+
+.parrafo-fecha{
+    margin:0px;
+    padding-top: 2vh;
+    font-weight: bold;
+    color:gray;
+}
+.parrafo{
+    margin:0px;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    color:black;
+
+}
+
+.btn-img{
+    margin:0.7vh 0 1vh 0vh;
+    padding-top:0.1vh;
+    padding-left:0.2vh;
+    padding-right:0.2vh;
+    text-transform: capitalize;
+}
+
+.row-img{
+    margin-top: 0.7vh;
+}
+
+
+
+

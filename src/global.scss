@@ -24,3 +24,45 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+
+// Manejo de estilos para ion-alert y sus componentes
+//----------------------------------------------------------------------------//
+
+//Custom alert
+ion-alert.custom-alert {
+    --backdrop-opacity: 0.3;
+    --background:rgba(248, 248, 248);
+}
+
+//Tabla para leyenda del mapa
+.alert-message.sc-ion-alert-md{
+    table{
+        width:100%;
+        color:rgb(74, 74, 74);
+        
+    }
+
+    .td-tipo{
+        text-align: right;
+    }
+}
+
+.alert-title.sc-ion-alert-md{
+    color:black!important;
+}
+
+.alert-checkbox-label.sc-ion-alert-md{
+    color:rgb(74, 74, 74);
+    text-align:right;
+
+}
+
+
+//Manejo de estilos para infowindow de google
+//----------------------------------------------------------------------------//
+
+.gm-style-iw.gm-style-iw-c{
+    max-width: 30vh!important;
+}
