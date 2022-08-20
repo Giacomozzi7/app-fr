@@ -44,7 +44,11 @@ ion-content{
 }
 
 .row-img{
-    margin-top: 0.7vh;
+    margin-top: 0.2vh;
+}
+
+.col-slides{
+    padding:0.1vh;
 }
 
 

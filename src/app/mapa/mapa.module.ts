@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import {HttpClientModule} from '@angular/common/http';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -14,7 +15,8 @@ import { MapaPage } from './mapa.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    MapaPageRoutingModule
+    MapaPageRoutingModule,
+    HttpClientModule
   ],
   declarations: [MapaPage],
   providers:[

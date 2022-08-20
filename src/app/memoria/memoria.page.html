@@ -1,20 +1,20 @@
-<ion-header>
+<ion-header *ngIf="evento">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="mapa"></ion-back-button>
     </ion-buttons>
-    <ion-title>Título del Evento</ion-title>
+    <ion-title>{{evento.titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid class="ion-no-padding" id = "grilla">
+<ion-content *ngIf="evento">
+  <ion-grid class="ion-no-padding" id = "grilla" >
     <ion-row class="ion-no-padding">
       <ion-col class="ion-no-padding">
         <div class= "text-container"> 
-        <p class="parrafo-zona">Zona: Urbana</p>
-        <p class="parrafo-fecha">Fecha : xx/xx/xxxx</p>
-        <p class="parrafo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices scelerisque justo, sit amet vulputate mi varius rhoncus. Donec semper et justo nec porttitor. Proin semper a nisi maximus tristique. Nulla cursus urna sit amet varius accumsan. Sed blandit, sem vel semper suscipit, tortor mi sagittis ante, ac dignissim est erat ut eros. Aenean sollicitudin scelerisque egestas.</p>
+        <p class="parrafo-zona">Zona: {{evento.zona}}</p>
+        <p class="parrafo-fecha">Fecha : {{evento.fecha}}</p>
+        <p class="parrafo">{{evento.descrip}}</p>
         </div>
       </ion-col>
     </ion-row>
@@ -25,31 +25,47 @@
       </img-comparison-slider>
     </ion-row>
     <ion-row class="row-img">
-      <ion-col size="6">
-        <ion-img src="..." style="background-color: lightblue; height:15vh;"></ion-img>
+      <ion-col size="6" class="col-slides">
+        <ion-slides pager="false" #mySlider>
+          <ion-slide *ngFor="let slide of slides">
+            <ion-img [src]="slide.img" style="background-color: lightblue; height:15vh;"></ion-img>
+          </ion-slide>
+        </ion-slides>
       </ion-col>
-      <ion-col size="6">
-        <ion-img src="..." style="background-color: lightblue; height:15vh;"></ion-img>
+      <ion-col size="6" class="col-slides">
+        <ion-slides pager="false" #mySlider2>
+          <ion-slide *ngFor="let slide of slides">
+            <ion-img [src]="slide.img" style="background-color: lightblue; height:15vh;"></ion-img>
+          </ion-slide>
+        </ion-slides>
       </ion-col>
     </ion-row>
     <ion-row class="row-img">
-      <ion-col size="6">
-        <ion-img src="..." style="background-color: lightseagreen; height:15vh;"></ion-img>
+      <ion-col size="6" class="col-slides">
+        <ion-slides pager="false" #mySlider3>
+          <ion-slide *ngFor="let slide of slides">
+            <ion-img [src]="slide.img" style="background-color: lightblue; height:15vh;"></ion-img>
+          </ion-slide>
+        </ion-slides>
       </ion-col>
-      <ion-col size="6">
-        <ion-img src="..." style="background-color: lightseagreen; height:15vh;"></ion-img>
+      <ion-col size="6" class="col-slides">
+        <ion-slides pager="false" #mySlider4>
+          <ion-slide *ngFor="let slide of slides">
+            <ion-img [src]="slide.img" style="background-color: lightblue; height:15vh;"></ion-img>
+          </ion-slide>
+        </ion-slides>
       </ion-col>
     </ion-row>
 
     <ion-row class = "buttons-row">
       <ion-col size = "3">
-        <ion-button color="warning" expand="block" class="btn-img">Antes</ion-button>
+        <ion-button color="warning" expand="block" class="btn-img"  (click) = "setAntes(0)">Antes</ion-button>
       </ion-col>
       <ion-col size = "6">
-        <ion-button color="warning" expand="block" class="btn-img">Justo después</ion-button>
+        <ion-button color="warning" expand="block" class="btn-img" (click) = "setAntes(1)">Justo después</ion-button>
       </ion-col>
       <ion-col size = "3">
-        <ion-button color="warning" expand="block" class="btn-img">Ahora</ion-button>
+        <ion-button color="warning" expand="block" class="btn-img" (click) = "setAntes(2)">Ahora</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

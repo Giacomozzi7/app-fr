@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { AlertController } from '@ionic/angular';
 import { Marker } from '../../interfaces/marker';
-import markerJson from '../../markers/markers.json'
+import { ProveedorService } from '../proveedor.service';
 
 declare var google;
 
@@ -16,7 +16,7 @@ export class MapaPage implements OnInit {
   filtroTipo;
   filtroZona;
   map = null;
-  markers = markerJson as Marker[];
+  markers;
   marcadorGoogle;
   aMarkers = []
   miPos;
@@ -28,10 +28,11 @@ export class MapaPage implements OnInit {
     'Incendio':'red'
   }
 
-  constructor(private geolocation: Geolocation, private alertController: AlertController) {}
+  constructor(private geolocation: Geolocation, private alertController: AlertController, public proveedor: ProveedorService) {}
 
   //Init
   ngOnInit(){
+    this.proveedor.obtenerDatos().subscribe((data)=> {this.markers = data}, (error) => {console.log(error)});
     this.loadMap()
     this.filtroTipo = this.filtros.Tipo;
     this.filtroZona = this.filtros.Zona;
@@ -74,6 +75,7 @@ export class MapaPage implements OnInit {
     this.markers.forEach(marker => {
       this.addMarker(marker);
       
+      
     });
   }
 
@@ -82,6 +84,7 @@ export class MapaPage implements OnInit {
     let marcadorGoogle = new google.maps.Marker({
       position: marker.pos,
       map: this.map,
+      id: marker.id,
       title: marker.titulo,
       tipo: marker.tipo,
       descripcion: marker.descrip,
@@ -108,6 +111,7 @@ export class MapaPage implements OnInit {
                           "<h6 style='color:black; margin-left:1px;'> " + marcadorGoogle.zona + "</h6>" +
                           "<p style='color:black;'>"  + marcadorGoogle.descripcion + "</p>" +
                           "<p style='color:grey'> Fecha: " + marcadorGoogle.fecha + "</p>"+
+                          "<ion-button shape='round' href='/memoria/"+ marcadorGoogle.id+ "' size='small'>Ver Memoria</ion-button>"
                         '</div>';
 
     let infowindow = new google.maps.InfoWindow({

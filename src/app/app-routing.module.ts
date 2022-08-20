@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./mapa/mapa.module').then( m => m.MapaPageModule)
   },
   {
-    path: 'memoria',
+    path: 'memoria/:id',
     loadChildren: () => import('./memoria/memoria.module').then( m => m.MemoriaPageModule)
   },
 ];

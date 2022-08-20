@@ -1,4 +1,5 @@
 export interface Marker{
+    id:number,
     pos:{
         lat:number,
         lng:number,
