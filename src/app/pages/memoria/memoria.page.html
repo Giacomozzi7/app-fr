@@ -1,0 +1,92 @@
+<ion-header *ngIf="evento">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="mapa"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{evento.titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="evento">
+  <ion-grid class="ion-no-padding" id = "grilla" >
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding">
+        <div class= "text-container"> 
+        <p class="parrafo-zona">Zona: {{evento.zona}}</p>
+        <p class="parrafo-fecha">Fecha : {{evento.fecha}}</p>
+        <p class="parrafo">{{evento.descrip}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-card color="dark" class="card-foto">
+        <ion-card-header>
+          <ion-card-title><b>Imagen pantalla dividida</b></ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="card-content">
+          <img-comparison-slider>
+            <img slot="first" src="../../assets/img/antes.jpg" />
+            <img slot="second" src="../../assets/img/despues.jpg" />
+          </img-comparison-slider>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+    <ion-row class="row-img" *ngFor="let sl of slides; let ind=index">
+      <ion-col size="12" class="col-slides">
+        <ion-card color="dark" class="card-foto">
+          <ion-card-header>
+            <ion-card-title><b>{{sl.titulo}}</b></ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="card-content">
+            <ion-slides #mySlider scrollbar="true">
+              <ion-slide *ngFor="let imagen of sl.img">
+                <ion-img [src]="imagen"></ion-img>
+              </ion-slide>
+            </ion-slides>
+            <ion-grid>
+              <ion-row class = "buttons-row">
+                <ion-col size = "3">
+                  <ion-button color="warning" expand="block" class="btn-img"  (click) = "setAntes(0,ind)">Antes</ion-button>
+                </ion-col>
+                <ion-col size = "6">
+                  <ion-button color="warning" expand="block" class="btn-img" (click) = "setAntes(1,ind)">Justo después</ion-button>
+                </ion-col>
+                <ion-col size = "3">
+                  <ion-button color="warning" expand="block" class="btn-img" (click) = "setAntes(2,ind)">Ahora</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+
+        </ion-card>
+        
+      </ion-col> 
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-grid class="ion-no-padding" >
+    <ion-row class=".ion-no-padding" style="height:7vh;">
+      <ion-col size="3">
+        <ion-button fill="clear" expand="block" color="dark" size="large">
+          <ion-icon name="image"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button fill="clear" expand="block" color="dark" size="large">
+          <ion-icon name="megaphone"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3" >
+        <ion-button fill="clear" expand="block" color="dark" size="large"> 
+          <ion-icon  name="videocam"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button fill="clear" expand="block" color="dark" size="large">
+          <ion-icon name="chatbubble-ellipses"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

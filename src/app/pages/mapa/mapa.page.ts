@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { AlertController } from '@ionic/angular';
 import { Marker } from '../../interfaces/marker';
-import { ProveedorService } from '../proveedor.service';
+import { ProveedorService } from '../../services/proveedor.service';
 
 declare var google;
 
@@ -32,10 +32,18 @@ export class MapaPage implements OnInit {
 
   //Init
   ngOnInit(){
-    this.proveedor.obtenerDatos().subscribe((data)=> {this.markers = data}, (error) => {console.log(error)});
-    this.loadMap()
-    this.filtroTipo = this.filtros.Tipo;
-    this.filtroZona = this.filtros.Zona;
+    this.proveedor.obtenerDatos().subscribe(
+      (data)=> {
+        this.markers = data
+        this.loadMap()
+        this.filtroTipo = this.filtros.Tipo;
+        this.filtroZona = this.filtros.Zona
+      },
+      (error) => {
+        console.log(error)
+      });
+
+    
   }
 
 

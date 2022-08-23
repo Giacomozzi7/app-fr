@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,11 +13,11 @@ const routes: Routes = [
   },
   {
     path: 'mapa',
-    loadChildren: () => import('./mapa/mapa.module').then( m => m.MapaPageModule)
+    loadChildren: () => import('./pages/mapa/mapa.module').then( m => m.MapaPageModule)
   },
   {
     path: 'memoria/:id',
-    loadChildren: () => import('./memoria/memoria.module').then( m => m.MemoriaPageModule)
+    loadChildren: () => import('./pages/memoria/memoria.module').then( m => m.MemoriaPageModule)
   },
 ];
 
