@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'memoria/:id',
     loadChildren: () => import('./pages/memoria/memoria.module').then( m => m.MemoriaPageModule)
   },
+  {
+    path: 'galeria/:id',
+    loadChildren: () => import('./pages/galeria/galeria.module').then( m => m.GaleriaPageModule)
+  },
 ];
 
 @NgModule({

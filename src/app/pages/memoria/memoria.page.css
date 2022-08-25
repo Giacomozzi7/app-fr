@@ -10,8 +10,16 @@ ion-content{
     --background:white;
 }
 
+img-comparison-slider:focus{
+     outline:none;
+}
+
 #grilla{
     padding:0.2vh;
+}
+
+.text-container{
+    padding:0vh 1vh 0vh 1vh;
 }
 
 .parrafo-zona{

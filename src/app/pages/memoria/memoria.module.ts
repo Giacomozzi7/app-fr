@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { MemoriaPageRoutingModule } from './memoria-routing.module';
 
 import { MemoriaPage } from './memoria.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MemoriaPageRoutingModule
+    MemoriaPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [MemoriaPage],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
