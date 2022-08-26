@@ -12,11 +12,12 @@ declare var google;
   styleUrls: ['./mapa.page.css'],
 })
 export class MapaPage implements OnInit {
-  filtroTipo;
-  filtroZona;
+  filtroTipo: any[]
+  filtroZona: any[]
   map;
-  markers;
+  markers: Marker[];
   marcadorGoogle;
+  
   miPos;
   posActual;
 
@@ -39,7 +40,7 @@ export class MapaPage implements OnInit {
   //Init
   ngOnInit() {
     this.proveedor.obtenerDatos().subscribe(
-      (data) => {
+      (data: Marker[]) => {
         this.markers = data;
         this.loadMap();
         this.filtroTipo = this.filtros.Tipo;
@@ -166,7 +167,7 @@ export class MapaPage implements OnInit {
   }
 
   //SetChecked filtros
-  setChecked(tp, btn_string) {
+  setChecked(tp: string, btn_string: string) {
     if (btn_string === 'Tipo') {
       return this.filtroTipo.includes(tp);
     }
@@ -179,7 +180,7 @@ export class MapaPage implements OnInit {
   resetMarkers() {
     this.aMarkers.forEach((mk) => {
       if (
-        this.filtroTipo.includes(mk.tipo) & this.filtroZona.includes(mk.zona)
+        this.filtroTipo.includes(mk.tipo) && this.filtroZona.includes(mk.zona)
       ) {
         mk.setMap(this.map);
       }
@@ -192,7 +193,7 @@ export class MapaPage implements OnInit {
   async pressLeyenda() {
     //Construccion de tabla de marcadores
     let msg = '<table> ';
-    Object.keys(this.mapcolors).forEach((key,index) => {
+    Object.keys(this.mapcolors).forEach((key) => {
       msg +=
         "<tr><td><img src = '../../assets/icon/" +
         this.mapcolors[key] +
@@ -219,7 +220,7 @@ export class MapaPage implements OnInit {
     //Inicializa un arreglo en base a los filtros existentes
     let aInputs = [];
 
-    this.filtros[btn_string].forEach((tp) => {
+    this.filtros[btn_string].forEach((tp:string) => {
       let oTP = {
         label: tp,
         type: 'checkbox',
