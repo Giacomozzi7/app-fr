@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { AlertController } from '@ionic/angular';
-import { Marker } from '../../interfaces/marker';
+import { AlertController, AlertInput } from '@ionic/angular';
+import { Marker} from '../../interfaces/interfaces';
 import { ProveedorService } from '../../services/proveedor.service';
 
 declare var google;
@@ -12,29 +12,31 @@ declare var google;
   styleUrls: ['./mapa.page.css'],
 })
 export class MapaPage implements OnInit {
-  filtroTipo: any[]
-  filtroZona: any[]
-  map;
-  markers: Marker[];
-  marcadorGoogle;
-  
-  miPos;
-  posActual;
+  public filtroTipo: string[]
+  public filtroZona: string[]
+  public markers: Marker[];
 
-  aMarkers = [];
-  infowindows = [];
+  //Por definir tipos (any)
+  public map; 
+  public marcadorGoogle;
+  public miPos;
+  public aMarkers = [];
+  public infoWindows = [];
+
   filtros = { Tipo: [], Zona: [], Fecha: [] };
   mapcolors = {
     "Mi ubicación":"my_location",
-    Terremoto: 'purple',
-    Tsunami: 'blue',
-    Incendio: 'red',
+    "Terremoto": 'purple',
+    "Tsunami": 'blue',
+    "Incendio": 'red',
+    "Inundación": 'green',
+    "Sequía": 'yellow'
   };
 
   constructor(
     private geolocation: Geolocation,
     private alertController: AlertController,
-    public proveedor: ProveedorService
+    public proveedor: ProveedorService,
   ) {}
 
   //Init
@@ -149,14 +151,14 @@ export class MapaPage implements OnInit {
         shouldFocus: true,
       });
     });
-    this.infowindows.push(infowindow);
+    this.infoWindows.push(infowindow);
   }
 
   //Cerrar todas las infowindows al abrir una nueva
   cerrarInfoWindows() {
-    for (let window of this.infowindows) {
+    this.infoWindows.forEach((window) =>{
       window.close();
-    }
+    })
   }
 
   //Quita los marcadores del mapa
@@ -167,7 +169,7 @@ export class MapaPage implements OnInit {
   }
 
   //SetChecked filtros
-  setChecked(tp: string, btn_string: string) {
+  setChecked(tp: string, btn_string: string): boolean {
     if (btn_string === 'Tipo') {
       return this.filtroTipo.includes(tp);
     }
@@ -218,10 +220,10 @@ export class MapaPage implements OnInit {
   //Presiona sobre el icono de filtro
   async pressFiltro(btn_string: string) {
     //Inicializa un arreglo en base a los filtros existentes
-    let aInputs = [];
+    let aInputs : AlertInput[] = [];
 
     this.filtros[btn_string].forEach((tp:string) => {
-      let oTP = {
+      let oTP: AlertInput = {
         label: tp,
         type: 'checkbox',
         value: tp,
@@ -230,7 +232,7 @@ export class MapaPage implements OnInit {
       aInputs.push(oTP);
     });
 
-    const alert = await this.alertController.create({
+    const alert: HTMLIonAlertElement = await this.alertController.create({
       header: 'Seleccionar categoría',
       cssClass: 'custom-alert',
       inputs: aInputs,

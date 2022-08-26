@@ -1,5 +1,34 @@
-<app-header titulo="Galeria" refback="mapa"></app-header>
+<app-header titulo="Galeria de Imágenes" [refback]="refMemoria"></app-header>
 
-<ion-content>
+<ion-content padding *ngIf="evento">
+    <ion-grid class="ion-no-padding" id="grilla">
+        <ion-row class="ion-no-padding">
+            <ion-col>
+                <ion-card color="dark" style="border:1px solid;">
+                    <ion-card-header style="text-align:center">
+                        <ion-icon name="images" style="font-size:4vh"></ion-icon>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <p>Esta galería de imágenes corresponde al evento: <b>{{evento.titulo}}</b> ocurrido con fecha: <b>{{evento.fecha}}</b>.</p>
+                    </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="row-img" *ngFor="let gal of galeria; let ind=index">
+            <ion-col size="12">
+              <ion-card color="dark" class="card-foto">
+                <ion-card-content class="card-content">
+                    <ion-img [src]="gal.imagen"></ion-img>
+                </ion-card-content>
+                <ion-card-header>
+                    <ion-card-subtitle><b>Fuente:</b> {{gal.autor}}</ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        
+    </ion-grid>
 
 </ion-content>
+

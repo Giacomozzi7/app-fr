@@ -1,0 +1,45 @@
+ion-content{
+    --background:white;
+}
+
+#grilla{
+    padding:0.2vh;
+}
+
+.text-container{
+    padding:0vh 1vh 0vh 1vh;
+}
+
+.parrafo-zona{
+    margin:0px;
+    padding-top: 2vh;
+    font-weight: bold;
+    color:black;
+}
+
+.parrafo-fecha{
+    margin:0px;
+    padding-top: 2vh;
+    font-weight: bold;
+    color:gray;
+}
+.parrafo{
+    margin:0px;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    color:black;
+
+}
+
+.row-img{
+    margin-top: 0.2vh;
+}
+
+.card-foto{
+    margin: 1vh;
+    border:1px solid rgb(187, 187, 187);
+}
+
+.card-content{
+    padding: 0vh 0vh 0vh 0vh;
+}

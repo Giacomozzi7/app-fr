@@ -14,6 +14,10 @@ img-comparison-slider:focus{
      outline:none;
 }
 
+.descripcion-header{
+    text-align: center;
+}
+
 #grilla{
     padding:0.2vh;
 }
@@ -56,13 +60,12 @@ img-comparison-slider:focus{
 }
 
 .card-foto{
-    margin: 0.7vh;
+    margin: 1vh;
     border:1px solid rgb(187, 187, 187);
 }
 
 .card-content{
-    padding-left:0.5vh;
-    padding-right: 0.5vh;
+    padding: 0vh 0vh 1.5vh 0vh;
 }
 
 
