@@ -43,3 +43,36 @@
 .col_filtro{
     padding:1px;
 }
+
+
+ion-modal {
+    --height: 40%;
+    --width:80%;
+    --border-radius: 16px;
+
+    ion-list{
+        background-color: white;;
+    }
+
+    ion-content{
+        background-color: white;
+    }
+
+    ion-checkbox{
+        --background:white;
+        --background-checked: #6815ec;
+        --border-color:#6815ec;
+        --border-color-checked:#6815ec;
+    }
+
+    ion-toolbar{
+        display:inline-block;
+    }
+
+    .volver-modal{
+        margin-left:35%;
+    }
+}
+
+
+

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { AlertController, AlertInput } from '@ionic/angular';
+import { AlertController, AlertInput, IonItem, IonModal, IonSlides } from '@ionic/angular';
 import { Marker} from '../../interfaces/interfaces';
 import { ProveedorService } from '../../services/proveedor.service';
 
@@ -9,12 +9,13 @@ declare var google;
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.page.html',
-  styleUrls: ['./mapa.page.css'],
+  styleUrls: ['./mapa.page.scss'],
 })
 export class MapaPage implements OnInit {
   public filtroTipo: string[]
   public filtroZona: string[]
   public markers: Marker[];
+  public filtroOn: boolean;
 
   //Por definir tipos (any)
   public map; 
@@ -24,6 +25,7 @@ export class MapaPage implements OnInit {
   public infoWindows = [];
 
   filtros = { Tipo: [], Zona: [], Fecha: [] };
+
   mapcolors = {
     "Mi ubicación":"my_location",
     "Terremoto": 'purple',
@@ -32,6 +34,13 @@ export class MapaPage implements OnInit {
     "Inundación": 'green',
     "Sequía": 'yellow'
   };
+
+  @ViewChildren('itemFiltro') itemFiltro: QueryList<IonItem>;
+  @ViewChildren('itemZona') itemZona: QueryList<IonItem>;
+  @ViewChildren('itemFecha') itemFecha: QueryList<IonItem>;
+  @ViewChild('modal') modal: IonModal;
+  @ViewChild('mySlider') mySlider: IonSlides;
+
 
   constructor(
     private geolocation: Geolocation,
@@ -45,8 +54,7 @@ export class MapaPage implements OnInit {
       (data: Marker[]) => {
         this.markers = data;
         this.loadMap();
-        this.filtroTipo = this.filtros.Tipo;
-        this.filtroZona = this.filtros.Zona;
+        
       },
       (error) => {
         console.log(error);
@@ -83,6 +91,7 @@ export class MapaPage implements OnInit {
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       mapEle.classList.add('show-map');
       this.renderMarkers();
+      this.filtros.Fecha.sort((a,b) => { return parseInt(a.valor.split(' ')[0]) - parseInt(b.valor.split(' ')[0])});
     });
   }
 
@@ -107,13 +116,50 @@ export class MapaPage implements OnInit {
     this.setInfoWindow(marcadorGoogle);
 
     //Se agrega tipo, zona y fecha a los filtros sin repeticion
-    !this.filtros.Tipo.includes(marcadorGoogle.tipo) &&
-      this.filtros.Tipo.push(marcadorGoogle.tipo);
-    !this.filtros.Zona.includes(marcadorGoogle.zona) &&
-      this.filtros.Zona.push(marcadorGoogle.zona);
-    !this.filtros.Fecha.includes(marcadorGoogle.fecha) &&
-      this.filtros.Fecha.push(marcadorGoogle.fecha);
+    if (this.filtros.Tipo.filter(e => e.valor === marcadorGoogle.tipo).length === 0) {
+      this.filtros.Tipo.push({valor: marcadorGoogle.tipo, isChecked:true});  
+    }
+
+    if (this.filtros.Zona.filter(e => e.valor === marcadorGoogle.zona).length === 0) {
+      this.filtros.Zona.push({valor: marcadorGoogle.zona, isChecked:true});  
+    }
+    
+    this.filtrarFecha(marcadorGoogle)
   }
+
+  //Transforma la fecha segun decada
+  filtrarFecha(marcadorGoogle){
+    let fecha = marcadorGoogle.fecha.split('-');
+    let date = new Date(fecha[2], fecha[1] - 1, fecha[0]);
+
+    //Obtencion de decadas
+    let lowerDecade  = this.rangoFechas(date , 10)
+    let upperDecade  = this.rangoFechas(date , 10, 9)
+
+    let finalDecade = lowerDecade.toString() + " - " + upperDecade.toString()
+
+    if (this.filtros.Fecha.filter(e => e.valor === finalDecade).length === 0){
+      this.filtros.Fecha.push({valor: finalDecade, isChecked:true});
+    }
+
+
+  }
+
+  //Permite obtener la decada de cada fecha
+  rangoFechas(fecha, regla, sum = 0){
+    return Math.floor(fecha.getFullYear() / regla) * regla + sum
+  }
+
+  //Handler select 
+  handleChange(ev){
+    let change = ev.target.value;
+    this.mySlider.lockSwipes(false)
+    if (change=='categoria') this.mySlider.slideTo(0);
+    if (change == 'fecha')   this.mySlider.slideTo(2);
+    if (change=='zona')      this.mySlider.slideTo(1);
+    this.mySlider.lockSwipes(true)
+  }
+
 
   //Añade un infowindow a cada marcador asignado al mapa
   setInfoWindow(marcadorGoogle) {
@@ -168,25 +214,58 @@ export class MapaPage implements OnInit {
     });
   }
 
-  //SetChecked filtros
-  setChecked(tp: string, btn_string: string): boolean {
-    if (btn_string === 'Tipo') {
-      return this.filtroTipo.includes(tp);
-    }
-    if (btn_string === 'Zona') {
-      return this.filtroZona.includes(tp);
-    }
-  }
+  activarFiltro(){
+    this.filtros.Tipo = [];
+    this.filtros.Zona=  [];
+    this.filtros.Fecha=  [];
 
-  //Renderiza nuevamente los marcadores aplicando filtros
-  resetMarkers() {
+    let arrayFiltros = this.itemFiltro.toArray()
+    let arrayZona = this.itemZona.toArray()
+    let arrayFecha = this.itemFecha.toArray()
+
+    this.modal.dismiss()
+
+    arrayFiltros.forEach(val =>{
+      let valor = val['el'].innerText
+      let isChecked = val['el']['children'][0]['attributes']['aria-checked']['value']
+      console.log(valor,isChecked) 
+      this.filtros.Tipo.push({valor, isChecked})  
+    })
+
+    arrayZona.forEach(val =>{
+      let valor = val['el'].innerText
+      let isChecked = val['el']['children'][0]['attributes']['aria-checked']['value']
+      console.log(valor,isChecked) 
+      this.filtros.Zona.push({valor, isChecked})  
+    })
+
+    arrayFecha.forEach(val =>{
+      let valor = val['el'].innerText
+      let isChecked = val['el']['children'][0]['attributes']['aria-checked']['value']
+      console.log(valor,isChecked) 
+      this.filtros.Fecha.push({valor, isChecked})  
+    })
+
+
+    this.quitarMarkers();
+    //Render markers
     this.aMarkers.forEach((mk) => {
+      let a = this.filtros.Tipo.filter(e => e.valor === mk.tipo && e.isChecked === "true").length > 0
+      let b = this.filtros.Zona.filter(e => e.valor === mk.zona && e.isChecked === "true").length > 0
+      let c = this.filtros.Fecha.filter(e => 
+        parseInt(e.valor.split('-')[0]) <= parseInt(mk.fecha.split('-')[2])  
+        && 
+        parseInt(e.valor.split('-')[1]) >= parseInt(mk.fecha.split('-')[2])
+        &&
+        e.isChecked === "true").length > 0
+      console.log(a,b,c)
       if (
-        this.filtroTipo.includes(mk.tipo) && this.filtroZona.includes(mk.zona)
+        a && b && c
       ) {
         mk.setMap(this.map);
       }
     });
+    
   }
   //Control de alertas
   //--------------------------------------------------------------------------------------------------------------------------
@@ -217,42 +296,4 @@ export class MapaPage implements OnInit {
     await alert.present();
   }
 
-  //Presiona sobre el icono de filtro
-  async pressFiltro(btn_string: string) {
-    //Inicializa un arreglo en base a los filtros existentes
-    let aInputs : AlertInput[] = [];
-
-    this.filtros[btn_string].forEach((tp:string) => {
-      let oTP: AlertInput = {
-        label: tp,
-        type: 'checkbox',
-        value: tp,
-        checked: this.setChecked(tp, btn_string),
-      };
-      aInputs.push(oTP);
-    });
-
-    const alert: HTMLIonAlertElement = await this.alertController.create({
-      header: 'Seleccionar categoría',
-      cssClass: 'custom-alert',
-      inputs: aInputs,
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: (res) => {
-            if (btn_string === 'Tipo') {
-              this.filtroTipo = res;
-            }
-            if (btn_string === 'Zona') {
-              this.filtroZona = res;
-            }
-            this.quitarMarkers();
-            this.resetMarkers();
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
 }

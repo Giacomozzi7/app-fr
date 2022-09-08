@@ -9,6 +9,8 @@ import { IonicModule } from '@ionic/angular';
 import { MapaPageRoutingModule } from './mapa-routing.module';
 
 import { MapaPage } from './mapa.page';
+import { BtnfiltrosComponent } from '../../components/btnfiltros/btnfiltros.component';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -16,7 +18,8 @@ import { MapaPage } from './mapa.page';
     FormsModule,
     IonicModule,
     MapaPageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ComponentsModule
   ],
   declarations: [MapaPage],
   providers:[
