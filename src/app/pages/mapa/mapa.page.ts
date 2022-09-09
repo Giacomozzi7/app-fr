@@ -12,10 +12,9 @@ declare var google;
   styleUrls: ['./mapa.page.scss'],
 })
 export class MapaPage implements OnInit {
-  public filtroTipo: string[]
-  public filtroZona: string[]
   public markers: Marker[];
   public filtroOn: boolean;
+  public aLeyenda = [];
 
   //Por definir tipos (any)
   public map; 
@@ -23,10 +22,11 @@ export class MapaPage implements OnInit {
   public miPos;
   public aMarkers = [];
   public infoWindows = [];
+  public colorFiltro: string = 'dark';
 
-  filtros = { Tipo: [], Zona: [], Fecha: [] };
+  public filtros = { Tipo: [], Zona: [], Fecha: [] };
 
-  mapcolors = {
+  public mapcolors = {
     "Mi ubicación":"my_location",
     "Terremoto": 'purple',
     "Tsunami": 'blue',
@@ -35,7 +35,7 @@ export class MapaPage implements OnInit {
     "Sequía": 'yellow'
   };
 
-  @ViewChildren('itemFiltro') itemFiltro: QueryList<IonItem>;
+  @ViewChildren('itemTipo') itemTipo: QueryList<IonItem>;
   @ViewChildren('itemZona') itemZona: QueryList<IonItem>;
   @ViewChildren('itemFecha') itemFecha: QueryList<IonItem>;
   @ViewChild('modal') modal: IonModal;
@@ -92,6 +92,7 @@ export class MapaPage implements OnInit {
       mapEle.classList.add('show-map');
       this.renderMarkers();
       this.filtros.Fecha.sort((a,b) => { return parseInt(a.valor.split(' ')[0]) - parseInt(b.valor.split(' ')[0])});
+      this.generarLeyenda();
     });
   }
 
@@ -135,14 +136,12 @@ export class MapaPage implements OnInit {
     //Obtencion de decadas
     let lowerDecade  = this.rangoFechas(date , 10)
     let upperDecade  = this.rangoFechas(date , 10, 9)
-
     let finalDecade = lowerDecade.toString() + " - " + upperDecade.toString()
 
+    //Se agrega al arreglo de fechas sin repeticion
     if (this.filtros.Fecha.filter(e => e.valor === finalDecade).length === 0){
       this.filtros.Fecha.push({valor: finalDecade, isChecked:true});
     }
-
-
   }
 
   //Permite obtener la decada de cada fecha
@@ -150,7 +149,7 @@ export class MapaPage implements OnInit {
     return Math.floor(fecha.getFullYear() / regla) * regla + sum
   }
 
-  //Handler select 
+  //Handler select (Modal filtro)
   handleChange(ev){
     let change = ev.target.value;
     this.mySlider.lockSwipes(false)
@@ -214,41 +213,36 @@ export class MapaPage implements OnInit {
     });
   }
 
-  activarFiltro(){
-    this.filtros.Tipo = [];
-    this.filtros.Zona=  [];
-    this.filtros.Fecha=  [];
-
-    let arrayFiltros = this.itemFiltro.toArray()
-    let arrayZona = this.itemZona.toArray()
-    let arrayFecha = this.itemFecha.toArray()
-
+  aplicarFiltro(){
+    let arrayChecked: string[] = [];
+    
+    let arrayFiltros = [
+      this.itemTipo.toArray(),
+      this.itemZona.toArray(),
+      this.itemFecha.toArray()
+    ]
     this.modal.dismiss()
 
-    arrayFiltros.forEach(val =>{
-      let valor = val['el'].innerText
-      let isChecked = val['el']['children'][0]['attributes']['aria-checked']['value']
-      console.log(valor,isChecked) 
-      this.filtros.Tipo.push({valor, isChecked})  
+    Object.keys(this.filtros).forEach((cat,index) =>{
+      this.filtros[cat] = []
+
+      arrayFiltros[index].forEach(val =>{
+        let valor = val['el'].innerText
+        let isChecked = val['el']['children'][0]['attributes']['aria-checked']['value']
+        this.filtros[cat].push({valor, isChecked})  
+        arrayChecked.push(isChecked)
+
+      })
     })
-
-    arrayZona.forEach(val =>{
-      let valor = val['el'].innerText
-      let isChecked = val['el']['children'][0]['attributes']['aria-checked']['value']
-      console.log(valor,isChecked) 
-      this.filtros.Zona.push({valor, isChecked})  
-    })
-
-    arrayFecha.forEach(val =>{
-      let valor = val['el'].innerText
-      let isChecked = val['el']['children'][0]['attributes']['aria-checked']['value']
-      console.log(valor,isChecked) 
-      this.filtros.Fecha.push({valor, isChecked})  
-    })
-
-
     this.quitarMarkers();
-    //Render markers
+    this.resetMarkers();
+    //Cambia el color del icono de filtro si se activa
+    arrayChecked.includes("false") ? this.colorFiltro = 'success' : this.colorFiltro = 'dark'
+    
+  }
+
+  //Vuelve a renderizar los marcadores aplicando filtros
+  resetMarkers(){
     this.aMarkers.forEach((mk) => {
       let a = this.filtros.Tipo.filter(e => e.valor === mk.tipo && e.isChecked === "true").length > 0
       let b = this.filtros.Zona.filter(e => e.valor === mk.zona && e.isChecked === "true").length > 0
@@ -258,20 +252,28 @@ export class MapaPage implements OnInit {
         parseInt(e.valor.split('-')[1]) >= parseInt(mk.fecha.split('-')[2])
         &&
         e.isChecked === "true").length > 0
-      console.log(a,b,c)
-      if (
-        a && b && c
-      ) {
-        mk.setMap(this.map);
-      }
+
+      if (a && b && c) mk.setMap(this.map);  
     });
-    
   }
+
+  //Genera un arreglo con objetos pertenecientes a la leyenda
+  generarLeyenda(){
+    Object.keys(this.mapcolors).forEach((key) => {
+      let ob = {
+            nombre: key,
+            url: '../../assets/icon/' + this.mapcolors[key] + '.png'
+      }
+      this.aLeyenda.push(ob) 
+    });
+  }
+
   //Control de alertas
   //--------------------------------------------------------------------------------------------------------------------------
 
   //Presiona sobre el icono de leyenda
   async pressLeyenda() {
+
     //Construccion de tabla de marcadores
     let msg = '<table> ';
     Object.keys(this.mapcolors).forEach((key) => {

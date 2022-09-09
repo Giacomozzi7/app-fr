@@ -46,7 +46,7 @@
 
 
 ion-modal {
-    --height: 40%;
+    --height: 42%;
     --width:80%;
     --border-radius: 16px;
 
@@ -71,6 +71,10 @@ ion-modal {
 
     .volver-modal{
         margin-left:35%;
+    }
+
+    .volver-modal-leyenda{
+        margin-left:65%;
     }
 }
 
