@@ -3,56 +3,28 @@
     <ion-row class="icons_row">
       <ion-col>
         <div>
-          <ion-button
-            fill="clear"
-            expand="block"
-            color="dark"
-            size="large"
-            class="btn"
-            href="home"
-          >
+          <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" href="home">
             <ion-icon name="arrow-back-circle" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
       <ion-col>
         <div>
-          <ion-button
-            fill="clear"
-            expand="block"
-            color="dark"
-            size="large"
-            class="btn"
-            id="open-modal-leyenda"
-          >
+          <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" id="open-modal-leyenda">
             <ion-icon name="information-circle" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
       <ion-col>
         <div>
-          <ion-button
-            fill="clear"
-            expand="block"
-            color="dark"
-            size="large"
-            class="btn"
-            (click)="ngOnInit()"
-          >
+          <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" (click)="ngOnInit()">
             <ion-icon name="refresh" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
       <ion-col>
         <div>
-          <ion-button
-            fill="clear"
-            expand="block"
-            color="dark"
-            size="large"
-            class="btn"
-            href="memoria"
-          >
+          <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" href="memoria">
             <ion-icon name="images" class="icon"></ion-icon>
           </ion-button>
         </div>
@@ -60,113 +32,23 @@
     </ion-row>
     <ion-row>
       <ion-col class="col_mapa">
-
-      <!-- Modal Leyenda -->
-
-      <ion-modal #modleyenda trigger="open-modal-leyenda">
-        <ng-template>
-          <ion-content color="dark">
-            <ion-toolbar>
-              <ion-title>Leyenda</ion-title>
-            </ion-toolbar>
-            <ion-grid style="width:100%; max-height: 35vh;overflow-y: scroll;">
-              <ion-row *ngFor="let ley of aLeyenda">
-                <ion-col size="6">
-                  <ion-img [src]="ley.url" style="max-width:32px; max-height:32px; margin-top:-5%"></ion-img>
-                </ion-col>
-                <ion-col size="6" style="text-align: right">
-                  <p class="ion-no-margin">{{ley.nombre}}</p>
-
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-
-            <ion-button (click)="modleyenda.dismiss()" color="warning" class='volver-modal-leyenda'>Volver</ion-button>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
-
-
-    <!-- Fin Modal -->
+        <!-- Modal Leyenda -->
+        <app-leyenda [mapcolors] = "mapcolors"></app-leyenda>
+        <!-- Fin Modal -->
         <div id="map" size="10"></div>
-
-      <!-- Modal Filtro -->
-
-        <ion-modal #modal trigger="open-modal">
-          <ng-template>
-            <ion-content color="dark">
-              <ion-toolbar>
-                <ion-title>Filtros</ion-title>
-                <ion-list class="ion-no-padding" slot="end">
-                  <ion-item>
-                    <ion-select
-                      interface="action-sheet"
-                      placeholder="Filtro"
-                      value="categoria"
-                      (ionChange)="handleChange($event)">
-                      <ion-select-option value="categoria">Categoría</ion-select-option>
-                      <ion-select-option value="zona">Zona</ion-select-option>
-                      <ion-select-option value="fecha">Fecha</ion-select-option>
-                    </ion-select>
-                  </ion-item>
-                </ion-list>
-              </ion-toolbar>
-              <ion-slides #mySlider>
-                <ion-slide>
-                  <ion-list class="ion-no-padding" style="width:100%; max-height: 27vh;overflow-y: scroll;">
-                    <ion-item color="dark" *ngFor="let cate of filtros.Tipo" #itemTipo>
-                      <ion-checkbox
-                        slot="start"
-                        [checked]="cate.isChecked"></ion-checkbox>
-                      <ion-label>{{cate.valor}}</ion-label>
-                    </ion-item>
-                  </ion-list>
-                </ion-slide>
-                <ion-slide>
-                  <ion-list class="ion-no-padding" style="width:100%">
-                    <ion-item color="dark" *ngFor="let zona of filtros.Zona" #itemZona>
-                      <ion-checkbox
-                        slot="start"
-                        [checked]="zona.isChecked"></ion-checkbox>
-                      <ion-label>{{zona.valor}}</ion-label>
-                    </ion-item>
-                  </ion-list>
-                </ion-slide>
-                <ion-slide>
-                  <ion-list class="ion-no-padding" style="width:100%">
-                    <ion-item color="dark" *ngFor="let fecha of filtros.Fecha" #itemFecha>
-                      <ion-checkbox
-                        slot="start"
-                        [checked]="fecha.isChecked"></ion-checkbox>
-                      <ion-label>{{fecha.valor}}</ion-label>
-                    </ion-item>
-                  </ion-list>
-                </ion-slide>
-              </ion-slides>
-              <ion-button (click)="modal.dismiss()" color="warning" class='volver-modal'>Volver</ion-button>
-              <ion-button
-                (click)="aplicarFiltro()"
-                
-                color="success">Aplicar</ion-button>
-            </ion-content>
-          </ng-template>
-        </ion-modal>
-
-
-      <!-- Fin Modal -->
+        <!-- Modal Filtro -->
+          <app-filtros [filtros] = "filtros" 
+                       [aMarkers] = "aMarkers" 
+                       [map] = "map" 
+                       (colorEmitter)="recibirColor($event)">
+          </app-filtros>
+        <!-- Fin Modal -->
       </ion-col>
     </ion-row>
     <ion-row class="icons_row">
       <ion-col size="3">
         <div>
-          <ion-button
-            fill="clear"
-            expand="block"
-            [color]="colorFiltro"
-            size="large"
-            class="btn"
-            id="open-modal"
-          >
+          <ion-button fill="clear" expand="block" [color] = "colorFiltro" size="large" class="btn" id="open-modal">
             <ion-icon name="funnel" class="icon"></ion-icon>
           </ion-button>
         </div>
@@ -176,21 +58,12 @@
         </div>
       </ion-col>
       <ion-col size="2" class="col_filtro">
-        
       </ion-col>
       <ion-col size="2" class="col_filtro">
-       
       </ion-col>
       <ion-col size="3">
         <div>
-          <ion-button
-            fill="clear"
-            expand="block"
-            color="dark"
-            size="large"
-            class="btn"
-            href="home"
-          >
+          <ion-button fill="clear" expand="block" color="dark" size="large" class="btn" href="home">
             <ion-icon name="navigate" class="icon"></ion-icon>
           </ion-button>
         </div>

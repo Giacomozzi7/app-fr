@@ -1,0 +1,58 @@
+<ion-modal #modal trigger="open-modal">
+  <ng-template>
+    <ion-content color="dark">
+      <ion-toolbar>
+        <ion-title>Filtros</ion-title>
+        <ion-list class="ion-no-padding" slot="end">
+          <ion-item>
+            <ion-select
+              interface="action-sheet"
+              placeholder="Filtro"
+              value="categoria"
+              (ionChange)="handleChange($event)">
+              <ion-select-option value="categoria">Categoría</ion-select-option>
+              <ion-select-option value="zona">Zona</ion-select-option>
+              <ion-select-option value="fecha">Fecha</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-toolbar>
+      <ion-slides #mySlider>
+        <ion-slide>
+          <ion-list class="ion-no-padding" style="width:100%; max-height: 27vh;overflow-y: scroll;">
+            <ion-item color="dark" *ngFor="let cate of filtros.Tipo" #itemTipo>
+              <ion-checkbox
+                slot="start"
+                [checked]="cate.isChecked"></ion-checkbox>
+              <ion-label>{{cate.valor}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+        <ion-slide>
+          <ion-list class="ion-no-padding" style="width:100%">
+            <ion-item color="dark" *ngFor="let zona of filtros.Zona" #itemZona>
+              <ion-checkbox
+                slot="start"
+                [checked]="zona.isChecked"></ion-checkbox>
+              <ion-label>{{zona.valor}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+        <ion-slide>
+          <ion-list class="ion-no-padding" style="width:100%">
+            <ion-item color="dark" *ngFor="let fecha of filtros.Fecha" #itemFecha>
+              <ion-checkbox
+                slot="start"
+                [checked]="fecha.isChecked"></ion-checkbox>
+              <ion-label>{{fecha.valor}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+      </ion-slides>
+      <ion-button (click)="modal.dismiss()" color="warning" class='volver-modal'>Volver</ion-button>
+      <ion-button
+        (click)="aplicarFiltro()"
+        color="success">Aplicar</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>

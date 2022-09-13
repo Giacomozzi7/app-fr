@@ -3,18 +3,22 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 import { HeaderComponent } from './header/header.component';
-import { BtnfiltrosComponent } from './btnfiltros/btnfiltros.component';
+import { LeyendaComponent } from './leyenda/leyenda.component';
+import { FiltrosComponent } from './filtros/filtros.component';
+
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    BtnfiltrosComponent
+    LeyendaComponent,
+    FiltrosComponent
   ],
   exports: [
     HeaderComponent,
-    BtnfiltrosComponent
+    LeyendaComponent,
+    FiltrosComponent
   ],
   imports: [
     CommonModule,

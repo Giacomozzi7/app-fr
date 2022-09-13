@@ -12,6 +12,8 @@ declare var google;
   styleUrls: ['./mapa.page.scss'],
 })
 export class MapaPage implements OnInit {
+
+  public colorFiltro: string = 'dark';
   public markers: Marker[];
   public filtroOn: boolean;
   public aLeyenda = [];
@@ -22,10 +24,8 @@ export class MapaPage implements OnInit {
   public miPos;
   public aMarkers = [];
   public infoWindows = [];
-  public colorFiltro: string = 'dark';
-
+  
   public filtros = { Tipo: [], Zona: [], Fecha: [] };
-
   public mapcolors = {
     "Mi ubicación":"my_location",
     "Terremoto": 'purple',
@@ -35,16 +35,8 @@ export class MapaPage implements OnInit {
     "Sequía": 'yellow'
   };
 
-  @ViewChildren('itemTipo') itemTipo: QueryList<IonItem>;
-  @ViewChildren('itemZona') itemZona: QueryList<IonItem>;
-  @ViewChildren('itemFecha') itemFecha: QueryList<IonItem>;
-  @ViewChild('modal') modal: IonModal;
-  @ViewChild('mySlider') mySlider: IonSlides;
-
-
   constructor(
     private geolocation: Geolocation,
-    private alertController: AlertController,
     public proveedor: ProveedorService,
   ) {}
 
@@ -92,7 +84,6 @@ export class MapaPage implements OnInit {
       mapEle.classList.add('show-map');
       this.renderMarkers();
       this.filtros.Fecha.sort((a,b) => { return parseInt(a.valor.split(' ')[0]) - parseInt(b.valor.split(' ')[0])});
-      this.generarLeyenda();
     });
   }
 
@@ -149,17 +140,6 @@ export class MapaPage implements OnInit {
     return Math.floor(fecha.getFullYear() / regla) * regla + sum
   }
 
-  //Handler select (Modal filtro)
-  handleChange(ev){
-    let change = ev.target.value;
-    this.mySlider.lockSwipes(false)
-    if (change=='categoria') this.mySlider.slideTo(0);
-    if (change == 'fecha')   this.mySlider.slideTo(2);
-    if (change=='zona')      this.mySlider.slideTo(1);
-    this.mySlider.lockSwipes(true)
-  }
-
-
   //Añade un infowindow a cada marcador asignado al mapa
   setInfoWindow(marcadorGoogle) {
     let contentString =
@@ -206,96 +186,11 @@ export class MapaPage implements OnInit {
     })
   }
 
-  //Quita los marcadores del mapa
-  quitarMarkers() {
-    this.aMarkers.forEach((mk) => {
-      mk.setMap(null);
-    });
-  }
-
-  aplicarFiltro(){
-    let arrayChecked: string[] = [];
-    
-    let arrayFiltros = [
-      this.itemTipo.toArray(),
-      this.itemZona.toArray(),
-      this.itemFecha.toArray()
-    ]
-    this.modal.dismiss()
-
-    Object.keys(this.filtros).forEach((cat,index) =>{
-      this.filtros[cat] = []
-
-      arrayFiltros[index].forEach(val =>{
-        let valor = val['el'].innerText
-        let isChecked = val['el']['children'][0]['attributes']['aria-checked']['value']
-        this.filtros[cat].push({valor, isChecked})  
-        arrayChecked.push(isChecked)
-
-      })
-    })
-    this.quitarMarkers();
-    this.resetMarkers();
-    //Cambia el color del icono de filtro si se activa
-    arrayChecked.includes("false") ? this.colorFiltro = 'success' : this.colorFiltro = 'dark'
+  //Recibe cambio de color desde componente filtros
+  recibirColor($event) {
+    this.colorFiltro = $event
     
   }
 
-  //Vuelve a renderizar los marcadores aplicando filtros
-  resetMarkers(){
-    this.aMarkers.forEach((mk) => {
-      let a = this.filtros.Tipo.filter(e => e.valor === mk.tipo && e.isChecked === "true").length > 0
-      let b = this.filtros.Zona.filter(e => e.valor === mk.zona && e.isChecked === "true").length > 0
-      let c = this.filtros.Fecha.filter(e => 
-        parseInt(e.valor.split('-')[0]) <= parseInt(mk.fecha.split('-')[2])  
-        && 
-        parseInt(e.valor.split('-')[1]) >= parseInt(mk.fecha.split('-')[2])
-        &&
-        e.isChecked === "true").length > 0
-
-      if (a && b && c) mk.setMap(this.map);  
-    });
-  }
-
-  //Genera un arreglo con objetos pertenecientes a la leyenda
-  generarLeyenda(){
-    Object.keys(this.mapcolors).forEach((key) => {
-      let ob = {
-            nombre: key,
-            url: '../../assets/icon/' + this.mapcolors[key] + '.png'
-      }
-      this.aLeyenda.push(ob) 
-    });
-  }
-
-  //Control de alertas
-  //--------------------------------------------------------------------------------------------------------------------------
-
-  //Presiona sobre el icono de leyenda
-  async pressLeyenda() {
-
-    //Construccion de tabla de marcadores
-    let msg = '<table> ';
-    Object.keys(this.mapcolors).forEach((key) => {
-      msg +=
-        "<tr><td><img src = '../../assets/icon/" +
-        this.mapcolors[key] +
-        ".png' > <td class ='td-tipo'>" +
-        key +
-        '</td></tr>';
-    });
-    msg += '</table>';
-    console.log(msg)
-
-    //Creacion de alerta y asignacion de mensajes
-    const alert = await this.alertController.create({
-      header: 'Leyenda',
-      cssClass: 'custom-alert',
-      message: msg,
-      buttons: ['Volver'],
-    });
-
-    await alert.present();
-  }
 
 }

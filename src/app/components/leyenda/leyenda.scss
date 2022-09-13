@@ -1,0 +1,33 @@
+ion-modal {
+    --height: 42%;
+    --width:80%;
+    --border-radius: 16px;
+
+    ion-content{
+        background-color: white;
+    }
+
+    ion-toolbar{
+        display:inline-block;
+    }
+
+    .volver-leyenda{
+        margin-left:65%;
+    }
+
+    ion-grid{
+        width: 100%; 
+        max-height: 35vh;
+        overflow-y: scroll;
+    }
+
+    ion-img{
+        max-width:  32px; 
+        max-height: 32px; 
+        margin-top: -5%
+    }
+
+    col-texto{
+        text-align: right
+    }
+}

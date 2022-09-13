@@ -1,0 +1,20 @@
+<ion-modal #modleyenda trigger="open-modal-leyenda">
+  <ng-template>
+    <ion-content color="dark">
+      <ion-toolbar>
+        <ion-title>Leyenda</ion-title>
+      </ion-toolbar>
+      <ion-grid>
+        <ion-row *ngFor="let ley of aLeyenda">
+          <ion-col size="6">
+            <ion-img [src]="ley.url"></ion-img>
+          </ion-col>
+          <ion-col size="6" class="col-texto">
+            <p class="ion-no-margin">{{ley.nombre}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button (click)="modleyenda.dismiss()" color="warning" class='volver-leyenda'>Volver</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
