@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'galeria/:id',
     loadChildren: () => import('./pages/galeria/galeria.module').then( m => m.GaleriaPageModule)
   },
+  {
+    path: 'camara/:id',
+    loadChildren: () => import('./pages/camara/camara.module').then( m => m.CamaraPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { AlertController, AlertInput, IonItem, IonModal, IonSlides } from '@ionic/angular';
-import { Marker} from '../../interfaces/interfaces';
+import { Component, OnInit} from '@angular/core';
+import { Marker } from '../../interfaces/interfaces';
 import { ProveedorService } from '../../services/proveedor.service';
+import { Geolocation} from '@capacitor/geolocation';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
 declare var google;
 
@@ -13,8 +13,11 @@ declare var google;
 })
 export class MapaPage implements OnInit {
 
-  public colorFiltro: string = 'dark';
-  public markers: Marker[];
+  public prueba;
+  public filteredMarkers;
+
+  public colorFiltro: string = 'light';
+  public markers = [] //: Marker[];
   public filtroOn: boolean;
   public aLeyenda = [];
 
@@ -35,23 +38,50 @@ export class MapaPage implements OnInit {
     "Sequía": 'yellow'
   };
 
-  constructor(
-    private geolocation: Geolocation,
-    public proveedor: ProveedorService,
+  constructor( 
+    public proveedor: ProveedorService, 
+    private screenOrientation: ScreenOrientation,
   ) {}
 
   //Init
   ngOnInit() {
+    this.screenOrientation.unlock()
     this.proveedor.obtenerDatos().subscribe(
-      (data: Marker[]) => {
-        this.markers = data;
+      (data) => {   
+        this.filtrarData(data)
         this.loadMap();
-        
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  //Obtiene la posicion actual y genera marcador en el mapa
+  fetchLocation(){
+    Geolocation.getCurrentPosition().then(res =>{ 
+      this.miPos = {
+        lat: res.coords.latitude, 
+        lng: res.coords.longitude 
+      }
+      this.map.setCenter(this.miPos);
+      new google.maps.Marker({
+        position: this.miPos,
+        map: this.map,
+        icon: {
+          url: '../../assets/icon/my_location.png',
+        }
+      });
+    }) 
+  }
+
+
+  //Filtra datos necesarios para esta vista
+  filtrarData(data){
+    for (let i = 0; i < data.length; i++) {
+      let sliced = Object.keys(data[i]).slice(0, 9).reduce((result, key) => { result[key] = data[i][key]; return result;}, {});
+      this.markers.push(sliced)
+    } 
   }
 
   // Google Maps Api
@@ -65,21 +95,8 @@ export class MapaPage implements OnInit {
       zoom: 15,
     });
 
-    //Obtener ubicacion y setear centro al iniciar
-    this.geolocation.getCurrentPosition().then((pos) => {
-      this.miPos = new google.maps.LatLng(
-        pos.coords.latitude,
-        pos.coords.longitude
-      );
-      this.map.setCenter(this.miPos);
-      new google.maps.Marker({
-        position: this.miPos,
-        map: this.map,
-        icon: {
-          url: '../../assets/icon/my_location.png',
-        },
-      });
-    });
+    this.fetchLocation()
+
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       mapEle.classList.add('show-map');
       this.renderMarkers();
@@ -98,7 +115,7 @@ export class MapaPage implements OnInit {
   addMarker(marker: Marker) {
     let marcadorGoogle = new google.maps.Marker({
       ...marker,
-      position: marker.pos,
+      position: marker.pos_evento,
       map: this.map,
       icon: {
         url: '../../assets/icon/' + this.mapcolors[marker.tipo] + '.png',
@@ -153,14 +170,14 @@ export class MapaPage implements OnInit {
                           marcadorGoogle.zona +
                           '</h6>' +
                           "<p style='color:black;'>" +
-                          marcadorGoogle.descrip +
+                          marcadorGoogle.descripcion +
                           '</p>' +
                           "<p style='color:grey'> Fecha: " +
                           marcadorGoogle.fecha +
                           '</p>' +
-                          "<div style='text-align:center'><ion-button style='margin-bottom:2vh'shape='round' href='/memoria/" +
+                          "<div style='text-align:center'><ion-button style='margin-bottom:2vh'shape='round' href='/camara/" +
                           marcadorGoogle.id +
-                          "' size='small'>Ver Memoria</ion-button></div>" +
+                          "' size='small'>Ver Antes/Después</ion-button></div>" +
                           '</div>';
 
     let infowindow = new google.maps.InfoWindow({

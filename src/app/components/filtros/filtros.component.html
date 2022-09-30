@@ -1,7 +1,7 @@
 <ion-modal #modal trigger="open-modal">
   <ng-template>
-    <ion-content color="dark">
-      <ion-toolbar>
+    <ion-content color="light">
+      <ion-toolbar color="dark">
         <ion-title>Filtros</ion-title>
         <ion-list class="ion-no-padding" slot="end">
           <ion-item>
@@ -20,7 +20,7 @@
       <ion-slides #mySlider>
         <ion-slide>
           <ion-list class="ion-no-padding" style="width:100%; max-height: 27vh;overflow-y: scroll;">
-            <ion-item color="dark" *ngFor="let cate of filtros.Tipo" #itemTipo>
+            <ion-item color="light" *ngFor="let cate of filtros.Tipo" #itemTipo>
               <ion-checkbox
                 slot="start"
                 [checked]="cate.isChecked"></ion-checkbox>
@@ -30,7 +30,7 @@
         </ion-slide>
         <ion-slide>
           <ion-list class="ion-no-padding" style="width:100%">
-            <ion-item color="dark" *ngFor="let zona of filtros.Zona" #itemZona>
+            <ion-item color="light" *ngFor="let zona of filtros.Zona" #itemZona>
               <ion-checkbox
                 slot="start"
                 [checked]="zona.isChecked"></ion-checkbox>
@@ -40,7 +40,7 @@
         </ion-slide>
         <ion-slide>
           <ion-list class="ion-no-padding" style="width:100%">
-            <ion-item color="dark" *ngFor="let fecha of filtros.Fecha" #itemFecha>
+            <ion-item color="light" *ngFor="let fecha of filtros.Fecha" #itemFecha>
               <ion-checkbox
                 slot="start"
                 [checked]="fecha.isChecked"></ion-checkbox>

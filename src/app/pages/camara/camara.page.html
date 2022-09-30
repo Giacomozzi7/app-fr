@@ -1,0 +1,53 @@
+<ion-content scrollY="false">
+  <ion-grid class="ion-no-paddding" id="grilla">
+    <ion-row>
+      <ion-col size="1.3" class="col-icon" >
+        <ion-row>
+          <ion-button fill="clear" expand="block" color="light" size="large" href="mapa">
+            <ion-icon name="arrow-back-circle" class="icon"></ion-icon>
+          </ion-button>
+        </ion-row>
+        <ion-row class="row-button" id="first-row-button">
+          <ion-button size="small" expand="block" [color]="colorBotones[0]" class="btn-cambiar" (click)="cambiarImagen(0)">Antes</ion-button>
+        </ion-row>
+        <ion-row class="row-button">
+          <ion-button size="small" expand="block" [color]="colorBotones[1]" class="btn-cambiar" (click)="cambiarImagen(1)">Después</ion-button>
+        </ion-row>
+        <ion-row class="row-button">
+          <ion-button size="small" expand="block" [color]="colorBotones[2]" class="btn-cambiar" (click)="cambiarImagen(2)">Ahora</ion-button>
+        </ion-row>
+      </ion-col>
+      <ion-col size="9.4" style="background-color:lightskyblue; height: 100vh;" class="ion-no-padding">
+        <img-comparison-slider  class="slider-example-relative-size" [value]="valueSlider">
+            <img slot="first"     [src]="updatedImage" />
+            <webcam slot="second" [width]="800" [height]="471" (imageCapture)="handleImage($event)" > </webcam>
+        </img-comparison-slider>
+      </ion-col>
+      <ion-col size="1.3" class="col-icon" >
+        <ion-row>
+            <ion-icon id="semaforo" name="checkmark-circle" class="icon" color="success"></ion-icon>
+        </ion-row>
+        <ion-row>
+          <ion-button fill="clear" expand="block" color="light" size="large"  href="mapa">
+            <ion-icon name="camera" class="icon"></ion-icon>
+          </ion-button>
+        </ion-row>
+        <ion-row>
+          <ion-button fill="clear" expand="block" color="light" size="large"  [href]="newUrl">
+            <ion-icon name="book" class="icon"></ion-icon>
+          </ion-button>
+        </ion-row>
+        <ion-row>
+          <ion-button fill="clear" expand="block" color="light" size="large" href="mapa">
+            <ion-icon name="megaphone" class="icon"></ion-icon>
+          </ion-button>
+        </ion-row>
+        <ion-row class="button-bottom">
+          <ion-button fill="clear" expand="block" color="light" size="large" href="mapa">
+            <ion-icon name="volume-high" class="icon"></ion-icon>
+          </ion-button>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

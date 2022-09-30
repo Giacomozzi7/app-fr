@@ -1,11 +1,21 @@
 export interface Marker {
-  id: number;
-  pos: {
+  id: string;
+  pos_camara: {
     lat: number;
     lng: number;
   };
+  pos_evento:{
+    lat:number;
+    lng:number;
+    alt:number;
+  }
+  camera_pose:{
+    head:number;
+    pidch: number;
+    roll: number;
+  }
   titulo: string;
-  descrip: string;
+  descripcion: string;
   tipo: string;
   zona: string;
   fecha: string;

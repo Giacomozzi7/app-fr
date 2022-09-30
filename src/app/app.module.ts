@@ -7,12 +7,18 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HeaderComponent } from './components/header/header.component';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+
+
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+              {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+               Geolocation,
+              ScreenOrientation],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+//{provide:ScreenOrientation, useClass: ScreenOrientationMock}],

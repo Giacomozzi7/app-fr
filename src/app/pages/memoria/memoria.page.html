@@ -4,7 +4,7 @@
   <ion-grid class="ion-no-padding" id="grilla">
     <ion-row class="ion-no-padding">
       <ion-col class="ion-no-padding" size="12">
-        <ion-card color="dark" class="card-foto">
+        <ion-card color="light" class="card-foto">
           <ion-card-content>
             <p style="display: inline"><b>Ocurrido el:</b> {{evento.fecha}}</p>
             <p style="display: inline; margin-left: 8vh">
@@ -15,28 +15,22 @@
             <ion-card-title><b>Descripción del evento</b></ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <p>{{evento.descrip}}</p>
+            <p>{{evento.descripcion}}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-card color="dark" class="card-foto">
+      <ion-card color="light" class="card-foto">
         <ion-card-content class="card-content">
           <img-comparison-slider>
-            <img slot="first" src="../../assets/img/antes.jpg" />
-            <img slot="second" src="../../assets/img/despues.jpg" />
+            <img slot="first"  [src]="evento.slider[0].url_antes" />
+            <img slot="second" [src]="evento.slider[0].url_despues" />
           </img-comparison-slider>
         </ion-card-content>
-        <ion-card-header>
-          <ion-card-subtitle
-            ><b>Imágen izquierda:</b> Costas de Kentari previo al
-            tsunami.</ion-card-subtitle
-          >
-          <ion-card-subtitle
-            ><b>Imágen derecha:</b> Costas de Kentari tres dias después del
-            tsunami.</ion-card-subtitle
-          >
+        <ion-card-header class="header-slider">
+          <ion-card-subtitle><b>Imágen izquierda:</b> Antes</ion-card-subtitle>
+          <ion-card-subtitle><b>Imágen derecha:</b> Después</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
     </ion-row>
@@ -44,14 +38,14 @@
     <ion-row class="row-img">
       <ion-col size="12" class="col-slides">
         <ion-slides pager="true">
-          <ion-slide *ngFor="let sl of slides; let ind=index">
-            <ion-card color="dark" class="card-foto">
+          <ion-slide *ngFor="let sl of evento.memoria; let ind=index">
+            <ion-card color="light" class="card-foto">
               <ion-card-header>
                 <ion-card-subtitle><b>Descripción:</b> {{sl.titulo}}</ion-card-subtitle>
               </ion-card-header>
               <ion-card-content class="card-content">
                 <ion-slides #mySlider scrollbar="true">
-                  <ion-slide *ngFor="let imagen of sl.img">
+                  <ion-slide *ngFor="let imagen of sl.img_url">
                     <ion-img [src]="imagen"></ion-img>
                   </ion-slide>
                 </ion-slides>
@@ -95,32 +89,33 @@
   </ion-grid>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="footer-galeria">
   <ion-grid class="ion-no-padding">
     <ion-row class=".ion-no-padding" style="height: 7vh">
       <ion-col size="3">
         <ion-button
           fill="clear"
           expand="block"
-          color="dark"
+          color="light"
           size="large"
           [href]="refGaleria"
+          class="ion-no-margin"
         >
           <ion-icon name="image"></ion-icon>
         </ion-button>
       </ion-col>
       <ion-col size="3">
-        <ion-button fill="clear" expand="block" color="dark" size="large">
+        <ion-button fill="clear" expand="block" color="light" size="large" class="ion-no-margin">
           <ion-icon name="megaphone"></ion-icon>
         </ion-button>
       </ion-col>
       <ion-col size="3">
-        <ion-button fill="clear" expand="block" color="dark" size="large">
+        <ion-button fill="clear" expand="block" color="light" size="large" class="ion-no-margin">
           <ion-icon name="videocam"></ion-icon>
         </ion-button>
       </ion-col>
       <ion-col size="3">
-        <ion-button fill="clear" expand="block" color="dark" size="large">
+        <ion-button fill="clear" expand="block" color="light" size="large" class="ion-no-margin">
           <ion-icon name="chatbubble-ellipses"></ion-icon>
         </ion-button>
       </ion-col>
