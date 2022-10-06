@@ -24,8 +24,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/galeria/galeria.module').then( m => m.GaleriaPageModule)
   },
   {
-    /* path: 'camara/:id', */
-    path: 'camara',
+    path: 'camara/:id',
+    /* path: 'camara', */
     loadChildren: () => import('./pages/camara/camara.module').then( m => m.CamaraPageModule)
   },
 ];
