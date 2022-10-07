@@ -86,7 +86,7 @@ export class FiltrosComponent implements OnInit {
     //Cambia el color del icono de filtro si se activa
     arrayChecked.includes("false") 
       ? this.colorEmitter.emit('success') 
-      : this.colorEmitter.emit('dark')
+      : this.colorEmitter.emit('light')
     
   }
 }

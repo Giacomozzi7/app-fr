@@ -10,21 +10,21 @@
       </ion-col>
       <ion-col>
         <div>
-          <ion-button fill="clear" expand="block" color="light" size="large" class="btn" id="open-modal-leyenda">
+          <ion-button *ngIf="navigationMode === false" fill="clear" expand="block" color="light" size="large" class="btn" id="open-modal-leyenda">
             <ion-icon name="information-circle" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
       <ion-col>
         <div>
-          <ion-button fill="clear" expand="block" color="light" size="large" class="btn" (click)="ngOnInit()">
+          <ion-button *ngIf="navigationMode === false" fill="clear" expand="block" color="light" size="large" class="btn" (click)="ngOnInit()">
             <ion-icon name="refresh" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
       <ion-col>
         <div>
-          <ion-button fill="clear" expand="block" color="light" size="large" class="btn" href="memoria">
+          <ion-button *ngIf="navigationMode === false" fill="clear" expand="block" color="light" size="large" class="btn">
             <ion-icon name="images" class="icon"></ion-icon>
           </ion-button>
         </div>
@@ -36,6 +36,7 @@
         <app-leyenda [mapcolors] = "mapcolors"></app-leyenda>
         <!-- Fin Modal -->
         <div id="map" size="10"></div>
+        <div id="indicators"></div>
         <!-- Modal Filtro -->
           <app-filtros [filtros] = "filtros" 
                        [aMarkers] = "aMarkers" 
@@ -48,7 +49,7 @@
     <ion-row class="icons_row">
       <ion-col size="3">
         <div>
-          <ion-button fill="clear" expand="block" [color] = "colorFiltro" size="large" class="btn" id="open-modal">
+          <ion-button *ngIf="navigationMode === false" fill="clear" expand="block" [color] = "colorFiltro" size="large" class="btn" id="open-modal">
             <ion-icon name="funnel" class="icon"></ion-icon>
           </ion-button>
         </div>
@@ -63,8 +64,8 @@
       </ion-col>
       <ion-col size="3">
         <div>
-          <ion-button fill="clear" expand="block" color="light" size="large" class="btn" href="home">
-            <ion-icon name="navigate" class="icon"></ion-icon>
+          <ion-button *ngIf="flagCurrent === 1" fill="clear" expand="block" [color]="buttonRuta[1]" size="large" class="btn" (click)="calculateRoute()">
+            <ion-icon [name]="buttonRuta[0]" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>

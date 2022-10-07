@@ -23,6 +23,15 @@ export class MapaPage implements OnInit {
 
   //Por definir tipos (any)
   public map; 
+  public mapEle: HTMLElement;
+  public indicatorsEle: HTMLElement;
+  public currentDestino = {}
+  public currentMarcador;
+  public flagCurrent = 0;
+  public buttonRuta:string[] = ['navigate','success']
+  public navigationMode = false;
+  public directionsService = new google.maps.DirectionsService();
+  public directionsRenderer = new google.maps.DirectionsRenderer({suppressMarkers:true});
   public marcadorGoogle;
   public miPos;
   public aMarkers = [];
@@ -72,6 +81,15 @@ export class MapaPage implements OnInit {
           url: '../../assets/icon/my_location.png',
         }
       });
+
+      google.maps.event.addListenerOnce(this.map, 'idle', () => {
+        this.mapEle.classList.add('show-map');
+        this.renderMarkers();
+        this.filtros.Fecha.sort((a,b) => { return parseInt(a.valor.split(' ')[0]) - parseInt(b.valor.split(' ')[0])});
+        
+      });
+
+
     }) 
   }
 
@@ -90,24 +108,30 @@ export class MapaPage implements OnInit {
   //Creacion del mapa
   loadMap() {
     // Definicion del mapa y zoom
-    const mapEle: HTMLElement = document.getElementById('map');
-    this.map = new google.maps.Map(mapEle, {
+    this.mapEle = document.getElementById('map');
+    this.indicatorsEle = document.getElementById('indicators');
+    this.map = new google.maps.Map(this.mapEle, {
       zoom: 15,
     });
 
     this.fetchLocation()
-
-    google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      mapEle.classList.add('show-map');
-      this.renderMarkers();
-      this.filtros.Fecha.sort((a,b) => { return parseInt(a.valor.split(' ')[0]) - parseInt(b.valor.split(' ')[0])});
-    });
+    
   }
 
   //Renderiza marcadores a partir de arreglo de marcadores
   renderMarkers() {
     this.markers.forEach((marker) => {
       this.addMarker(marker);
+    });
+  }
+
+
+  //Oculta los marcadores sin removerlos del mapa
+  hideMarkers(h: boolean){
+    this.aMarkers.forEach((marker)=>{
+      if (marker!= this.currentMarcador){
+        marker.setVisible(!h);
+      }
     });
   }
 
@@ -192,9 +216,28 @@ export class MapaPage implements OnInit {
         map: this.map,
         shouldFocus: true,
       });
+
+      this.currentDestino = {
+        lat: marcadorGoogle.pos_evento['lat'],
+        lng: marcadorGoogle.pos_evento['lng']
+      }
+
+      this.currentMarcador = marcadorGoogle;
+      this.flagCurrent = 1
+
     });
+    
     this.infoWindows.push(infowindow);
+
+    //Handler close infowindow
+    infowindow.addListener('closeclick', ()=>{
+      this.currentDestino = {}
+      this.flagCurrent = 0;
+
+    })
   }
+
+
 
   //Cerrar todas las infowindows al abrir una nueva
   cerrarInfoWindows() {
@@ -208,6 +251,44 @@ export class MapaPage implements OnInit {
     this.colorFiltro = $event
     
   }
+
+  calculateRoute() {
+    if (this.buttonRuta.includes('navigate')){
+      if(Object.keys(this.currentDestino).length > 0){
+        this.directionsService.route({
+          origin: this.miPos,
+          destination: this.currentDestino,
+          travelMode: google.maps.TravelMode.DRIVING,
+        }, (response, status)  => {
+          if (status === google.maps.DirectionsStatus.OK) {
+            this.directionsRenderer.setDirections(response);
+          } 
+          else {
+            alert('No se puede renderizar. Razon: ' + status);
+          }
+        });
+
+        this.directionsRenderer.setMap(this.map);
+        this.cerrarInfoWindows()
+        this.hideMarkers(true);
+        this.buttonRuta = ['stop','danger']
+        this.navigationMode = true;
+      }
+    } 
+    else {
+      this.hideMarkers(false);
+      this.directionsRenderer.setMap(null);
+      this.buttonRuta = ['navigate','success']
+      this.currentDestino = {}
+      this.flagCurrent = 0;
+      this.map.setCenter(this.miPos);
+      this.map.setZoom(15)
+      this.navigationMode = false;
+
+    }
+
+
+  } 
 
 
 }
