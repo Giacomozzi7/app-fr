@@ -26,6 +26,9 @@ export class CamaraPage implements OnInit {
     'https://i.picsum.photos/id/547/910/390.jpg?hmac=QD4h99yrJR1UTbBBWcCCNYa_o2MtDi_YbUjWxlex1Bo',
   ];
 
+  //deshabilitar icono para cambiar de camara (frontal o trasera)
+  public allowCameraSwitch = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private screenOrientation: ScreenOrientation
@@ -80,6 +83,6 @@ export class CamaraPage implements OnInit {
       this.colorSound[index] = 'success'
       this.nameDefault[index] = this.namePlay[index]
     }
-    
+
   }
 }
