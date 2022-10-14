@@ -22,9 +22,11 @@ export class CamaraPage implements OnInit {
   public namePlay:    string[] = ['mic','volume-high']
   public nameStop:    string[];
   public imagenes:    string[] = [
-    'https://i.picsum.photos/id/688/910/390.jpg?hmac=K9L5TPYR-Uki6vFIFgladr03Hn6B0emM22RRgOEcMiI',
-    'https://i.picsum.photos/id/547/910/390.jpg?hmac=QD4h99yrJR1UTbBBWcCCNYa_o2MtDi_YbUjWxlex1Bo',
+    'https://i.imgur.com/YZ0wpa6.jpg',
+    'https://images.newscientist.com/wp-content/uploads/2015/10/mg22830412.800-1_800.jpg?width=1200',
   ];
+
+  public ahora = 'https://i.imgur.com/YZ0wpa6.jpg'
 
   //deshabilitar icono para cambiar de camara (frontal o trasera)
   public allowCameraSwitch = false;

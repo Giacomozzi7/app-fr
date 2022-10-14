@@ -41,7 +41,8 @@
           <ion-slide *ngFor="let sl of evento.memoria; let ind=index">
             <ion-card color="light" class="card-foto">
               <ion-card-header>
-                <ion-card-subtitle><b>Descripción:</b> {{sl.titulo}}</ion-card-subtitle>
+                <ion-card-subtitle style="text-align:left"><b>Descripción:</b> {{sl.titulo}}</ion-card-subtitle>
+                <ion-card-subtitle style="text-align:left"><b>Subido por:</b> {{sl.usuario_id}}</ion-card-subtitle>
               </ion-card-header>
               <ion-card-content class="card-content">
                 <ion-slides #mySlider scrollbar="true">

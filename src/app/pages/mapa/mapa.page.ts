@@ -262,22 +262,23 @@ export class MapaPage implements OnInit {
         }, (response, status)  => {
           if (status === google.maps.DirectionsStatus.OK) {
             this.directionsRenderer.setDirections(response);
+            this.directionsRenderer.setMap(this.map);
           } 
           else {
             alert('No se puede renderizar. Razon: ' + status);
           }
         });
 
-        this.directionsRenderer.setMap(this.map);
         this.cerrarInfoWindows()
         this.hideMarkers(true);
         this.buttonRuta = ['stop','danger']
         this.navigationMode = true;
+        
       }
     } 
     else {
-      this.hideMarkers(false);
       this.directionsRenderer.setMap(null);
+      this.hideMarkers(false);
       this.buttonRuta = ['navigate','success']
       this.currentDestino = {}
       this.flagCurrent = 0;

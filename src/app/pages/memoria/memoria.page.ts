@@ -34,8 +34,10 @@ export class MemoriaPage implements OnInit {
     this.proveedor.obtenerEvento(this.profileId)
       .subscribe((data) => {
         this.evento = data[0];
+        console.log(this.evento.memoria)
         this.genButtonColors();
         this.lockSlides();
+        this.buscarUsuarios()
       });
   }
 
@@ -67,6 +69,18 @@ export class MemoriaPage implements OnInit {
     this.aColor[ind][num] = 'dark';
     aData[ind].lockSwipes(true)
     
+  }
+
+  buscarUsuarios(){
+    for (let i = 0; i < this.evento.memoria.length; i++) {
+      let userId = this.evento.memoria[i]['usuario_id']
+      this.proveedor.obtenerUsuario(userId)
+        .subscribe((usuario) => {
+          let strNombre = usuario[0]['nombre'] + " "+ usuario[0]['apellido']
+          this.evento.memoria[i]['usuario_id'] = strNombre
+        })
+   }
+
   }
 
 }
