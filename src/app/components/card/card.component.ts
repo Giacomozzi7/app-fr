@@ -7,16 +7,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-
   @Input() titulo: string;
   @Input() subtitulo: string;
-  @Input() imagen: string;
   @Input() contenido: string;
   @Input() icono: string;
+  @Input() iconoColor: string;
   @Input() url: string;
-  @Input() url_name: string;
-  @Input() url_down: string;
-  @Input() url_name_down: string
+  @Input() urlName: string;
+  @Input() urlDown: string;
+  @Input() urlNameDown: string
 
     constructor() { }
 

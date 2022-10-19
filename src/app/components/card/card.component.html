@@ -1,6 +1,6 @@
 <ion-card>
   <ion-grid>
-    <ion-row class="text-align-center">
+    <ion-row class="text-align-center ion-align-items-center">
       <ion-col size="8">
         <ion-card-header>
           <ion-card-title>{{titulo}}</ion-card-title>
@@ -10,14 +10,15 @@
         <ion-card-content>
           {{contenido}}
           <br>
-          <a href={{url_down}}>{{url_name_down}}</a>
+          <a href={{urlDown}}>{{urlNameDown}}</a>
         </ion-card-content>
       </ion-col>
     
       <ion-col class>
         <div class="ion-text-center">
-          <img src= {{imagen}} />
-          <a href={{url}}>{{url_name}}</a>
+          <ion-icon name={{icono}} color={{iconoColor}} ></ion-icon>
+          <br>
+          <a href={{url}}>{{urlName}}</a>
         </div>
       </ion-col>
     </ion-row>
