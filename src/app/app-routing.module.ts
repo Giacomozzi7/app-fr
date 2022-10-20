@@ -27,7 +27,11 @@ const routes: Routes = [
     path: 'camara/:id',
     /* path: 'camara', */
     loadChildren: () => import('./pages/camara/camara.module').then( m => m.CamaraPageModule)
+  },  {
+    path: 'modulo-educativo',
+    loadChildren: () => import('./pages/modulo-educativo/modulo-educativo.module').then( m => m.ModuloEducativoPageModule)
   },
+
 ];
 
 @NgModule({

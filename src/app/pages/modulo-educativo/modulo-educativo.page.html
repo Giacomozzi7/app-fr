@@ -1,0 +1,59 @@
+<app-header titulo="Modulo Educativo" refback="home" ></app-header>
+
+<ion-content>
+  <!-- Hay tres opciones de cards, la dieferencia de cada una es en 
+  donde se ubica el enlaze a la pagina de onemi -->
+
+  <app-card titulo= "Sección de Noticias" 
+            imagen="data:image/png;base64,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" 
+            contenido="Esta sección incluye datos obtenidos directamente desde ONEMI, como suelen ser noticias, asi como tambien las diversas alertas que estos emiten"
+            icono="newspaper"
+            iconoColor="primary">
+          
+          </app-card>
+
+  <app-card subtitulo="Onemi Alertas"
+            imagen="https://images.emojiterra.com/twitter/v14.0/512px/26a0.png"
+            contenido = "Alertas emititidas por parte de la onemi"
+            url= "https://www.onemi.gov.cl/alertas/"
+            urlName="Ir a Onemi Alertas"
+            icono="alert"> 
+            
+  </app-card>
+
+  <app-card subtitulo="Onemi Noticias"
+            imagen="https://img2.freepng.es/20190316/kgl/kisspng-newspaper-computer-icons-clip-art-portable-network-5c8ca84598b6f3.2991946315527219896255.jpg"
+            contenido = "Alertas emititidas por parte de la onemi"
+            (click)="abrirSite('https://www.onemi.gov.cl/noticias/')"
+            icono="newspaper"
+            iconoColor="danger">  
+     
+  </app-card>
+
+  <app-card subtitulo="Onemi Informaciones"
+            imagen="https://img2.freepng.es/20190316/kgl/kisspng-newspaper-computer-icons-clip-art-portable-network-5c8ca84598b6f3.2991946315527219896255.jpg"
+            contenido = "Alertas emititidas por parte de la onemi"
+            urlDown="https://www.onemi.gov.cl/alertas/"
+            urlNameDown="Ir a Onemi Alertas"
+            icono="information"
+            iconoColor="warning">
+  </app-card>
+
+  <app-card>
+    
+  </app-card>
+
+  
+</ion-content>
+
+<ion-footer class="footer">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="light" >
+          <ion-icon name="game-controller"></ion-icon>
+          Cuestionario</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

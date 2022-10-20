@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
 import { LeyendaComponent } from './leyenda/leyenda.component';
 import { FiltrosComponent } from './filtros/filtros.component';
+import { CardComponent } from './card/card.component';
 
 
 
@@ -13,12 +14,14 @@ import { FiltrosComponent } from './filtros/filtros.component';
   declarations: [
     HeaderComponent,
     LeyendaComponent,
-    FiltrosComponent
+    FiltrosComponent,
+    CardComponent
   ],
   exports: [
     HeaderComponent,
     LeyendaComponent,
-    FiltrosComponent
+    FiltrosComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
