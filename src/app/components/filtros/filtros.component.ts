@@ -46,7 +46,7 @@ export class FiltrosComponent implements OnInit {
   //Vuelve a renderizar los marcadores aplicando filtros
   resetMarkers(){
     this.aMarkers.forEach((mk) => {
-      let a = this.filtros.Tipo.filter(e => e.valor === mk.tipo && e.isChecked === "true").length > 0
+      let a = this.filtros.Tipo.filter(e => e.valor === mk.categoria && e.isChecked === "true").length > 0
       let b = this.filtros.Zona.filter(e => e.valor === mk.zona && e.isChecked === "true").length > 0
       let c = this.filtros.Fecha.filter(e => 
         parseInt(e.valor.split('-')[0]) <= parseInt(mk.fecha.split('-')[2])  

@@ -14,7 +14,7 @@ export class ProveedorService {
 
    obtenerDatos(){
     //'https://164.77.114.239:8129/api/Eventos'
-    return this.http.get('https://164.77.114.239:8129/api/Eventos')
+    return this.http.get('https://164.77.114.239:8129/api/Eventos/all')
    }
 
   obtenerEvento(id:string){
@@ -24,6 +24,11 @@ export class ProveedorService {
 
   obtenerUsuario(id:string){
     //'https://164.77.114.239:8129/api/Usuarios/'+ id
-    return this.http.get('https://164.77.114.239:8129/api/Usuarios/'+ id)
+    return this.http.get('https://164.77.114.239:8129/api/UsuarioApp/'+ id)
  } 
+
+ obtenerCategoria(id:string){
+  return this.http.get('https://164.77.114.239:8129/api/CategoriaEvento/'+ id)
+
+ }
 }

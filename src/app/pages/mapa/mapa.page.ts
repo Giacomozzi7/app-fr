@@ -4,6 +4,7 @@ import { ProveedorService } from '../../services/proveedor.service';
 import { Geolocation} from '@capacitor/geolocation';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
+
 declare var google;
 
 @Component({
@@ -36,6 +37,10 @@ export class MapaPage implements OnInit {
   public miPos;
   public aMarkers = [];
   public infoWindows = [];
+  public watch;
+  public latitude
+  public longitude
+  public myMarker;
   
   public filtros = { Tipo: [], Zona: [], Fecha: [] };
   public mapcolors = {
@@ -58,12 +63,35 @@ export class MapaPage implements OnInit {
     this.proveedor.obtenerDatos().subscribe(
       (data) => {   
         this.filtrarData(data)
+        this.obtainCategoria()
         this.loadMap();
-      },
+        this.watcherPosition();
+        })
+      ,
       (error) => {
         console.log(error);
-      }
-    );
+      }    
+  }
+
+  obtainCategoria(){
+    this.markers.forEach((marker) =>{
+      this.proveedor.obtenerCategoria(marker.categoria).subscribe((data)=>{
+        marker.categoria = data[0]['tipo']
+      })
+    })
+  }
+
+  watcherPosition(){
+    this.watch = Geolocation.watchPosition({
+      enableHighAccuracy:true,
+    },
+    (coordinates)=> {
+      console.log(coordinates)
+      this.myMarker.setPosition(
+        new google.maps.LatLng(coordinates.coords.latitude, coordinates.coords.longitude)
+      )
+    })
+
   }
 
   //Obtiene la posicion actual y genera marcador en el mapa
@@ -74,7 +102,7 @@ export class MapaPage implements OnInit {
         lng: res.coords.longitude 
       }
       this.map.setCenter(this.miPos);
-      new google.maps.Marker({
+      this.myMarker = new google.maps.Marker({
         position: this.miPos,
         map: this.map,
         icon: {
@@ -85,11 +113,8 @@ export class MapaPage implements OnInit {
       google.maps.event.addListenerOnce(this.map, 'idle', () => {
         this.mapEle.classList.add('show-map');
         this.renderMarkers();
-        this.filtros.Fecha.sort((a,b) => { return parseInt(a.valor.split(' ')[0]) - parseInt(b.valor.split(' ')[0])});
-        
+        this.filtros.Fecha.sort((a,b) => { return parseInt(a.valor.split(' ')[0]) - parseInt(b.valor.split(' ')[0])});    
       });
-
-
     }) 
   }
 
@@ -142,15 +167,15 @@ export class MapaPage implements OnInit {
       position: marker.pos_evento,
       map: this.map,
       icon: {
-        url: '../../assets/icon/' + this.mapcolors[marker.tipo] + '.png',
+        url: '../../assets/icon/' + this.mapcolors[marker.categoria] + '.png',
       },
     });
     this.aMarkers.push(marcadorGoogle);
     this.setInfoWindow(marcadorGoogle);
 
     //Se agrega tipo, zona y fecha a los filtros sin repeticion
-    if (this.filtros.Tipo.filter(e => e.valor === marcadorGoogle.tipo).length === 0) {
-      this.filtros.Tipo.push({valor: marcadorGoogle.tipo, isChecked:true});  
+    if (this.filtros.Tipo.filter(e => e.valor === marcadorGoogle.categoria).length === 0) {
+      this.filtros.Tipo.push({valor: marcadorGoogle.categoria, isChecked:true});  
     }
 
     if (this.filtros.Zona.filter(e => e.valor === marcadorGoogle.zona).length === 0) {
@@ -188,7 +213,7 @@ export class MapaPage implements OnInit {
                           "<h5 style='color:black;'>" +
                           marcadorGoogle.titulo +
                           ' - ' +
-                          marcadorGoogle.tipo +
+                          marcadorGoogle.categoria +
                           '</h5>' +
                           "<h6 style='color:black; margin-left:1px;'> " +
                           marcadorGoogle.zona +
@@ -236,7 +261,6 @@ export class MapaPage implements OnInit {
 
     })
   }
-
 
 
   //Cerrar todas las infowindows al abrir una nueva

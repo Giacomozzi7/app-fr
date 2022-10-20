@@ -16,7 +16,7 @@ export interface Marker {
   }
   titulo: string;
   descripcion: string;
-  tipo: string;
+  categoria: string;
   zona: string;
   fecha: string;
 }

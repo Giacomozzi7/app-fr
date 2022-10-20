@@ -76,6 +76,7 @@ export class MemoriaPage implements OnInit {
       let userId = this.evento.memoria[i]['usuario_id']
       this.proveedor.obtenerUsuario(userId)
         .subscribe((usuario) => {
+          console.log(usuario)
           let strNombre = usuario[0]['nombre'] + " "+ usuario[0]['apellido']
           this.evento.memoria[i]['usuario_id'] = strNombre
         })

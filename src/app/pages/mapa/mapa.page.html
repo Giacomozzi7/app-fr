@@ -10,22 +10,22 @@
       </ion-col>
       <ion-col>
         <div>
-          <ion-button *ngIf="navigationMode === false" fill="clear" expand="block" color="light" size="large" class="btn" id="open-modal-leyenda">
+          <ion-button fill="clear" expand="block" color="light" size="large" class="btn" id="open-modal-leyenda" [disabled]="navigationMode === true">
             <ion-icon name="information-circle" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
       <ion-col>
         <div>
-          <ion-button *ngIf="navigationMode === false" fill="clear" expand="block" color="light" size="large" class="btn" (click)="ngOnInit()">
-            <ion-icon name="refresh" class="icon"></ion-icon>
+          <ion-button fill="clear" expand="block" color="light" size="large" class="btn" href="mapa" [disabled]="navigationMode === true">
+            <ion-icon name="refresh-circle" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
       <ion-col>
         <div>
-          <ion-button *ngIf="navigationMode === false" fill="clear" expand="block" color="light" size="large" class="btn">
-            <ion-icon name="images" class="icon"></ion-icon>
+          <ion-button fill="clear" expand="block" color="light" size="large" class="btn" [disabled]="navigationMode === true">
+            <ion-icon name="help-circle" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
@@ -49,7 +49,7 @@
     <ion-row class="icons_row">
       <ion-col size="3">
         <div>
-          <ion-button *ngIf="navigationMode === false" fill="clear" expand="block" [color] = "colorFiltro" size="large" class="btn" id="open-modal">
+          <ion-button  fill="clear" expand="block" [color] = "colorFiltro" size="large" class="btn" id="open-modal" [disabled]="navigationMode === true">
             <ion-icon name="funnel" class="icon"></ion-icon>
           </ion-button>
         </div>
@@ -59,6 +59,7 @@
         </div>
       </ion-col>
       <ion-col size="2" class="col_filtro">
+        <p>{{latitude}}</p>
       </ion-col>
       <ion-col size="2" class="col_filtro">
       </ion-col>
