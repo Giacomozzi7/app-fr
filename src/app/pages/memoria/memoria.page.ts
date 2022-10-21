@@ -34,7 +34,7 @@ export class MemoriaPage implements OnInit {
     this.proveedor.obtenerEvento(this.profileId)
       .subscribe((data) => {
         this.evento = data[0];
-        console.log(this.evento.memoria)
+        console.log(this.evento)
         this.genButtonColors();
         this.lockSlides();
         this.buscarUsuarios()
@@ -76,7 +76,6 @@ export class MemoriaPage implements OnInit {
       let userId = this.evento.memoria[i]['usuario_id']
       this.proveedor.obtenerUsuario(userId)
         .subscribe((usuario) => {
-          console.log(usuario)
           let strNombre = usuario[0]['nombre'] + " "+ usuario[0]['apellido']
           this.evento.memoria[i]['usuario_id'] = strNombre
         })

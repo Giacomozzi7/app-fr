@@ -62,23 +62,29 @@ export class MapaPage implements OnInit {
     this.screenOrientation.unlock()
     this.proveedor.obtenerDatos().subscribe(
       (data) => {   
-        this.filtrarData(data)
-        this.obtainCategoria()
-        this.loadMap();
-        this.watcherPosition();
-        })
+          this.filtrarData(data);
+          this.loadMap();
+          this.watcherPosition();
+        }
+        )
       ,
       (error) => {
         console.log(error);
       }    
   }
 
-  obtainCategoria(){
-    this.markers.forEach((marker) =>{
-      this.proveedor.obtenerCategoria(marker.categoria).subscribe((data)=>{
-        marker.categoria = data[0]['tipo']
+  async obtainCategoria(){
+    this.proveedor.obtenerCategorias().subscribe((data) =>{
+      let dataN = data
+      this.markers.forEach(marker =>{
+        for (let i = 0; i<5; i++){
+          if (dataN[i]['id'] === marker.categoria){
+            marker.categoria = dataN[i]['tipo']
+          }
+        }
       })
-    })
+    }) 
+    return;
   }
 
   watcherPosition(){
@@ -131,7 +137,9 @@ export class MapaPage implements OnInit {
   //---------------------------------------------------------------------------------------------------
 
   //Creacion del mapa
-  loadMap() {
+  async loadMap() {
+    await this.obtainCategoria();
+    console.log(this.markers)
     // Definicion del mapa y zoom
     this.mapEle = document.getElementById('map');
     this.indicatorsEle = document.getElementById('indicators');
