@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'modulo-educativo',
     loadChildren: () => import('./pages/modulo-educativo/modulo-educativo.module').then( m => m.ModuloEducativoPageModule)
   },
+  {
+    path: 'trivia',
+    loadChildren: () => import('./pages/trivia/trivia.module').then( m => m.TriviaPageModule)
+  },
 
 ];
 

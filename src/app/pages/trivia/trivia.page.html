@@ -1,0 +1,268 @@
+<app-header titulo="Trivia" refback="home" ></app-header>
+
+<ion-content *ngIf="setDificultad">
+  <ion-card>
+    <br><br><br><br>
+    <ion-card-header>
+      <ion-card-title>Seleccione la dificultad</ion-card-title>
+    </ion-card-header>
+  <br>
+    <ion-card-content>
+          <ion-row class="ion-text-center">
+            <ion-col>
+              <ion-button color="success" (click)="setBajoFlag()" disabled={{bajoFlag}}>Facil</ion-button>
+            </ion-col>
+
+            <ion-col>
+              <ion-button color="warning" (click)="setMedioFlag()"disabled={{medioFlag}} >Intermedio</ion-button>
+            </ion-col>
+        
+            <ion-col>
+              <ion-button color="danger" (click)="setAltoFlag()" disabled={{altoFlag}}>Dificil</ion-button>
+            </ion-col>
+          </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Selecciona la categoría</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <div class="ion-text-center">
+      <ion-row>
+        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
+          <ion-button color="medium" size="small" expand="block" (click)="mostrarValor()" [id]="ince">Incendio
+            <ion-icon name="flame"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
+          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorTerremoto()" [id]="terre">Terremoto 
+            <ion-icon name="pulse"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
+          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorTsunami()" [id]="tsu">Tsunami
+            <ion-icon name="flag"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
+          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorInundacion()" [id]="inun">Inundación
+            <ion-icon name="thunderstorm"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    
+      <ion-row>
+        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
+          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorHuracan()" [id]="hur">Huracán
+            <ion-icon name="cloudy-night"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
+          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorSequia()" [id]="seq">Sequía
+            <ion-icon name="sunny"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorAvalancha()" [id]="aval">Avalancha
+            <ion-icon name="snow"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button color="medium" expand="block" size="small" (click)="mostrarValorDeslizamiento()" [id]="des"> Deslizamiento de Tierra 
+            <ion-icon name="alert-circle"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+    </div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col sizeLg="4" sizeMd="4" sizeXs="12">
+            <ion-button expand="block" (click)="pagPreguntas()">Jugar!!!</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+
+<ion-content *ngIf="showPreguntas">
+  <ion-card>
+    <ion-card-header>
+      <!-- <ion-card-title>Pregunta</ion-card-title> -->
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="ion-text-center" >
+          <ion-col size="4">
+            <ion-label>Puntaje: {{puntaje}}</ion-label>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-label>Pregunta {{preguntaActual+1}} de {{preguntasList.length}}</ion-label>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-label>{{contador}} </ion-label>
+            <ion-icon name="stopwatch-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <!-- <ion-progress-bar color="secondary"></ion-progress-bar> -->
+            <div role="progressbar" [ngStyle]="{'width':progreso+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Pregunta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row >
+          <ion-col class="ion-text-center">
+            <img src="https://images.assetsdelivery.com/compings_v2/startstock/startstock1902/startstock190200018.jpg" alt="">
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="8">
+            <ion-label>{{preguntasList[preguntaActual]?.preguntaText}}</ion-label>
+          </ion-col>
+
+          <ion-col size="4">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Alternativas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row *ngFor="let option of preguntasList[preguntaActual]?.alternativas">
+          <ion-col>
+            <ion-button expand="block" (click)="answer(preguntaActual+1, option)"> {{option.alternativaText}} </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="ion-text-center">
+          <ion-col size="6">
+            <ion-button (click)="resetQuiz()" color="danger">
+              <ion-icon name="refresh-circle" size="large" ></ion-icon>
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button [disabled]="preguntaActual===preguntasList.length-1"class="btn" (click)="nextQuestion()" color="light">
+              <ion-icon name="play-skip-forward" size="large"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-text-center">
+          <ion-col>
+            <ion-label>Reset Trivia</ion-label>
+          </ion-col>
+
+          <ion-col>
+            <ion-label>Saltar Pregunta</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-content *ngIf="isQuizCompleted">
+  <ion-card> 
+    <ion-card-header>
+      <ion-card-title class="ion-align-center">Felicidades Trivia Completada</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <img src="../../../assets/icon/celebracion.png">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Resultados</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Estos son los resultados obtenidos:</ion-label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-label>Respuestas Correctas: {{respuestaCorrecta}}</ion-label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-label>Respuestas Incorrectas: {{respuestaIncorrecta}}</ion-label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-label>Puntaje: {{puntaje}} puntos</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content class="ion-text-center">
+      <ion-button href="modulo-educativo">Volver a Modulo Educativo</ion-button>
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
