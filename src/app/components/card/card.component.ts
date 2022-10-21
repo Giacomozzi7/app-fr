@@ -12,10 +12,6 @@ export class CardComponent implements OnInit {
   @Input() contenido: string;
   @Input() icono: string;
   @Input() iconoColor: string;
-  @Input() url: string;
-  @Input() urlName: string;
-  @Input() urlDown: string;
-  @Input() urlNameDown: string
 
     constructor() { }
 

@@ -1,0 +1,192 @@
+{
+    "preguntas": [{
+            "preguntaText": "Esta corresponde a la pregunta 1?",
+            "alternativas": [{
+                    "alternativaText": "Alternativa 1",
+                    "correcto": true
+                },
+                {
+                    "alternativaText": "Alternativa 2",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 3",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 4",
+                    "correcto": false
+                }
+            ],
+            "explicacion": "Explicacion de respuesta correcta"
+        },
+        {
+            "preguntaText": "Esta corresponde a la pregunta 2?",
+            "alternativas": [{
+                    "alternativaText": "Alternativa 1",
+                    "correcto": true
+                },
+                {
+                    "alternativaText": "Alternativa 2",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 3",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 4",
+                    "correcto": false
+                }
+            ],
+            "explicacion": "Explicacion de respuesta correcta"
+        },
+        {
+            "preguntaText": "Esta corresponde a la pregunta 3?",
+            "alternativas": [{
+                    "alternativaText": "Alternativa 1",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 2",
+                    "correcto": true
+                },
+                {
+                    "alternativaText": "Alternativa 3",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 4",
+                    "correcto": false
+                }
+            ],
+            "explicacion": "Explicacion de respuesta correcta"
+        },
+        {
+            "preguntaText": "Esta corresponde a la pregunta 4?",
+            "alternativas": [{
+                    "alternativaText": "Alternativa 1",
+                    "correcto": false   
+                },
+                {
+                    "alternativaText": "Alternativa 2",
+                    "correcto": true
+                },
+                {
+                    "alternativaText": "Alternativa 3",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 4",
+                    "correcto": false
+                }
+            ],
+            "explicacion": "Explicacion de respuesta correcta"
+        },
+        {
+            "preguntaText": "Esta corresponde a la pregunta 5?",
+            "alternativas": [{
+                    "alternativaText": "Alternativa 1",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 2",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 3",
+                    "correcto": true
+                },
+                {
+                    "alternativaText": "Alternativa 4",
+                    "correcto": false
+                }
+            ],
+            "explicacion": "Explicacion de respuesta correcta"
+        },
+        {
+            "preguntaText": "Esta corresponde a la pregunta 6?",
+            "alternativas": [{
+                    "alternativaText": "Alternativa 1",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 2",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 3",
+                    "correcto": true
+                },
+                {
+                    "alternativaText": "Alternativa 4",
+                    "correcto": false
+                }
+            ],
+            "explicacion": "Explicacion de respuesta correcta"
+        },
+        {
+            "preguntaText": "Esta corresponde a la pregunta 7?",
+            "alternativas": [{
+                    "alternativaText": "Alternativa 1",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 2",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 3",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 4",
+                    "correcto": true
+                }
+            ],
+            "explicacion": "Explicacion de respuesta correcta"
+        },
+        {
+            "preguntaText": "Esta corresponde a la pregunta 8?",
+            "alternativas": [{
+                    "alternativaText": "Alternativa 1",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 2",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 3",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 4",
+                    "correcto": true
+                }
+            ],
+            "explicacion": "Explicacion de respuesta correcta"
+        },
+        {
+            "preguntaText": "Esta corresponde a la pregunta 9?",
+            "alternativas": [{
+                    "alternativaText": "Alternativa 1",
+                    "correcto": true
+                },
+                {
+                    "alternativaText": "Alternativa 2",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 3",
+                    "correcto": false
+                },
+                {
+                    "alternativaText": "Alternativa 4",
+                    "correcto": false
+                }
+            ],
+            "explicacion": "Explicacion de respuesta correcta"
+        }
+    ]
+}

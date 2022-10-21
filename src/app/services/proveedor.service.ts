@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProveedorService {
+  public varService: any;
 
 
   constructor(public http: HttpClient) {}
@@ -31,4 +32,8 @@ export class ProveedorService {
   return this.http.get('https://164.77.114.239:8129/api/CategoriaEvento/')
 
  }
+
+  getQuestionJson(){
+    return this.http.get<any>("assets/preguntas.json");
+  }
 }
