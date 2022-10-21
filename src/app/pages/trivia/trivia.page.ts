@@ -49,7 +49,7 @@ export class TriviaPage implements OnInit {
 
 
   ngOnInit() {
-    // this.presentAlert();
+    this.presentAlert();
   }
 
   async presentAlert() {
