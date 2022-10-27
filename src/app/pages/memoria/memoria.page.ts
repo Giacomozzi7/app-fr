@@ -14,6 +14,7 @@ export class MemoriaPage implements OnInit {
   profileId: string;
   evento;
   refGaleria: string;
+  refRelatos: string;
   aColor: String[][] = [];
 
 
@@ -30,6 +31,7 @@ export class MemoriaPage implements OnInit {
     this.screenOrientation.unlock();
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refGaleria = 'galeria/'+ this.profileId;
+    this.refRelatos = 'relatos/'+ this.profileId;
 
     this.proveedor.obtenerEvento(this.profileId)
       .subscribe((data) => {

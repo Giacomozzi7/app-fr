@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Marker } from 'src/app/interfaces/interfaces';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 
 @Component({
