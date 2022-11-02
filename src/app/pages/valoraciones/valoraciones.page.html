@@ -1,0 +1,53 @@
+<app-header titulo="Valoraciones" [refback]="refMemoria"></app-header>
+
+<ion-content padding *ngIf="evento">
+  <ion-grid class="ion-no-padding" id="grilla">
+      <ion-row class="ion-no-padding">
+          <ion-col>
+              <ion-card color="light" style="border:1px solid;">
+                  <ion-card-header style="text-align:center">
+                      <ion-icon name="star" style="font-size:4vh"></ion-icon>
+                  </ion-card-header>
+                  <ion-card-content>
+                      <p>Esta sección de valoraciones corresponde al evento: <b>{{evento.titulo}}</b> ocurrido con fecha: <b>{{evento.fecha}}</b>.</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+      </ion-row>
+      <ion-row class="ion-no-padding">
+        <ion-col>
+            <ion-card color="light" style="border:1px solid;">
+                <ion-card-header style="text-align:center">
+                    <ion-card-title><b>Valoración Inmersión</b></ion-card-title>
+                    <ion-card-subtitle>Valora tu visita al evento de acuerdo a la inmersión producida.</ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content style="padding:0vh; text-align:center">
+                    <ion-button size="small" class="muy-bajo">Muy bajo</ion-button>
+                    <ion-button size="small" class="bajo">Bajo</ion-button>
+                    <ion-button size="small" class="medio">Medio</ion-button>
+                    <ion-button size="small" class="alto">Alto</ion-button>
+                    <ion-button size="small" class="muy-alto">Muy Alto</ion-button>
+                </ion-card-content>
+                <ion-card-header style="text-align:center">
+                  <ion-card-title><b>Valoración Interés</b></ion-card-title>
+                  <ion-card-subtitle>Valora tu visita al evento de acuerdo a la interés generado.</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content style="padding:0vh; text-align:center">
+                <ion-button size="small" class="muy-bajo">Muy bajo</ion-button>
+                <ion-button size="small" class="bajo">Bajo</ion-button>
+                <ion-button size="small" class="medio">Medio</ion-button>
+                <ion-button size="small" class="alto">Alto</ion-button>
+                <ion-button size="small" class="muy-alto">Muy Alto</ion-button>
+            </ion-card-content>
+            <div class="div-enviar">
+              <ion-button class="btn-enviar">
+                Enviar
+                <ion-icon slot="end" name="star"></ion-icon>
+              </ion-button>
+            </div>
+            
+          </ion-card>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>    

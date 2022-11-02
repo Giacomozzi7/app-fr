@@ -40,6 +40,11 @@ const routes: Routes = [
     path: 'relatos/:id',
     loadChildren: () => import('./pages/relatos/relatos.module').then( m => m.RelatosPageModule)
   },
+  {
+    path: 'valoraciones/:id',
+    loadChildren: () => import('./pages/valoraciones/valoraciones.module').then( m => m.ValoracionesPageModule)
+  },
+
 
 ];
 

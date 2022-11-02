@@ -1,0 +1,34 @@
+<ion-modal #modinteres trigger="open-modal">
+  <ng-template>
+    <ion-content color="light">
+      <ion-toolbar color="dark">
+        <ion-title>¿Sabías que?</ion-title>
+        <ion-buttons slot="end">
+          <ion-button style="margin:0px" slot="icon-only" size="small">
+            <ion-icon button name="caret-back-circle" style="font-size:10vh" color="primary"></ion-icon>
+          </ion-button>
+          <ion-button style="margin:0px;">
+            <ion-icon name="caret-forward-circle" style="font-size:10vh" color="primary"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-grid>
+        <ion-row class="ion-text-center">
+          <ion-col size="12">
+                <ion-icon name="warning" style="font-size:20vh" color="warning"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center">
+          <ion-col size="12">
+            <p style="padding:2vh" class="ion-no-margin">Si este desastre volviese a ocurrir en este mismo instante no tendrías tiempo para escapar.</p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center">
+          <ion-col class="ion-no-padding">
+            <ion-button (click)="modinteres.dismiss()" color="warning" class='volver-leyenda'>Volver</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>  
+    </ion-content>
+  </ng-template>
+</ion-modal>

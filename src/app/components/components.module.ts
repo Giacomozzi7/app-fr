@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { LeyendaComponent } from './leyenda/leyenda.component';
 import { FiltrosComponent } from './filtros/filtros.component';
 import { CardComponent } from './card/card.component';
+import { DatosInteresComponent } from './datos-interes/datos-interes.component';
 
 
 
@@ -15,13 +16,15 @@ import { CardComponent } from './card/card.component';
     HeaderComponent,
     LeyendaComponent,
     FiltrosComponent,
-    CardComponent
+    CardComponent,
+    DatosInteresComponent,
   ],
   exports: [
     HeaderComponent,
     LeyendaComponent,
     FiltrosComponent,
-    CardComponent
+    CardComponent,
+    DatosInteresComponent
   ],
   imports: [
     CommonModule,

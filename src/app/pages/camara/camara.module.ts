@@ -8,6 +8,7 @@ import { CamaraPageRoutingModule } from './camara-routing.module';
 
 import { CamaraPage } from './camara.page';
 import { WebcamModule } from 'ngx-webcam';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { WebcamModule } from 'ngx-webcam';
     FormsModule,
     IonicModule,
     CamaraPageRoutingModule,
-    WebcamModule
+    WebcamModule,
+    ComponentsModule
   ],
   declarations: [CamaraPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA ]

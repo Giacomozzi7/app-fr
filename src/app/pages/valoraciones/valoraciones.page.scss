@@ -1,0 +1,36 @@
+ion-card-content{
+    ion-button{
+        width:8.45vh;
+        margin: 0px;
+        --border-radius: 0;
+    }
+
+    .muy-bajo{
+        --background:#cc3300
+    }
+
+    .bajo{
+        --background: #ff9966
+    }
+
+    .medio{
+        --background: #ffcc00
+    }
+
+    .alto{
+        --background: #99cc33
+
+    }
+
+    .muy-alto{
+        --background: #339900
+    }
+}
+
+.div-enviar{
+    text-align: center;
+}
+.btn-enviar{
+    margin-top:2vh;
+
+}

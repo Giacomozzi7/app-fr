@@ -120,7 +120,6 @@ export class RelatosPage implements OnInit {
 
   }
 
-
   generarPlaylist(){
     this.evento.relatos.forEach(relato => {
       if (relato.aceptado === true){

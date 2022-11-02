@@ -1,0 +1,25 @@
+ion-modal {
+    --height: 80%;
+    --width:42%;
+    --border-radius: 16px;
+
+    ion-content{
+        background-color: white;
+    }
+
+    ion-toolbar{
+        display:inline-block;
+        ion-button {
+            --padding-start: 0.5vh;
+            --padding-end: 0.5vh;
+        }
+        
+    }
+
+    ion-grid{
+        width: 100%; 
+        max-height: 70vh;
+        overflow-y: scroll;
+    }
+
+}
