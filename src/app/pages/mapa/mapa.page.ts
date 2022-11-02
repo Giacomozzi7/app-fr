@@ -92,10 +92,11 @@ export class MapaPage implements OnInit {
       enableHighAccuracy:true,
     },
     (coordinates)=> {
-      console.log(coordinates)
-      this.myMarker.setPosition(
-        new google.maps.LatLng(coordinates.coords.latitude, coordinates.coords.longitude)
-      )
+      if (coordinates !== null){
+        this.myMarker.setPosition(
+          new google.maps.LatLng(coordinates.coords.latitude, coordinates.coords.longitude)
+        )
+      }
     })
 
   }

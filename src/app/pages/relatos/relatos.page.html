@@ -1,6 +1,6 @@
 <app-header titulo="Relatos" [refback]="refMemoria"></app-header>
 
-<ion-content padding *ngIf="evento">
+<ion-content padding *ngIf="evento && playlist">
   <ion-grid class="ion-no-padding" id="grilla">
       <ion-row class="ion-no-padding">
           <ion-col>
@@ -17,6 +17,11 @@
         <ion-row>
           <ion-col size="12">
             <ion-card color="light" class="card-foto">
+              <ion-card-header style="background-color:white">
+                <p style="display:inline">Haz click sobre el <b>ícono</b> </p>
+                <ion-icon name="volume-off" style="font-size:4vh;" ></ion-icon>
+                <p style="display:inline">para reproducir el relato.</p>
+              </ion-card-header>
               <ion-card-content class="ion-no-padding">
               <ion-list style="width:100%">
                 <ion-item *ngFor="let track of playlist" >
@@ -29,9 +34,10 @@
                     <ion-label [color]="track == activeTrack? 'success' : 'dark'"  style="font-size:2vh;" >
                       {{track.name}}
                     </ion-label>
-                    <ion-label color="medium"  style="font-size:2vh; text-align: right;" >
-                      01/01/01
+                    <ion-label color="medium"  style="font-size:2vh; text-align: right; " >
+                      <ion-icon name="heart-outline" class="icon" color="danger" style="font-size:2.5vh; font-weight: bold; margin-right:1vh; margin-top:0.5vh;" ></ion-icon>
                     </ion-label>
+                    <p><b>{{track.likes.length}}</b></p>
                 </ion-item>
               </ion-list>
             </ion-card-content>
@@ -45,10 +51,15 @@
   <ion-toolbar color="dark">
     <ion-row>
       <ion-col size="12" text-center class="ion-text-center">
-        {{activeTrack.name}}
-      </ion-col>
-      <ion-col size="12" text-center class="ion-text-center">
-        Por: Francisco Giacomozzi
+        <ion-row class="data-track">
+        <b>{{activeTrack.name}}</b>
+        </ion-row>
+        <ion-row class="data-track">
+        <p style="margin:0px"><b>Por: </b>{{activeTrack.usuario_id}}</p>
+        </ion-row>
+        <ion-row class="data-track">
+        <p style="margin:0px">{{activeTrack.fecha_subida}}</p>
+        </ion-row>
       </ion-col>
       <ion-col size="12">
         <ion-range #range [(ngModel)]="progress" max="100" color="success" (touchend)="seek()" (mouseup)="seek()"></ion-range>

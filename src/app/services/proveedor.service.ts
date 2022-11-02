@@ -30,7 +30,10 @@ export class ProveedorService {
 
  obtenerCategorias(){
   return this.http.get('https://164.77.114.239:8129/api/CategoriaEvento/')
+ }
 
+ obtenerRelatos(id:string){
+  return this.http.get('https://164.77.114.239:8129/api/app/page/relatos/' + id)
  }
 
   getQuestionJson(){

@@ -20,3 +20,13 @@ export interface Marker {
   zona: string;
   fecha: string;
 }
+
+export interface Track{
+  name:string;
+  path: string;
+  fecha_subida: string;
+  usuario_id: string;
+  likes : string[];
+}
+
+

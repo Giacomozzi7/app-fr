@@ -3,11 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { Howl } from 'howler';
 import { IonRange } from '@ionic/angular';
-
-export interface Track{
-  name:string;
-  path: string;
-}
+import { Track } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-relatos',
@@ -20,32 +16,7 @@ export class RelatosPage implements OnInit {
   refMemoria:string;
   evento;
   audioUrl: string;
-  playlist: Track[] = [
-    {
-      name: 'Título Relato 1',
-      path: 'https://docs.google.com/uc?export=download&id=1rl3bPKPZFU2BvJFvYkmci1-Z7bSfayKx'
-    },
-    {
-      name: 'Título Relato 2',
-      path: 'https://docs.google.com/uc?export=download&id=1rrN76h8U3erufq2hSqqNdyVqvrDO_-cr'
-    },
-    {
-      name: 'Título Relato 3',
-      path: 'https://docs.google.com/uc?export=download&id=1rumu3P2exgUJGuposb4fJ0CVTLnAVXno'
-    },
-    {
-      name: 'Título Relato 4',
-      path: 'https://docs.google.com/uc?export=download&id=1rl3bPKPZFU2BvJFvYkmci1-Z7bSfayKx'
-    },
-    {
-      name: 'Título Relato 5',
-      path: 'https://docs.google.com/uc?export=download&id=1rrN76h8U3erufq2hSqqNdyVqvrDO_-cr'
-    },
-    {
-      name: 'Título Relato 6',
-      path: 'https://docs.google.com/uc?export=download&id=1rumu3P2exgUJGuposb4fJ0CVTLnAVXno'
-    }
-  ]
+  playlist: Track[] = [];
 
   activeTrack: Track = null;
   player: Howl = null;
@@ -128,12 +99,42 @@ export class RelatosPage implements OnInit {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refMemoria = 'memoria/'+ this.profileId;
 
-    this.proveedor.obtenerEvento(this.profileId)
+    this.proveedor.obtenerRelatos(this.profileId)
     .subscribe((data) => {
       this.evento = data[0];
-      console.log(this.evento)
-      //this.buscarUsuarios()
+      this.generarPlaylist();
+      this.buscarUsuarios()
     });
+  }
+
+  buscarUsuarios(){
+    for (let i = 0; i < this.playlist.length; i++) {
+      let userId = this.playlist[i]['usuario_id']
+      console.log(userId)
+      this.proveedor.obtenerUsuario(userId)
+        .subscribe((usuario) => {
+          let strNombre = usuario[0]['nombre'] + " "+ usuario[0]['apellido']
+          this.playlist[i]['usuario_id'] = strNombre
+        })
+   }
+
+  }
+
+
+  generarPlaylist(){
+    this.evento.relatos.forEach(relato => {
+      if (relato.aceptado === true){
+        let objRelato = {
+          "name" : relato.titulo,
+          "path": relato.contenido,
+          "fecha_subida": relato.fecha_subida,
+          "usuario_id": relato.usuario_id,
+          "likes": relato.likes
+        }
+        this.playlist.push(objRelato);
+      }
+    });
+
   }
 }
 
