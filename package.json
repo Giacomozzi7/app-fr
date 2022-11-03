@@ -40,6 +40,7 @@
     "img-comparison-slider": "^7.7.2",
     "ngx-webcam": "^0.4.1",
     "rxjs": "~6.6.0",
+    "swiper": "^8.4.4",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },

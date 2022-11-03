@@ -7,7 +7,8 @@ import { LeyendaComponent } from './leyenda/leyenda.component';
 import { FiltrosComponent } from './filtros/filtros.component';
 import { CardComponent } from './card/card.component';
 import { DatosInteresComponent } from './datos-interes/datos-interes.component';
-
+import { ModalEscenarioComponent } from './modal-escenario/modal-escenario.component';
+import { SwiperModule } from 'swiper/angular';
 
 
 
@@ -18,17 +19,20 @@ import { DatosInteresComponent } from './datos-interes/datos-interes.component';
     FiltrosComponent,
     CardComponent,
     DatosInteresComponent,
+    ModalEscenarioComponent
   ],
   exports: [
     HeaderComponent,
     LeyendaComponent,
     FiltrosComponent,
     CardComponent,
-    DatosInteresComponent
+    DatosInteresComponent,
+    ModalEscenarioComponent
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    SwiperModule
   ]
 })
 export class ComponentsModule { }
