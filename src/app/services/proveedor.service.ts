@@ -10,38 +10,39 @@ export class ProveedorService {
 
   constructor(public http: HttpClient) {}
 
-  //requestHeader = new HttpHeaders()
-  //    .set('Origin', 'https://164.77.114.239:8129')
-
+  //Obtiene marcadores para el GIS
   obtenerMapPins(){
     return this.http.get('https://164.77.114.239:8129/api/app/page/mappins')
   }
 
-
-  obtenerDatos(){
-    //'https://164.77.114.239:8129/api/Eventos'
-    return this.http.get('https://164.77.114.239:8129/api/Eventos/all')
-   }
-
+  //Obtiene un evento especifico
   obtenerEvento(id:string){
-    //'https://164.77.114.239:8129/api/Eventos/'+ id
-     return this.http.get('https://164.77.114.239:8129/api/Eventos/'+ id)
+    return this.http.get('https://164.77.114.239:8129/api/Eventos/'+ id)
   } 
 
+  //Obtiene un usuario
   obtenerUsuario(id:string){
-    //'https://164.77.114.239:8129/api/Usuarios/'+ id
     return this.http.get('https://164.77.114.239:8129/api/UsuarioApp/'+ id)
- } 
+  } 
 
- obtenerCategorias(){
-  return this.http.get('https://164.77.114.239:8129/api/CategoriaEvento/')
- }
+  //Obtiene las categorias asociadas a cada evento
+  obtenerCategorias(){
+    return this.http.get('https://164.77.114.239:8129/api/CategoriaEvento/')
+  }
 
- obtenerRelatos(id:string){
-  return this.http.get('https://164.77.114.239:8129/api/app/page/relatos/' + id)
- }
+  //Obtiene los relatos
+  obtenerRelatos(id:string){
+    return this.http.get('https://164.77.114.239:8129/api/app/page/relatos/' + id)
+  }
 
+  //Obtiene datos de interes por evento
+  obtenerDatosInteres(id:string){
+    return this.http.get('https://164.77.114.239:8129/api/DatosInteres/' + id)
+  }
+
+ // (?)
   getQuestionJson(){
     return this.http.get<any>("assets/preguntas.json");
   }
+
 }

@@ -43,6 +43,7 @@
               <ion-card-header>
                 <ion-card-subtitle style="text-align:left"><b>Título:</b> {{sl.titulo}}</ion-card-subtitle>
                 <ion-card-subtitle style="text-align:left"><b>Subido por:</b> {{sl.usuario_id}}</ion-card-subtitle>
+                <ion-card-subtitle style="text-align:left"><b>Descripción:</b> Espacio para descripción</ion-card-subtitle>
               </ion-card-header>
               <ion-card-content class="card-content">
                 <ion-slides #mySlider scrollbar="true">
@@ -111,7 +112,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="3">
-        <ion-button fill="clear" expand="block" color="light" size="large" class="ion-no-margin">
+        <ion-button fill="clear" expand="block" color="light" size="large" class="ion-no-margin" disabled="true">
           <ion-icon name="videocam"></ion-icon>
         </ion-button>
       </ion-col>

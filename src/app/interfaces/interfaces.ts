@@ -23,4 +23,11 @@ export interface Track{
   likes : string[];
 }
 
+export interface DatosInteres {
+  interes_id:  string;
+  titulo:      string;
+  imagen_url:  string;
+  descripcion: string;
+}
+
 

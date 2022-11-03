@@ -2,12 +2,12 @@
   <ng-template>
     <ion-content color="light">
       <ion-toolbar color="dark">
-        <ion-title>¿Sabías que?</ion-title>
+        <ion-title>{{datosInteres[indexDato].titulo}}</ion-title>
         <ion-buttons slot="end">
-          <ion-button style="margin:0px" slot="icon-only" size="small">
+          <ion-button style="margin:0px" slot="icon-only" size="small" (click)="cambiarDato('izq')">
             <ion-icon button name="caret-back-circle" style="font-size:10vh" color="primary"></ion-icon>
           </ion-button>
-          <ion-button style="margin:0px;">
+          <ion-button style="margin:0px;" (click)="cambiarDato('der')">
             <ion-icon name="caret-forward-circle" style="font-size:10vh" color="primary"></ion-icon>
           </ion-button>
         </ion-buttons>
@@ -20,7 +20,7 @@
         </ion-row>
         <ion-row class="ion-text-center">
           <ion-col size="12">
-            <p style="padding:2vh" class="ion-no-margin">Si este desastre volviese a ocurrir en este mismo instante no tendrías tiempo para escapar.</p>
+            <p style="padding:2vh" class="ion-no-margin">{{datosInteres[indexDato].descripcion}}</p>
           </ion-col>
         </ion-row>
         <ion-row class="ion-text-center">

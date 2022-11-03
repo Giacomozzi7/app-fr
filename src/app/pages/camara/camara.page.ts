@@ -37,12 +37,13 @@ export class CamaraPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.screenOrientation.lock('landscape').catch((error) => {
       console.log('Función Nativa : No permitida en Browser');
     });
     this.updatedImage = this.imagenes[0];
     this.valueSlider = 50;
-    this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
+    
     this.newUrl = 'memoria/' + this.profileId;
     this.setAudio();
   }

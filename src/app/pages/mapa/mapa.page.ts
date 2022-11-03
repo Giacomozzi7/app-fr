@@ -3,6 +3,7 @@ import { Marker } from '../../interfaces/interfaces';
 import { ProveedorService } from '../../services/proveedor.service';
 import { Geolocation} from '@capacitor/geolocation';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { ToastController } from '@ionic/angular';
 
 
 declare var google;
@@ -14,36 +15,38 @@ declare var google;
 })
 export class MapaPage implements OnInit {
 
-  public prueba;
-  public filteredMarkers;
+  
+  mapEle:         HTMLElement;
+  indicatorsEle:  HTMLElement;
+  colorFiltro:    string = 'light';
+  markers:        Marker[]//: Marker[];
+  filtroOn:       boolean;
+  buttonRuta:     string[] = ['navigate','success']
+  flagCurrent:    Number = 0;
+  navigationMode: boolean = false;
+  toastNavText:   string = 'activado'
 
-  public colorFiltro: string = 'light';
-  public markers: Marker[]//: Marker[];
-  public filtroOn: boolean;
-  public aLeyenda = [];
+  aLeyenda = [];
 
   //Por definir tipos (any)
-  public map; 
-  public mapEle: HTMLElement;
-  public indicatorsEle: HTMLElement;
-  public currentDestino = {}
-  public currentMarcador;
-  public flagCurrent = 0;
-  public buttonRuta:string[] = ['navigate','success']
-  public navigationMode = false;
-  public directionsService = new google.maps.DirectionsService();
-  public directionsRenderer = new google.maps.DirectionsRenderer({suppressMarkers:true});
-  public marcadorGoogle;
-  public miPos;
-  public aMarkers = [];
-  public infoWindows = [];
-  public watch;
-  public latitude
-  public longitude
-  public myMarker;
+  prueba;
+  filteredMarkers;
+  map; 
+  currentDestino = {}
+  currentMarcador;
+  directionsService = new google.maps.DirectionsService();
+  directionsRenderer = new google.maps.DirectionsRenderer({suppressMarkers:true});
+  marcadorGoogle;
+  miPos;
+  aMarkers = [];
+  infoWindows = [];
+  watch;
+  latitude
+  longitude
+  myMarker;
   
-  public filtros = { Tipo: [], Zona: [], Fecha: [] };
-  public mapcolors = {
+  filtros = { Tipo: [], Zona: [], Fecha: [] };
+  mapcolors = {
     "Mi ubicación":"my_location",
     "Terremoto": 'purple',
     "Tsunami": 'blue',
@@ -53,6 +56,7 @@ export class MapaPage implements OnInit {
   };
 
   constructor( 
+    private toastController: ToastController,
     public proveedor: ProveedorService, 
     private screenOrientation: ScreenOrientation,
   ) {}
@@ -312,7 +316,23 @@ export class MapaPage implements OnInit {
     }
 
 
-  } 
+  }
+  
+  //Toast cambio modo navegacion
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Modo navegación '+ this.toastNavText,
+      duration: 1500,
+      icon: 'car',
+      position: 'top'
+    });
+
+    await toast.present();
+
+    this.toastNavText === 'desactivado'
+      ? this.toastNavText = 'activado'
+      : this.toastNavText = 'desactivado'
+  }
 
 
 }

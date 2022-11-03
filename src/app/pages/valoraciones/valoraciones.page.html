@@ -22,26 +22,26 @@
                     <ion-card-subtitle>Valora tu visita al evento de acuerdo a la inmersión producida.</ion-card-subtitle>
                 </ion-card-header>
                 <ion-card-content style="padding:0vh; text-align:center">
-                    <ion-button size="small" class="muy-bajo">Muy bajo</ion-button>
-                    <ion-button size="small" class="bajo">Bajo</ion-button>
-                    <ion-button size="small" class="medio">Medio</ion-button>
-                    <ion-button size="small" class="alto">Alto</ion-button>
-                    <ion-button size="small" class="muy-alto">Muy Alto</ion-button>
+                    <ion-button size="small" class="muy-bajo" [color]="inmersionColors[0]" (click)="getVal('inmersion',0)">Muy bajo</ion-button>
+                    <ion-button size="small" class="bajo"     [color]="inmersionColors[1]" (click)="getVal('inmersion',1)">Bajo</ion-button>
+                    <ion-button size="small" class="medio"    [color]="inmersionColors[2]" (click)="getVal('inmersion',2)">Medio</ion-button>
+                    <ion-button size="small" class="alto"     [color]="inmersionColors[3]" (click)="getVal('inmersion',3)">Alto</ion-button>
+                    <ion-button size="small" class="muy-alto" [color]="inmersionColors[4]" (click)="getVal('inmersion',4)">Muy Alto</ion-button>
                 </ion-card-content>
                 <ion-card-header style="text-align:center">
                   <ion-card-title><b>Valoración Interés</b></ion-card-title>
                   <ion-card-subtitle>Valora tu visita al evento de acuerdo a la interés generado.</ion-card-subtitle>
               </ion-card-header>
               <ion-card-content style="padding:0vh; text-align:center">
-                <ion-button size="small" class="muy-bajo">Muy bajo</ion-button>
-                <ion-button size="small" class="bajo">Bajo</ion-button>
-                <ion-button size="small" class="medio">Medio</ion-button>
-                <ion-button size="small" class="alto">Alto</ion-button>
-                <ion-button size="small" class="muy-alto">Muy Alto</ion-button>
+                <ion-button size="small" class="muy-bajo" [color]="interesColors[0]" (click)="getVal('interes',0)">Muy bajo</ion-button>
+                <ion-button size="small" class="bajo"     [color]="interesColors[1]" (click)="getVal('interes',1)">Bajo</ion-button>
+                <ion-button size="small" class="medio"    [color]="interesColors[2]" (click)="getVal('interes',2)">Medio</ion-button>
+                <ion-button size="small" class="alto"     [color]="interesColors[3]" (click)="getVal('interes',3)">Alto</ion-button>
+                <ion-button size="small" class="muy-alto" [color]="interesColors[4]" (click)="getVal('interes',4)">Muy Alto</ion-button>
             </ion-card-content>
             <div class="div-enviar">
-              <ion-button class="btn-enviar">
-                Enviar
+              <ion-button class="btn-enviar" (click)="enviarVal()" (click)="presentToast()">
+                {{enviarTexto}}
                 <ion-icon slot="end" name="star"></ion-icon>
               </ion-button>
             </div>
