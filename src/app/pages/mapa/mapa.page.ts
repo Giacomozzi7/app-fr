@@ -18,7 +18,7 @@ export class MapaPage implements OnInit {
   public filteredMarkers;
 
   public colorFiltro: string = 'light';
-  public markers = [] //: Marker[];
+  public markers: Marker[]//: Marker[];
   public filtroOn: boolean;
   public aLeyenda = [];
 
@@ -60,11 +60,11 @@ export class MapaPage implements OnInit {
   //Init
   ngOnInit() {
     this.screenOrientation.unlock()
-    this.proveedor.obtenerDatos().subscribe(
-      (data) => {   
-          this.filtrarData(data);
-          this.loadMap();
-          this.watcherPosition();
+    this.proveedor.obtenerMapPins().subscribe(
+      (data: Marker[]) => {  
+        this.markers = data
+        this.loadMap();
+        this.watcherPosition();
         }
         )
       ,
@@ -125,22 +125,12 @@ export class MapaPage implements OnInit {
     }) 
   }
 
-
-  //Filtra datos necesarios para esta vista
-  filtrarData(data){
-    for (let i = 0; i < data.length; i++) {
-      let sliced = Object.keys(data[i]).slice(0, 9).reduce((result, key) => { result[key] = data[i][key]; return result;}, {});
-      this.markers.push(sliced)
-    } 
-  }
-
   // Google Maps Api
   //---------------------------------------------------------------------------------------------------
 
   //Creacion del mapa
   async loadMap() {
     await this.obtainCategoria();
-    console.log(this.markers)
     // Definicion del mapa y zoom
     this.mapEle = document.getElementById('map');
     this.indicatorsEle = document.getElementById('indicators');

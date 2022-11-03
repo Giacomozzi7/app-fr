@@ -13,7 +13,12 @@ export class ProveedorService {
   //requestHeader = new HttpHeaders()
   //    .set('Origin', 'https://164.77.114.239:8129')
 
-   obtenerDatos(){
+  obtenerMapPins(){
+    return this.http.get('https://164.77.114.239:8129/api/app/page/mappins')
+  }
+
+
+  obtenerDatos(){
     //'https://164.77.114.239:8129/api/Eventos'
     return this.http.get('https://164.77.114.239:8129/api/Eventos/all')
    }
