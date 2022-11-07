@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { ToastController } from '@ionic/angular';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
 @Component({
   selector: 'app-valoraciones',
@@ -25,11 +26,15 @@ export class ValoracionesPage implements OnInit {
     private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
     public proveedor: ProveedorService,
+    private screenOrientation: ScreenOrientation
   ) { }
 
   ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refMemoria = 'memoria/'+ this.profileId;
+    this.screenOrientation.lock('portrait').catch((error) => {
+      console.log('Función Nativa : No permitida en Browser');
+    });
 
     //copy array colors
     this.inmersionColors = Array.from(this.baseColors)

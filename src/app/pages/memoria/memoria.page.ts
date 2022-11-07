@@ -34,6 +34,9 @@ export class MemoriaPage implements OnInit {
     this.refGaleria = 'galeria/'+ this.profileId;
     this.refRelatos = 'relatos/'+ this.profileId;
     this.refValoraciones = 'valoraciones/'+ this.profileId;
+    this.screenOrientation.lock('portrait').catch((error) => {
+      console.log('Función Nativa : No permitida en Browser');
+    });
 
     this.proveedor.obtenerEvento(this.profileId)
       .subscribe((data) => {

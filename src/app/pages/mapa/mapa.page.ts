@@ -63,7 +63,9 @@ export class MapaPage implements OnInit {
 
   //Init
   ngOnInit() {
-    this.screenOrientation.unlock()
+    this.screenOrientation.lock('portrait').catch((error) => {
+      console.log('Función Nativa : No permitida en Browser');
+    });
     this.proveedor.obtenerMapPins().subscribe(
       (data: Marker[]) => {  
         this.markers = data
