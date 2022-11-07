@@ -1,0 +1,68 @@
+<app-header titulo="Escenario" *ngIf="escenario" refback="mapa"></app-header>
+
+<ion-content *ngIf="escenario">
+  <ion-grid class="ion-no-padding" id="grilla">
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding" size="12">
+        <ion-card color="light" class="card-foto">
+          <ion-card-header class="descripcion-header">
+            <ion-icon name="map" style="font-size:4vh" color="primary"></ion-icon>
+            <ion-card-title><b>{{escenario.titulo}}</b></ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="ion-text-justify">{{escenario.descrip_corta}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding" size="12">
+        <ion-slides pager="false" scrollbar="true">
+          <ion-slide *ngFor="let sl of escenario.slides">
+            <ion-card color="light" class="card-foto">  
+                  <ion-img [src]="sl.img_url"></ion-img>
+                  <ion-card-content class="descripcion-content">
+                    <b>{{sl.titulo}}</b><br>
+                    <b style="color:grey">{{sl.fecha}}</b>
+                  </ion-card-content>   
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding" size="12">
+        <ion-card color="light" class="card-foto">
+          <ion-card-header class="descripcion-header">
+            <ion-card-title><b>Historia</b></ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="ion-text-justify">{{escenario.descripcion}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding" size="12">
+        <ion-card color="light" class="card-foto">
+          <ion-card-header class="descripcion-header">
+            <ion-card-title><b>Ciudades</b></ion-card-title>
+          </ion-card-header>
+            <ion-list class="ciudad-lista">
+              <ion-item class="item-background-color" *ngFor="let ciudad of escenario.ciudades">
+                <ion-icon name="business" color="dark" style="margin-right:1vh"></ion-icon><ion-label>{{ciudad}}</ion-label>
+              </ion-item>
+            </ion-list>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+</ion-content>

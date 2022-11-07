@@ -10,13 +10,18 @@ import { Browser } from '@capacitor/browser';
 export class ModuloEducativoPage implements OnInit {
 
   // degtorad: number = Math.PI / 180; // Degree-to-Radian conversion
+  alfa:number;
 
   constructor() { }
 
   ngOnInit() {
-    window.addEventListener("deviceorientationabsolute", (e:DeviceOrientationEvent)=>{ 
-      console.log(e.alpha, "valor de alfa"); 
-    }, true); 
+    setTimeout(() => {
+      window.addEventListener("deviceorientationabsolute", (e:DeviceOrientationEvent)=>{ 
+        this.alfa = e.alpha;
+      }, true); 
+    }, 500)
+    
+    
   }
 
   async abrirSite(direccion: string) {

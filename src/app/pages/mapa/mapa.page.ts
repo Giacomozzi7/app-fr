@@ -70,6 +70,7 @@ export class MapaPage implements OnInit {
       (data: Marker[]) => {  
         this.markers = data
         this.loadMap();
+        console.log(this.aMarkers)
         this.watcherPosition();
         }
         )
@@ -229,9 +230,12 @@ export class MapaPage implements OnInit {
                           "<p style='color:grey'> Fecha: " +
                           marcadorGoogle.fecha +
                           '</p>' +
-                          "<div style='text-align:center'><ion-button style='margin-bottom:2vh'shape='round' href='/camara/" +
+                          "<div style='text-align:center'><ion-button shape='round' href='/camara/" +
                           marcadorGoogle.id +
-                          "' size='small'>Ver Antes/Después</ion-button></div>" +
+                          "' size='small'><ion-icon slot='start' name='camera'></ion-icon>Ver Antes/Después</ion-button>" +
+                          "<ion-button style='margin-bottom:2vh' shape='round' href='/escenario/" + 
+                          marcadorGoogle.escenario_id +
+                          "' size='small' color='warning'><ion-icon slot='start' name='map'></ion-icon>Ver Escenario</ion-button></div>"
                           '</div>';
 
     let infowindow = new google.maps.InfoWindow({
