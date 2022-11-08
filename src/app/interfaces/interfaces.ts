@@ -33,15 +33,21 @@ export interface DatosInteres {
 export interface Escenario{
   id:            string;
   titulo:        string;
-  descrip_corta: string;
-  descripcion:   string;
+  short_descrip: string;
+  long_descrip:  string;
   ciudades:      string[];
-  slides:        EscenarioSlide[]
+  slides:        EscenarioSlide[];
+  lat_lng:       LatLngEscenario[];
 }
 
 export interface EscenarioSlide{
   titulo:  string;
   img_url: string;
   fecha:   string;
+}
+
+export interface LatLngEscenario{
+  lat: number;
+  lng: number;
 }
 

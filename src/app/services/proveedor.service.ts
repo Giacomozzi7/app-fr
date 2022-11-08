@@ -40,6 +40,10 @@ export class ProveedorService {
     return this.http.get('https://164.77.114.239:8129/api/DatosInteres/' + id)
   }
 
+  obtenerEscenario(id:string){
+    return this.http.get('https://164.77.114.239:8129/api/Escenario/' + id)
+  }
+
  // (?)
   getQuestionJson(){
     return this.http.get<any>("assets/preguntas.json");
