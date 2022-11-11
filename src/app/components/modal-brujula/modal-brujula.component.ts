@@ -20,6 +20,7 @@ export class ModalBrujulaComponent implements OnInit {
   }
 
   closeModal() {
+    this.flag = false;
     this.modal.dismiss();
   }
 

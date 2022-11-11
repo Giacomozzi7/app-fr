@@ -36,24 +36,24 @@ export class ListenerComponent implements OnInit {
     console.log(this.orientation);
     this.presentToast(this.orientation, 50, "bottom");
 
-    if(this.orientation > 0 && this.orientation < 10){
-      this.presentToast("Apunta al norte", 500, "top");
-      this.titulo = "norte";
+    if(this.orientation > 0 && this.orientation < 10){//
+      this.presentToast("Apunta al este", 500, "top");
+      this.titulo = "este";
     }
 
     if(this.orientation >85 && this.orientation < 95){
-      this.presentToast("Apunta al este", 500, "top");
-      this.titulo = "Apunta al este";
+      this.presentToast("Apunta al norte", 500, "top");
+      this.titulo = "Apunta al norte";
     }
 
     if(this.orientation >175 && this.orientation < 185){
-      this.presentToast("Apunta al sur", 500, "top");
-      this.titulo = "Apunta al sur";
-    }
-
-    if(this.orientation >265 && this.orientation < 275){
       this.presentToast("Apunta al oeste", 500, "top");
       this.titulo = "Apunta al oeste";
+    }
+
+    if(this.orientation >265 && this.orientation < 275){//
+      this.presentToast("Apunta al sur", 500, "top");
+      this.titulo = "Apunta al sur";
     }
   }
 }

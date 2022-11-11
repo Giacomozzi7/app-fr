@@ -49,13 +49,15 @@
             <ion-icon [name]="nameDefault[1]" class="icon"></ion-icon>
           </ion-button>
         </ion-row>
+        <ion-row>
+            <ion-button fill="clear" expand="block" color="light" size="large" id="open-modal-brujula">
+              <ion-icon name="compass" class="icon"></ion-icon>
+            </ion-button>
+        </ion-row>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 
 <app-datos-interes [profileId] = "profileId"></app-datos-interes>
-
-
-
-
+<app-modal-brujula></app-modal-brujula>

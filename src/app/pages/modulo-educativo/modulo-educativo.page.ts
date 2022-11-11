@@ -13,7 +13,9 @@ export class ModuloEducativoPage implements OnInit {
     private screenOrientation: ScreenOrientation) { }
 
   ngOnInit() {
-    // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    this.screenOrientation.lock('landscape').catch((error) => {
+      console.log('Función Nativa : No permitida en Browser');
+    });   
   }
 
   async abrirSite(direccion: string) {
