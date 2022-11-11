@@ -1,0 +1,41 @@
+<ion-modal trigger="open-modal-brujula">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Brujula - Buscando el tesoro</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeModal()">
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+        
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <ion-button color="primary" expand="block" size="small" (click)="setFlag()">
+                  Encender 
+                </ion-button>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-button color="danger" expand="block" size="small" (click)="disableFlag()">
+                  Apagar 
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <!-- componente listener -->
+                <app-listener *ngIf="flag"></app-listener>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
