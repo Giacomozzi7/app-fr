@@ -44,6 +44,16 @@ const routes: Routes = [
     path: 'valoraciones/:id',
     loadChildren: () => import('./pages/valoraciones/valoraciones.module').then( m => m.ValoracionesPageModule)
   },
+  {
+    path: 'escenario/:id',
+    loadChildren: () => import('./pages/escenario/escenario.module').then( m => m.EscenarioPageModule)
+  },
+  {
+    path: 'comentarios/:id',
+    loadChildren: () => import('./pages/comentarios/comentarios.module').then( m => m.ComentariosPageModule)
+  },
+
+
 
 
 ];

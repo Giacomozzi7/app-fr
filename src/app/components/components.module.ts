@@ -7,7 +7,6 @@ import { LeyendaComponent } from './leyenda/leyenda.component';
 import { FiltrosComponent } from './filtros/filtros.component';
 import { CardComponent } from './card/card.component';
 import { DatosInteresComponent } from './datos-interes/datos-interes.component';
-import { ModalEscenarioComponent } from './modal-escenario/modal-escenario.component';
 import { SwiperModule } from 'swiper/angular';
 
 
@@ -19,7 +18,6 @@ import { SwiperModule } from 'swiper/angular';
     FiltrosComponent,
     CardComponent,
     DatosInteresComponent,
-    ModalEscenarioComponent
   ],
   exports: [
     HeaderComponent,
@@ -27,7 +25,6 @@ import { SwiperModule } from 'swiper/angular';
     FiltrosComponent,
     CardComponent,
     DatosInteresComponent,
-    ModalEscenarioComponent
   ],
   imports: [
     CommonModule,

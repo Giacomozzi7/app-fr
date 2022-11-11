@@ -16,11 +16,11 @@ export interface PosEvento {
 }
 
 export interface Track{
-  name:string;
-  path: string;
+  name:         string;
+  path:         string;
   fecha_subida: string;
-  usuario_id: string;
-  likes : string[];
+  usuario_id:   string;
+  likes :       string[];
 }
 
 export interface DatosInteres {
@@ -30,4 +30,33 @@ export interface DatosInteres {
   descripcion: string;
 }
 
+export interface Escenario{
+  id:            string;
+  titulo:        string;
+  short_descrip: string;
+  long_descrip:  string;
+  ciudades:      string[];
+  slides:        EscenarioSlide[];
+  lat_lng:       LatLngEscenario[];
+}
 
+export interface EscenarioSlide{
+  titulo:  string;
+  img_url: string;
+  fecha:   string;
+}
+
+export interface LatLngEscenario{
+  lat: number;
+  lng: number;
+}
+
+export interface Comentarios{
+  titulo: string;
+  contenido: string;
+  fecha_subida: string;
+  usuario_id: string;
+  comentario_id: string;
+  likes: string[];
+  aceptado: boolean;
+}

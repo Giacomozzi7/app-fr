@@ -29,13 +29,6 @@
           </ion-button>
         </div>
       </ion-col>
-      <ion-col>
-        <div>
-          <ion-button fill="clear" expand="block" color="light" size="large" class="btn" [disabled]="navigationMode === true" id="open-modal-escenario">
-            <ion-icon name="globe" class="icon"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-col>
     </ion-row>
 
     <ion-row>
@@ -52,9 +45,6 @@
                        (colorEmitter)="recibirColor($event)">
           </app-filtros>
         <!-- Fin Modal -->
-
-        <!-- Modal Descripcion Escenario -->
-        <app-modal-escenario></app-modal-escenario>
       </ion-col>
     </ion-row>
     <ion-row class="icons_row">
