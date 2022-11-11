@@ -8,8 +8,8 @@ import { FiltrosComponent } from './filtros/filtros.component';
 import { CardComponent } from './card/card.component';
 import { DatosInteresComponent } from './datos-interes/datos-interes.component';
 import { SwiperModule } from 'swiper/angular';
-
-
+import { ModalBrujulaComponent } from './modal-brujula/modal-brujula.component';
+import { ListenerComponent } from './listener/listener.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,8 @@ import { SwiperModule } from 'swiper/angular';
     FiltrosComponent,
     CardComponent,
     DatosInteresComponent,
+    ModalBrujulaComponent,
+    ListenerComponent
   ],
   exports: [
     HeaderComponent,
@@ -25,6 +27,8 @@ import { SwiperModule } from 'swiper/angular';
     FiltrosComponent,
     CardComponent,
     DatosInteresComponent,
+    ModalBrujulaComponent,
+    ListenerComponent
   ],
   imports: [
     CommonModule,
