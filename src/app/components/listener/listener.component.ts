@@ -34,7 +34,7 @@ export class ListenerComponent implements OnInit {
     console.log(this.orientation);
 
     console.log(this.orientation);
-    this.presentToast(this.orientation, 50, "bottom");
+    // this.presentToast(this.orientation, 50, "bottom");
 
     if(this.orientation > 0 && this.orientation < 10){//
       this.presentToast("Apunta al este", 500, "top");
