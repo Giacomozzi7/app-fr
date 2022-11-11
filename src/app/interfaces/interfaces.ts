@@ -51,3 +51,12 @@ export interface LatLngEscenario{
   lng: number;
 }
 
+export interface Comentarios{
+  titulo: string;
+  contenido: string;
+  fecha_subida: string;
+  usuario_id: string;
+  comentario_id: string;
+  likes: string[];
+  aceptado: boolean;
+}

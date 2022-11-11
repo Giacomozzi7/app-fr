@@ -1,0 +1,25 @@
+<app-header titulo="Comentarios" [refback]="refMemoria"></app-header>
+
+<ion-content padding *ngIf="comentarios">
+  <ion-grid class="ion-no-padding" id="grilla">
+      <ion-row class="row-img" *ngFor="let com of comentarios; let ind=index">
+        <ion-col size="12">
+          <ion-card color="light" class="card-foto">
+            <ion-card-header>
+                <ion-card-title>
+                  {{com.titulo}}
+                  <ion-label color="dark"  style="font-size:2vh; float: right; text-align: center; vertical-align: center;" >
+                    <ion-icon name="heart-outline" class="icon" color="danger" style="font-size:2.5vh; font-weight: bold; margin-top:-0.1vh; padding-inline-end: 0.3vh;" ></ion-icon>
+                    <p style="display:inline; float:right; color:black;">{{com.likes.length}}</p>
+                  </ion-label>
+                </ion-card-title> 
+                <ion-card-subtitle><b> Por: </b> {{com.usuario_id}}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p>{{com.contenido}}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>  
+  </ion-grid>
+</ion-content>
