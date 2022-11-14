@@ -1,6 +1,7 @@
 <app-header titulo="Valoraciones" [refback]="refMemoria"></app-header>
 
 <ion-content padding *ngIf="evento">
+  <app-card-resumen [profileId]="profileId"></app-card-resumen>
   <ion-grid class="ion-no-padding" id="grilla">
       <ion-row class="ion-no-padding">
           <ion-col>

@@ -1,16 +1,11 @@
-<app-header [titulo]="evento.titulo" *ngIf="evento" refback="mapa"></app-header>
+<app-header titulo="Memoria del Evento" *ngIf="evento" refback="mapa"></app-header>
 
 <ion-content *ngIf="evento">
+  <app-card-resumen [profileId]="profileId"></app-card-resumen>
   <ion-grid class="ion-no-padding" id="grilla">
     <ion-row class="ion-no-padding">
       <ion-col class="ion-no-padding" size="12">
         <ion-card color="light" class="card-foto">
-          <ion-card-content>
-            <p style="display: inline"><b>Ocurrido el:</b> {{evento.fecha}}</p>
-            <p style="display: inline; margin-left: 8vh">
-              <b>Zona:</b> {{evento.zona}}
-            </p>
-          </ion-card-content>
           <ion-card-header class="descripcion-header">
             <ion-card-title><b>Descripción del evento</b></ion-card-title>
           </ion-card-header>

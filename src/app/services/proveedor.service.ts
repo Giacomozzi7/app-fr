@@ -30,6 +30,11 @@ export class ProveedorService {
     return this.http.get('https://164.77.114.239:8129/api/CategoriaEvento/')
   }
 
+  //Obtiene una categoria a partir de su id
+  obtenerCategoria(id:string){
+    return this.http.get('https://164.77.114.239:8129/api/CategoriaEvento/' + id)
+  }
+
   //Obtiene los relatos
   obtenerRelatos(id:string){
     return this.http.get('https://164.77.114.239:8129/api/app/page/relatos/' + id)
@@ -47,6 +52,11 @@ export class ProveedorService {
  // (?)
   getQuestionJson(){
     return this.http.get<any>("assets/preguntas.json");
+  }
+
+  obtenerResumen(id: string){
+    return this.http.get('https://164.77.114.239:8129/api/app/page/evento/' + id)
+    
   }
 
 }

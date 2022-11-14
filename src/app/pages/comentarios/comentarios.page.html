@@ -1,6 +1,8 @@
 <app-header titulo="Comentarios" [refback]="refMemoria"></app-header>
 
 <ion-content padding *ngIf="comentarios">
+  <app-card-resumen [profileId]="profileId"></app-card-resumen>
+
   <ion-grid class="ion-no-padding" id="grilla">
       <ion-row class="row-img" *ngFor="let com of comentarios; let ind=index">
         <ion-col size="12">

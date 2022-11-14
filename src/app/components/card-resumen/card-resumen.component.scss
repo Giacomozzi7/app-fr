@@ -1,0 +1,32 @@
+ion-grid{
+    padding: 0.2vh 0.2vh 0vh 0.2vh ;
+    margin-bottom:0px;
+
+    ion-card{
+        border:1px solid black;
+        margin: 1vh 1vh 0vh 1vh;
+        
+    }
+    
+    ion-icon.main-icon{
+        font-size:4vh;
+    }
+
+    ion-card-header{
+        text-align: center;
+        padding-top: 0.4vh;
+        padding-bottom: 0.4vh;
+    }
+
+    ion-card-content.first-row{
+        padding-bottom:0px;
+    }
+
+    ion-card-title{
+        margin:0px;
+    }
+
+    p.estas-en{
+        margin: 0px;
+    }
+}

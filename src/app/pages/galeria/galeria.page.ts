@@ -24,7 +24,6 @@ export class GaleriaPage implements OnInit {
     this.proveedor.obtenerEvento(this.profileId)
       .subscribe((data) => {
         this.evento = data[0];
-        console.log(this.evento)
         this.buscarUsuarios()
       });
   }
