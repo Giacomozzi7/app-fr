@@ -1,0 +1,39 @@
+textarea{
+    resize:none;
+}
+
+.card-foto{
+    margin: 1vh;
+    border:1px solid rgb(187, 187, 187);
+}
+
+form{
+    font-size: 2vh;
+}
+
+.input-titulo{
+    width:100%;
+    margin-top:0.7vh;
+    margin-bottom: 1vh;
+    font-size:1.8vh;
+}
+
+ion-card-title{
+    font-size: 2.2vh;
+}
+
+.input-titulo:focus{
+    outline: none;  
+
+}
+
+.input-contenido{
+    width:100%;
+    height:20vh;
+    margin-top:0.7vh;
+    font-size:1.8vh;
+}
+
+.input-contenido:focus{
+    outline:none;
+}

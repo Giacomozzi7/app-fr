@@ -52,6 +52,11 @@ const routes: Routes = [
     path: 'comentarios/:id',
     loadChildren: () => import('./pages/comentarios/comentarios.module').then( m => m.ComentariosPageModule)
   },
+  {
+    path: 'agregar-comentario/:id',
+    loadChildren: () => import('./pages/agregar-comentario/agregar-comentario.module').then( m => m.AgregarComentarioPageModule)
+  },
+
 
 
 

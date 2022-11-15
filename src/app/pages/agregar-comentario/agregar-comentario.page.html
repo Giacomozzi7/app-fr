@@ -1,0 +1,47 @@
+<app-header titulo="Comentarios" [refback]="refComentarios"></app-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding" id="grilla">
+    <ion-row class="ion-no-padding">
+        <ion-col>
+            <ion-card color="light" style="border:1px solid;">
+                <ion-card-header style="text-align:center">
+                    <ion-icon name="chatbox-ellipses" style="font-size:4vh"></ion-icon>
+                </ion-card-header>
+                <ion-card-content>
+                    <p>En esta sección puedes añadir un comentario para que sea visto por la comunidad. Todos los campos son <b>obligatorios</b>.</p>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-card class="card-foto">
+            <ion-card-content class="card-content">
+              <form [formGroup]="comentario" (ngSubmit)="onSubmit()" novalidate >
+                <label>
+                  <ion-card-title>Título del Comentario</ion-card-title>
+                  <input 
+                    type= "text"
+                    name="titulo" 
+                    class="input-titulo"
+                    placeholder="Titulo" 
+                    formControlName = "titulo">
+                </label> 
+                <label>
+                  <ion-card-title>Contenido del Comentario</ion-card-title>
+                  <textarea
+                    type= "text"  
+                    name="contenido" 
+                    class="input-contenido"
+                    placeholder="Cuerpo del Comentario" 
+                    formControlName = "contenido"> </textarea>
+                </label>
+                <ion-button color="success" type="submit">Agregar Comentario</ion-button>
+             </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>

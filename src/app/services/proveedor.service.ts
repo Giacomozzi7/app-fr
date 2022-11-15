@@ -59,4 +59,8 @@ export class ProveedorService {
     
   }
 
+  postComentario(id:string ,obj){
+    return this.http.post('https://164.77.114.239:8129/api/Comentario/' + id, obj)
+  }
+
 }

@@ -2,7 +2,9 @@
 
 <ion-content padding *ngIf="comentarios">
   <app-card-resumen [profileId]="profileId"></app-card-resumen>
-
+  <div >
+  <ion-button style="display:block; margin-left:1vh; margin-right:1vh; margin-top:1vh;" color="success" [href]="refAgregarComentario">Agregar Comentario</ion-button>
+  </div>
   <ion-grid class="ion-no-padding" id="grilla">
       <ion-row class="row-img" *ngFor="let com of comentarios; let ind=index">
         <ion-col size="12">

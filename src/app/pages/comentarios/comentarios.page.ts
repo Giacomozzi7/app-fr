@@ -11,6 +11,7 @@ import { ProveedorService } from 'src/app/services/proveedor.service';
 export class ComentariosPage implements OnInit {
   profileId: string;
   refMemoria:string;
+  refAgregarComentario: string;
   comentarios: Comentarios [] = [
     {
       "titulo": "Un lugar para perderse...",
@@ -60,6 +61,7 @@ export class ComentariosPage implements OnInit {
   ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refMemoria = 'memoria/'+ this.profileId;
+    this.refAgregarComentario = 'agregar-comentario/' + this.profileId
     this.buscarUsuarios();
 
   }
