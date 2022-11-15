@@ -60,3 +60,10 @@ export interface Comentarios{
   likes: string[];
   aceptado: boolean;
 }
+
+export interface ValUser{
+  usuario_id:  string;
+  val_interes: number;
+  val_inmersion: number;
+  fecha_val: string;
+}

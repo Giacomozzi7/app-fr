@@ -45,6 +45,21 @@ export class ProveedorService {
     return this.http.get('https://164.77.114.239:8129/api/DatosInteres/' + id)
   }
 
+  obtenerValoraciones(id:string){
+    return this.http.get('https://164.77.114.239:8129/api/Valoracion/' + id)
+
+  }
+
+  putValoraciones(id: string, obj){
+    return this.http.put('https://164.77.114.239:8129/api/Valoracion/' + id, obj)
+
+  }
+
+  postValoraciones(id: string, obj){
+    return this.http.post('https://164.77.114.239:8129/api/Valoracion/' + id, obj)
+
+  }
+
   obtenerEscenario(id:string){
     return this.http.get('https://164.77.114.239:8129/api/Escenario/' + id)
   }

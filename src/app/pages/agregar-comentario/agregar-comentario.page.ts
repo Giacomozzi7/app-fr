@@ -66,17 +66,15 @@ export class AgregarComentarioPage implements OnInit {
 
   }
 
-
+  //Genera la fecha actual en formato DD-MM-YYYY
   crearFecha(){
-    let date = new Date();
+    const date = new Date();
+    return [
+      date.getDate(),
+      date.getMonth() + 1,
+      date.getFullYear()
+    ].join('-');
 
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-
-    const newDate = [day, month, year].join('-');
-
-    return newDate
   }
 
   

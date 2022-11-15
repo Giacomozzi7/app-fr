@@ -1,6 +1,6 @@
 <app-header titulo="Valoraciones" [refback]="refMemoria"></app-header>
 
-<ion-content padding *ngIf="evento">
+<ion-content padding *ngIf="valoracion">
   <app-card-resumen [profileId]="profileId"></app-card-resumen>
   <ion-grid class="ion-no-padding" id="grilla">
       <ion-row class="ion-no-padding">
@@ -10,7 +10,7 @@
                       <ion-icon name="star" style="font-size:4vh"></ion-icon>
                   </ion-card-header>
                   <ion-card-content>
-                      <p>Esta sección de valoraciones corresponde al evento: <b>{{evento.titulo}}</b> ocurrido con fecha: <b>{{evento.fecha}}</b>.</p>
+                      <p>En esta sección puedes valorar el Punto de interés visitado según el nivel de <b>inmersión</b> y el nivel de <b>interes</b> generado en ti.</p>
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -41,7 +41,7 @@
                 <ion-button size="small" class="muy-alto" [color]="interesColors[4]" (click)="getVal('interes',4)">Muy Alto</ion-button>
             </ion-card-content>
             <div class="div-enviar">
-              <ion-button class="btn-enviar" (click)="enviarVal()" (click)="presentToast()">
+              <ion-button class="btn-enviar" (click)="enviarVal()">
                 {{enviarTexto}}
                 <ion-icon slot="end" name="star"></ion-icon>
               </ion-button>

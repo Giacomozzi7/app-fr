@@ -19,7 +19,6 @@ export class CardResumenComponent implements OnInit {
     this.proveedor.obtenerResumen(this.profileId)
       .subscribe((data) => {
         this.evento = data[0];
-        console.log(this.evento)
         this.buscarData();
       });
 
