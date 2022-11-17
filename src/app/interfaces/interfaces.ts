@@ -59,6 +59,7 @@ export interface Comentarios{
   comentario_id: string;
   likes: string[];
   aceptado: boolean;
+  usuario_name?: string;
 }
 
 export interface ValUser{

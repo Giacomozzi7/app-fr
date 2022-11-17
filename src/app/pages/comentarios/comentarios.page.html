@@ -2,9 +2,19 @@
 
 <ion-content padding *ngIf="comentarios">
   <app-card-resumen [profileId]="profileId"></app-card-resumen>
-  <div >
-  <ion-button style="display:block; margin-left:1vh; margin-right:1vh; margin-top:1vh;" color="success" [href]="refAgregarComentario">Agregar Comentario</ion-button>
-  </div>
+
+  <ion-grid class="ion-no-padding" id="grilla">
+    <ion-row style="margin-left:1vh; margin-right:1vh;">
+      <ion-col size="6" class="ion-text-center">
+        <ion-button class="button-contenido" color="warning" fill="solid" (click) = "toggleComentarios()">{{myComStr}}</ion-button>
+      </ion-col>
+      <ion-col size="6"  class="ion-text-center">
+        <ion-button class="button-contenido"  color="success" fill="solid"  [href]="refAgregarComentario">Agregar Comentario</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Tarjetas -->
   <ion-grid class="ion-no-padding" id="grilla">
       <ion-row class="row-img" *ngFor="let com of comentarios; let ind=index">
         <ion-col size="12">
@@ -17,10 +27,20 @@
                     <p style="display:inline; float:right; color:black;">{{com.likes.length}}</p>
                   </ion-label>
                 </ion-card-title> 
-                <ion-card-subtitle><b> Por: </b> {{com.usuario_id}}</ion-card-subtitle>
+                <ion-card-subtitle><b> Por: </b> {{com.usuario_name}}</ion-card-subtitle>
+                <ion-card-subtitle><b> Fecha: </b> {{com.fecha_subida}}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
               <p>{{com.contenido}}</p>
+              <div *ngIf="com.usuario_id === userId" style="display:inline">
+                <ion-card-subtitle style="display:inline"><p style="color:grey"><b> Aceptado: </b> {{com.aceptado}}</p></ion-card-subtitle>
+                <ion-button color="danger" size="small" style="float:right" (click)="presentEliminar( profileId, com.comentario_id)">
+                  <ion-icon slot="icon-only" name="trash" style="font-size:2vh"></ion-icon>
+                </ion-button>
+                <ion-button size="small" style="float:right">
+                  <ion-icon slot="icon-only" name="create" style="font-size:2vh"></ion-icon>
+                </ion-button>         
+              </div>
             </ion-card-content>
           </ion-card>
         </ion-col>

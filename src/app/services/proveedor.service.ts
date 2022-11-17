@@ -60,6 +60,16 @@ export class ProveedorService {
 
   }
 
+  obtenerComentarios(id:string){
+    return this.http.get('https://164.77.114.239:8129/api/Comentario/' + id)
+  }
+
+  deleteComentario(id:string, id_c:string){
+    console.log(id)
+    console.log(id_c)
+    return this.http.delete('https://164.77.114.239:8129/api/Comentario/' + id + "/" + id_c)
+  }
+
   obtenerEscenario(id:string){
     return this.http.get('https://164.77.114.239:8129/api/Escenario/' + id)
   }

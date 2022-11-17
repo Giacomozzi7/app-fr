@@ -16,6 +16,7 @@ form{
     margin-top:0.7vh;
     margin-bottom: 1vh;
     font-size:1.8vh;
+    padding:1vh;
 }
 
 ion-card-title{
@@ -32,8 +33,13 @@ ion-card-title{
     height:20vh;
     margin-top:0.7vh;
     font-size:1.8vh;
+    padding:1vh;
 }
 
 .input-contenido:focus{
     outline:none;
+}
+
+.btn-agregar{
+    text-transform: none;
 }

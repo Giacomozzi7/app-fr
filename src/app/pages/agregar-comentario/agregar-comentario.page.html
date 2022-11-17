@@ -16,7 +16,7 @@
       </ion-row>
       <ion-row>
         <ion-col size="12">
-          <ion-card class="card-foto">
+          <ion-card class="card-foto" color="light">
             <ion-card-content class="card-content">
               <form [formGroup]="comentario" (ngSubmit)="onSubmit()" novalidate >
                 <label>
@@ -25,6 +25,7 @@
                     type= "text"
                     name="titulo" 
                     class="input-titulo"
+                    maxlength="30"
                     placeholder="Titulo" 
                     formControlName = "titulo">
                 </label> 
@@ -34,11 +35,14 @@
                     type= "text"  
                     name="contenido" 
                     class="input-contenido"
+                    maxlength="200"
                     placeholder="Cuerpo del Comentario" 
                     formControlName = "contenido"> </textarea>
                 </label>
-                <ion-button color="success" type="submit">Agregar Comentario</ion-button>
-             </form>
+                <div style="text-align: center;margin-top:1vh;">
+                <ion-button color="success" type="submit" class="btn-agregar">Agregar Comentario</ion-button>
+                </div>
+              </form>
             </ion-card-content>
           </ion-card>
         </ion-col>

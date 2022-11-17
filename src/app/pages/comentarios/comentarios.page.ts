@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Comentarios } from 'src/app/interfaces/interfaces';
 import { ProveedorService } from 'src/app/services/proveedor.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-comentarios',
@@ -12,58 +13,33 @@ export class ComentariosPage implements OnInit {
   profileId: string;
   refMemoria:string;
   refAgregarComentario: string;
-  comentarios: Comentarios [] = [
-    {
-      "titulo": "Un lugar para perderse...",
-      "contenido": "En este apartado el usuario describe su experiencia o impresiones que ha tenido al visitar el punto de interés. Puede incluir recomendaciones para otros usuarios e incluso escribir un relato de una vivencia propia en el pasado.",
-      "fecha_subida": "01/01/2022",
-      "likes": ["632a072930305800b2d85221","632a072930305800b2d85222","632a072930305800b2d85220"],
-      "comentario_id": "632a072930305800b2d85251",
-      "usuario_id": "632a072930305800b2d85222",
-      "aceptado": true
-    },
-    {
-      "titulo": "Un lugar muy Interesante",
-      "contenido": "En este apartado el usuario describe su experiencia o impresiones que ha tenido al visitar el punto de interés. Puede incluir recomendaciones para otros usuarios e incluso escribir un relato de una vivencia propia en el pasado.",
-      "fecha_subida": "01/01/2022",
-      "likes": ["632a072930305800b2d85222","632a072930305800b2d85220"],
-      "comentario_id": "632a072930305800b2d85231",
-      "usuario_id": "632a072930305800b2d85221",
-      "aceptado": true
-    },
-    {
-      "titulo": "Novedoso",
-      "contenido": "En este apartado el usuario describe su experiencia o impresiones que ha tenido al visitar el punto de interés. Puede incluir recomendaciones para otros usuarios e incluso escribir un relato de una vivencia propia en el pasado.",
-      "fecha_subida": "01/01/2022",
-      "likes": ["632a072930305800b2d85220"],
-      "comentario_id": "636cfac64fea906e1d8992ff",
-      "usuario_id": "632a072930305800b2d85220",
-      "aceptado": true
-    },
-    {
-      "titulo": "Interesante",
-      "contenido": "En este apartado el usuario describe su experiencia o impresiones que ha tenido al visitar el punto de interés. Puede incluir recomendaciones para otros usuarios e incluso escribir un relato de una vivencia propia en el pasado.",
-      "fecha_subida": "01/01/2022",
-      "likes": ["632a072930305800b2d85221","632a072930305800b2d85222","632a072930305800b2d85220"],
-      "comentario_id": "636d5e013412a4716df1f22c",
-      "usuario_id": "632a072930305800b2d85220",
-      "aceptado": true
-    }
-  ] 
-
+  comentarios: Comentarios[];
+  userId = "632a072930305800b2d85221"
+  myCom: boolean = false;
+  myComStr: string = 'Mis Comentarios';
   
 
   constructor(
     private activatedRoute: ActivatedRoute,
     public proveedor: ProveedorService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refMemoria = 'memoria/'+ this.profileId;
     this.refAgregarComentario = 'agregar-comentario/' + this.profileId
-    this.buscarUsuarios();
+    this.obtComentarios()
+    
 
+  }
+
+  obtComentarios(){
+    this.proveedor.obtenerComentarios(this.profileId)
+      .subscribe((data) =>{
+        this.comentarios = data[0].comentarios;
+        this.buscarUsuarios()
+      })
   }
 
   buscarUsuarios(){
@@ -72,10 +48,54 @@ export class ComentariosPage implements OnInit {
       this.proveedor.obtenerUsuario(userId)
         .subscribe((usuario) => {
           let strNombre = usuario[0]['nombre'] + " "+ usuario[0]['apellido']
-          this.comentarios[i]['usuario_id'] = strNombre
+          this.comentarios[i]['usuario_name'] = strNombre
         })
    }
 
+  }
+
+  eliminarComentario(id:string, id_c:string){
+    console.log(id)
+    this.proveedor.deleteComentario(id,id_c)
+      .subscribe((success)=>{
+        console.log(success)
+        this.obtComentarios();
+      })
+  }
+
+  toggleComentarios(){
+    if (this.myCom === false){
+      this.comentarios = this.comentarios.filter(obj => obj.usuario_id === this.userId)
+      this.myCom = true;
+      this.myComStr = 'Todos';
+    } else{
+      this.obtComentarios()
+      this.myCom = false;
+      this.myComStr = 'Mis Comentarios'
+    }
+  }
+
+
+  async presentEliminar(id: string,id_c:string) {
+    console.log(id)
+    const alert = await this.alertController.create({
+      header: '¿Estás seguro que deseas eliminar el comentario?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          role: 'confirm',
+          handler: () => {
+            this.eliminarComentario(id,id_c)
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
 }

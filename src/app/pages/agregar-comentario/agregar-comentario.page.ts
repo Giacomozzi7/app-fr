@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ObjectID } from 'bson';
+import { ToastController, AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-agregar-comentario',
@@ -14,9 +14,12 @@ export class AgregarComentarioPage implements OnInit {
   refComentarios: string;
   profileId: string;
   comentario: FormGroup;
-  userId:string = "632a072930305800b2d85220";
+  userId:string = "632a072930305800b2d85221";
 
   constructor(
+    private router: Router,
+    private alertController:  AlertController,
+    private toastController: ToastController,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     public proveedor: ProveedorService,
@@ -29,13 +32,11 @@ export class AgregarComentarioPage implements OnInit {
     this.comentario = new FormGroup({
       titulo: new FormControl('',[
         Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(25)
+        Validators.minLength(2)
       ]),
       contenido: new FormControl('', [
         Validators.required, 
-        Validators.minLength(2),
-        Validators.maxLength(200) ])
+        Validators.minLength(2) ])
     })  
   }
 
@@ -44,23 +45,18 @@ export class AgregarComentarioPage implements OnInit {
       let objComentario = {
         ...this.comentario.value,
         usuario_id: this.userId,
-        comentario_id: new ObjectID().toString(),
         fecha_subida: this.crearFecha(),
-        likes: [],
         aceptado: true
       }
 
-      console.log("Formulario correcto")
-      console.log(objComentario)
-
       this.proveedor.postComentario(this.profileId,objComentario)
         .subscribe((data) =>{
-          console.log(data)
+          this.presentAgregar()
         })
 
     } 
     else{
-      console.log("Formulario incorrecto")
+      this.presentToast();
       
     }
 
@@ -75,6 +71,38 @@ export class AgregarComentarioPage implements OnInit {
       date.getFullYear()
     ].join('-');
 
+  }
+
+
+
+  //Toast confirmación
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Todos los campos deben ser llenados',
+      duration: 1500,
+      icon: 'close-circle'
+    });
+
+    await toast.present();
+  }
+
+  async presentAgregar() {
+    const alert = await this.alertController.create({
+      header: 'Agregado!',
+      subHeader: 'Comentario agregado exitosamente',
+      backdropDismiss: false,
+      buttons: [,
+        {
+          text: 'Aceptar',
+          role: 'confirm',
+          handler: () => {
+            this.router.navigate(['/comentarios/'+this.profileId])
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   
