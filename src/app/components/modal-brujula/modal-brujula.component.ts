@@ -1,5 +1,6 @@
-import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-brujula',
@@ -9,9 +10,13 @@ import { IonModal } from '@ionic/angular';
 export class ModalBrujulaComponent implements OnInit {
 
   @ViewChild(IonModal) modal: IonModal;
-  flag: boolean = false;
 
-  constructor() { }
+  flag: boolean = false;
+  
+
+  constructor(
+    private alertController: AlertController
+  ) { }
 
   ngOnInit() {}
 
@@ -30,6 +35,29 @@ export class ModalBrujulaComponent implements OnInit {
 
   disableFlag(){
     this.flag = false;
+  }
+
+  escuchaClick(event){
+    console.log(typeof(event.valorFlag));
+
+    if(event.valorFlag == true){
+      this.closeModal();
+    }
+    this.presentAlert();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Advertencia!!!',
+      subHeader: 'Contenido no soportado',
+      message: 'Esta funcionalidad no esta disponible en tu dispositivo',
+      buttons:[{
+        text: 'Aceptar',
+        cssClass: 'alert-button-confirm',
+      }],
+      cssClass: 'custom-alert'
+    });
+    await alert.present();
   }
 }
 

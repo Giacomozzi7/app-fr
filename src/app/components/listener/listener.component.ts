@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -7,14 +7,17 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./listener.component.scss'],
 })
 export class ListenerComponent implements OnInit {
+  @Output() clickValue = new EventEmitter();
 
   dato: any;
   public orientation: any;
   titulo: string;
+  dataFail: boolean = false;
 
   constructor(public toastController: ToastController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 
   async presentToast(data: string, duration: number, position: 'top' | 'middle' | 'bottom') {
@@ -35,6 +38,11 @@ export class ListenerComponent implements OnInit {
 
     console.log(this.orientation);
     // this.presentToast(this.orientation, 50, "bottom");
+
+    if(this.orientation == null){
+      this.dataFail = true;
+      this.clickValue.emit({ valorFlag: this.dataFail })
+    }
 
     if(this.orientation > 0 && this.orientation < 10){//
       this.presentToast("Apunta al este", 500, "top");

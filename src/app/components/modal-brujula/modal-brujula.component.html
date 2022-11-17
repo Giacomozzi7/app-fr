@@ -14,23 +14,23 @@
         
           <ion-grid>
             <ion-row>
-              <ion-col size="6">
+              <ion-col>
                 <ion-button color="primary" expand="block" size="small" (click)="setFlag()">
                   Encender 
                 </ion-button>
               </ion-col>
 
-              <ion-col size="6">
+              <!-- <ion-col size="6">
                 <ion-button color="danger" expand="block" size="small" (click)="disableFlag()">
                   Apagar 
                 </ion-button>
-              </ion-col>
+              </ion-col> -->
             </ion-row>
 
             <ion-row>
               <ion-col>
                 <!-- componente listener -->
-                <app-listener *ngIf="flag"></app-listener>
+                <app-listener *ngIf="flag" (clickValue)="escuchaClick($event)"></app-listener>
 
               </ion-col>
             </ion-row>
