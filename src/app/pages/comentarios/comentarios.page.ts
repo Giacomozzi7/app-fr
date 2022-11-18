@@ -13,6 +13,7 @@ export class ComentariosPage implements OnInit {
   profileId: string;
   refMemoria:string;
   refAgregarComentario: string;
+  refEditarComentario: string;
   comentarios: Comentarios[];
   userId = "632a072930305800b2d85221"
   myCom: boolean = false;
@@ -28,7 +29,8 @@ export class ComentariosPage implements OnInit {
   ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refMemoria = 'memoria/'+ this.profileId;
-    this.refAgregarComentario = 'agregar-comentario/' + this.profileId
+    this.refAgregarComentario = 'agregar-comentario/' + this.profileId + '/agregar/""'
+    this.refEditarComentario = 'agregar-comentario/' + this.profileId + '/editar/'
     this.obtComentarios()
     
 

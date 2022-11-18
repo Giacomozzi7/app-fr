@@ -9,7 +9,7 @@
                     <ion-icon name="chatbox-ellipses" style="font-size:4vh"></ion-icon>
                 </ion-card-header>
                 <ion-card-content>
-                    <p>En esta sección puedes añadir un comentario para que sea visto por la comunidad. Todos los campos son <b>obligatorios</b>.</p>
+                    <p>En esta sección puedes {{accion}} un comentario para que sea visto por la comunidad. Todos los campos son <b>obligatorios</b>.</p>
                 </ion-card-content>
             </ion-card>
         </ion-col>
@@ -26,6 +26,7 @@
                     name="titulo" 
                     class="input-titulo"
                     maxlength="30"
+                    [value]="textoTitulo"
                     placeholder="Titulo" 
                     formControlName = "titulo">
                 </label> 
@@ -36,11 +37,12 @@
                     name="contenido" 
                     class="input-contenido"
                     maxlength="200"
+                    [value]="textoContenido"
                     placeholder="Cuerpo del Comentario" 
                     formControlName = "contenido"> </textarea>
                 </label>
                 <div style="text-align: center;margin-top:1vh;">
-                <ion-button color="success" type="submit" class="btn-agregar">Agregar Comentario</ion-button>
+                <ion-button color="success" type="submit" class="btn-agregar">{{accion}} Comentario</ion-button>
                 </div>
               </form>
             </ion-card-content>

@@ -65,9 +65,12 @@ export class ProveedorService {
   }
 
   deleteComentario(id:string, id_c:string){
-    console.log(id)
-    console.log(id_c)
     return this.http.delete('https://164.77.114.239:8129/api/Comentario/' + id + "/" + id_c)
+  }
+
+  updateComentario(id:string, obj){
+    return this.http.put('https://164.77.114.239:8129/api/Comentario/' + id, obj)
+
   }
 
   obtenerEscenario(id:string){

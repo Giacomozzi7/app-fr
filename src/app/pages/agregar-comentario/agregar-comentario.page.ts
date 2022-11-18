@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProveedorService } from 'src/app/services/proveedor.service';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ToastController, AlertController, NavController } from '@ionic/angular';
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
+import {
+  ToastController,
+  AlertController,
+  NavController,
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-agregar-comentario',
@@ -10,93 +19,125 @@ import { ToastController, AlertController, NavController } from '@ionic/angular'
   styleUrls: ['./agregar-comentario.page.scss'],
 })
 export class AgregarComentarioPage implements OnInit {
-
   refComentarios: string;
   profileId: string;
+  accion: string;
   comentario: FormGroup;
-  userId:string = "632a072930305800b2d85221";
+  myComentario;
+  idCom;
+  textoTitulo: string = '';
+  textoContenido: string = '';
+  userId: string = '632a072930305800b2d85221';
 
   constructor(
     private router: Router,
-    private alertController:  AlertController,
+    private alertController: AlertController,
     private toastController: ToastController,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    public proveedor: ProveedorService,
+    public proveedor: ProveedorService
   ) {}
 
   ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.refComentarios = 'comentarios/'+ this.profileId;
+    this.accion = this.activatedRoute.snapshot.paramMap.get('type');
+    this.idCom = this.activatedRoute.snapshot.paramMap.get('id_com');
+    this.refComentarios = 'comentarios/' + this.profileId;
 
-    this.comentario = new FormGroup({
-      titulo: new FormControl('',[
-        Validators.required,
-        Validators.minLength(2)
-      ]),
-      contenido: new FormControl('', [
-        Validators.required, 
-        Validators.minLength(2) ])
-    })  
+    if (this.accion === 'editar') {
+      this.findMyComment();
+    }
+
+    this.createFormGroup();
   }
 
-  onSubmit(){
-    if (this.comentario.valid){
+  createFormGroup() {
+    this.comentario = new FormGroup({
+      titulo: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+      ]),
+      contenido: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+      ]),
+    });
+  }
+
+  findMyComment() {
+    this.proveedor.obtenerComentarios(this.profileId).subscribe((data) => {
+      this.myComentario = data[0].comentarios.filter((com) => {
+        return (
+          com.usuario_id === this.userId && com.comentario_id === this.idCom
+        );
+      })[0];
+
+      this.textoTitulo = this.myComentario.titulo;
+      this.textoContenido = this.myComentario.contenido;
+    });
+  }
+
+  onSubmit() {
+    if (this.comentario.valid) {
       let objComentario = {
         ...this.comentario.value,
         usuario_id: this.userId,
         fecha_subida: this.crearFecha(),
-        aceptado: true
+        aceptado: true,
+      };
+
+      if (this.accion === 'editar') {
+        objComentario = {
+          ...objComentario,
+          comentario_id: this.myComentario.comentario_id,
+        };
+        console.log(objComentario)
+        this.proveedor
+          .updateComentario(this.profileId, objComentario)
+          .subscribe((data) => {
+            this.present('Editado','El comentario ha sido editado exitosamente');
+          });
+      } else {
+        this.proveedor
+          .postComentario(this.profileId, objComentario)
+          .subscribe((data) => {
+            this.present('Agregado','El comentario ha sido agregado exitosamente');
+          });
       }
-
-      this.proveedor.postComentario(this.profileId,objComentario)
-        .subscribe((data) =>{
-          this.presentAgregar()
-        })
-
-    } 
-    else{
+    } else {
       this.presentToast();
-      
     }
-
   }
 
   //Genera la fecha actual en formato DD-MM-YYYY
-  crearFecha(){
+  crearFecha() {
     const date = new Date();
-    return [
-      date.getDate(),
-      date.getMonth() + 1,
-      date.getFullYear()
-    ].join('-');
-
+    return [date.getDate(), date.getMonth() + 1, date.getFullYear()].join('-');
   }
-
-
 
   //Toast confirmación
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Todos los campos deben ser llenados',
       duration: 1500,
-      icon: 'close-circle'
+      icon: 'close-circle',
     });
 
     await toast.present();
   }
 
-  async presentAgregar() {
+  async present(h:string,sh:string) {
     const alert = await this.alertController.create({
-      header: 'Agregado!',
-      subHeader: 'Comentario agregado exitosamente',
+      header: h,
+      subHeader: sh,
       backdropDismiss: false,
-      buttons: [,
+      buttons: [
+        ,
         {
           text: 'Aceptar',
           role: 'confirm',
           handler: () => {
-            this.router.navigate(['/comentarios/'+this.profileId])
+            this.router.navigate(['/comentarios/' + this.profileId]);
           },
         },
       ],
@@ -104,7 +145,4 @@ export class AgregarComentarioPage implements OnInit {
 
     await alert.present();
   }
-
-  
-
 }

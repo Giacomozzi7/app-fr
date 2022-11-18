@@ -37,7 +37,7 @@
                 <ion-button color="danger" size="small" style="float:right" (click)="presentEliminar( profileId, com.comentario_id)">
                   <ion-icon slot="icon-only" name="trash" style="font-size:2vh"></ion-icon>
                 </ion-button>
-                <ion-button size="small" style="float:right">
+                <ion-button size="small" style="float:right" [href]="refEditarComentario + com.comentario_id">
                   <ion-icon slot="icon-only" name="create" style="font-size:2vh"></ion-icon>
                 </ion-button>         
               </div>
