@@ -50,6 +50,14 @@ export class ProveedorService {
 
   }
 
+  obtenerGaleria(id:string){
+    return this.http.get('https://164.77.114.239:8129/api/Galeria/' + id)
+  }
+
+  postGaleria(id: string,formData: FormData){
+    return this.http.post('https://164.77.114.239:8129/api/galeria' + id, formData)
+  }
+
   putValoraciones(id: string, obj){
     return this.http.put('https://164.77.114.239:8129/api/Valoracion/' + id, obj)
 
@@ -57,7 +65,6 @@ export class ProveedorService {
 
   postValoraciones(id: string, obj){
     return this.http.post('https://164.77.114.239:8129/api/Valoracion/' + id, obj)
-
   }
 
   obtenerComentarios(id:string){

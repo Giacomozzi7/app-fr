@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Galeria } from 'src/app/interfaces/interfaces';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 
 @Component({
@@ -10,7 +11,11 @@ import { ProveedorService } from 'src/app/services/proveedor.service';
 export class GaleriaPage implements OnInit {
   profileId: string;
   refMemoria:string;
-  evento;
+  galeria : Galeria[];
+  refAgregarImagen: string;
+  myImgStr: string = 'Mis Imágenes';
+  myImg : boolean = false;
+  userId = "632a072930305800b2d85221"
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -20,21 +25,40 @@ export class GaleriaPage implements OnInit {
   ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refMemoria = 'memoria/'+ this.profileId;
+    this.refAgregarImagen = 'agregar-imagen/' + this.profileId + '/agregar/""'
+    this.obtGaleria()
+    
+  }
 
-    this.proveedor.obtenerEvento(this.profileId)
+  obtGaleria(){
+    this.proveedor.obtenerGaleria(this.profileId)
       .subscribe((data) => {
-        this.evento = data[0];
+        this.galeria = data[0].galeria;
         this.buscarUsuarios()
       });
+
+  }
+
+
+  toggleImagenes(){
+    if (this.myImg === false){
+      this.galeria = this.galeria.filter(obj => obj.usuario_id === this.userId)
+      this.myImg = true;
+      this.myImgStr = 'Todos';
+    } else{
+      this.obtGaleria()
+      this.myImg = false;
+      this.myImgStr = 'Mis Imágenes'
+    }
   }
 
   buscarUsuarios(){
-    for (let i = 0; i < this.evento.galeria.length; i++) {
-      let userId = this.evento.galeria[i]['usuario_id']
+    for (let i = 0; i < this.galeria.length; i++) {
+      let userId = this.galeria[i]['usuario_id']
       this.proveedor.obtenerUsuario(userId)
         .subscribe((usuario) => {
           let strNombre = usuario[0]['nombre'] + " "+ usuario[0]['apellido']
-          this.evento.galeria[i]['usuario_id'] = strNombre
+          this.galeria[i]['usuario_name'] = strNombre
         })
    }
 

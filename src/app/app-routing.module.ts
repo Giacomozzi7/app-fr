@@ -56,6 +56,11 @@ const routes: Routes = [
     path: 'agregar-comentario/:id/:type/:id_com',
     loadChildren: () => import('./pages/agregar-comentario/agregar-comentario.module').then( m => m.AgregarComentarioPageModule)
   },
+  {
+    path: 'agregar-imagen/:id/:type/:id_img',
+    loadChildren: () => import('./pages/agregar-imagen/agregar-imagen.module').then( m => m.AgregarImagenPageModule)
+  },
+
 
 
 

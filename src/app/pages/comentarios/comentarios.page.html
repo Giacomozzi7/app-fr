@@ -4,6 +4,20 @@
   <app-card-resumen [profileId]="profileId"></app-card-resumen>
 
   <ion-grid class="ion-no-padding" id="grilla">
+    <ion-row class="ion-no-padding">
+      <ion-col>
+          <ion-card color="light" style="border:1px solid;">
+              <ion-card-header style="text-align:center">
+                  <ion-icon name="images" style="font-size:4vh"></ion-icon>
+              </ion-card-header>
+              <ion-card-content>
+                  <p>En esta sección puedes visualizar todos los comentarios ingresados por los usuarios asociadas al punto de interés.</p>
+              </ion-card-content>
+          </ion-card>
+      </ion-col>
+    </ion-row>
+
+
     <ion-row style="margin-left:1vh; margin-right:1vh;">
       <ion-col size="6" class="ion-text-center">
         <ion-button class="button-contenido" color="warning" fill="solid" (click) = "toggleComentarios()">{{myComStr}}</ion-button>

@@ -25,8 +25,6 @@ export class AgregarComentarioPage implements OnInit {
   comentario: FormGroup;
   myComentario;
   idCom;
-  textoTitulo: string = '';
-  textoContenido: string = '';
   userId: string = '632a072930305800b2d85221';
 
   constructor(
@@ -45,10 +43,11 @@ export class AgregarComentarioPage implements OnInit {
     this.refComentarios = 'comentarios/' + this.profileId;
 
     if (this.accion === 'editar') {
-      this.findMyComment();
+      this.findMyComment()
     }
 
-    this.createFormGroup();
+    this.createFormGroup()
+
   }
 
   createFormGroup() {
@@ -65,15 +64,15 @@ export class AgregarComentarioPage implements OnInit {
   }
 
   findMyComment() {
-    this.proveedor.obtenerComentarios(this.profileId).subscribe((data) => {
-      this.myComentario = data[0].comentarios.filter((com) => {
-        return (
-          com.usuario_id === this.userId && com.comentario_id === this.idCom
-        );
-      })[0];
+      this.proveedor.obtenerComentarios(this.profileId).subscribe((data) => {
+        this.myComentario = data[0].comentarios.filter((com) => {
+          return (
+            com.usuario_id === this.userId && com.comentario_id === this.idCom
+          );
+        })[0];
 
-      this.textoTitulo = this.myComentario.titulo;
-      this.textoContenido = this.myComentario.contenido;
+        this.comentario.patchValue(this.myComentario)
+
     });
   }
 

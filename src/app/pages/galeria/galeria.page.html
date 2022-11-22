@@ -1,6 +1,6 @@
 <app-header titulo="Galeria de Imágenes" [refback]="refMemoria"></app-header>
 
-<ion-content padding *ngIf="evento">
+<ion-content padding *ngIf="galeria">
 
     <app-card-resumen [profileId]="profileId"></app-card-resumen>
     <ion-grid class="ion-no-padding" id="grilla">
@@ -16,7 +16,17 @@
                 </ion-card>
             </ion-col>
           </ion-row>
-          <ion-row class="row-img" *ngFor="let gal of evento.galeria; let ind=index">
+
+          <ion-row style="margin-left:1vh; margin-right:1vh;">
+            <ion-col size="6" class="ion-text-center">
+              <ion-button class="button-contenido" color="warning" fill="solid" (click) = "toggleImagenes()">{{myImgStr}}</ion-button>
+            </ion-col>
+            <ion-col size="6"  class="ion-text-center">
+              <ion-button class="button-contenido"  color="success" fill="solid"  [href]="refAgregarImagen">Agregar Imágen</ion-button>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="row-img" *ngFor="let gal of galeria; let ind=index">
             <ion-col size="12">
               <ion-card *ngIf="gal.tipo==='img'" color="light" class="card-foto">
                 <ion-card-content class="card-content">
@@ -36,7 +46,7 @@
                     </ion-grid>  
                 </ion-card-header>
                 <ion-card-content>
-                  <ion-card-subtitle><b> {{gal.usuario_id}}</b></ion-card-subtitle>
+                  <ion-card-subtitle><b> {{gal.usuario_name}}</b></ion-card-subtitle>
                   <p>{{gal.descripcion}}</p>
 
                 </ion-card-content>

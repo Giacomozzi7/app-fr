@@ -1,0 +1,49 @@
+<app-header titulo="Agregar Imágen" [refback]="refGaleria"></app-header>
+<ion-content>
+  <ion-grid class="ion-no-padding" id="grilla">
+    <ion-row class="ion-no-padding">
+        <ion-col>
+            <ion-card color="light" style="border:1px solid;">
+                <ion-card-header style="text-align:center">
+                    <ion-icon name="images" style="font-size:4vh"></ion-icon>
+                </ion-card-header>
+                <ion-card-content>
+                    <p>En esta sección puedes {{accion}} una imágen para que sea vista por la comunidad. Todos los campos son <b>obligatorios</b>.</p>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-card class="card-foto" color="light">
+            <ion-card-content class="card-content">
+              <form [formGroup]="imagen" (ngSubmit)="onSubmit()" novalidate >
+                <label>
+                  <ion-card-title>Subir Archivo</ion-card-title>
+                  <input 
+                    type= "file"
+                    class="input-file"
+                    formControlName = "file"
+                    (change)="changeFile($event)"
+                    >
+                </label> 
+                <label>
+                  <ion-card-title>Descripción</ion-card-title>
+                  <textarea
+                    type= "text"  
+                    name="descripcion" 
+                    class="input-contenido"
+                    maxlength="300"
+                    placeholder="Cuerpo de la descripcion" 
+                    formControlName = "descripcion"> </textarea>
+                </label>
+                <div style="text-align: center;margin-top:1vh;">
+                <ion-button color="success" type="submit" class="btn-agregar">{{accion}} Imágen</ion-button>
+                </div>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>
