@@ -55,7 +55,7 @@ export class ProveedorService {
   }
 
   postGaleria(id: string,formData: FormData){
-    return this.http.post('https://164.77.114.239:8129/api/galeria' + id, formData)
+    return this.http.post('https://164.77.114.239:8129/api/galeria/imagen/' + id, formData)
   }
 
   putValoraciones(id: string, obj){

@@ -90,7 +90,7 @@ export class AgregarComentarioPage implements OnInit {
           ...objComentario,
           comentario_id: this.myComentario.comentario_id,
         };
-        console.log(objComentario)
+
         this.proveedor
           .updateComentario(this.profileId, objComentario)
           .subscribe((data) => {
