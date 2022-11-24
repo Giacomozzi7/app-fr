@@ -23,6 +23,7 @@ export class AgregarImagenPage implements OnInit {
   userId: string = '632a072930305800b2d85221';
   imageSrc: String | ArrayBuffer;
   isImg!: boolean;
+  imageSelected: boolean
 
   constructor(
     private router: Router,
@@ -55,7 +56,14 @@ export class AgregarImagenPage implements OnInit {
     if (event.target.files.length > 0) {
       this.fileToUpload = event.target.files[0];
       this.mostrarPrev(event);
+      this.imageSelected = true;
     }
+  }
+
+  cleanForm(){
+    this.imagen.reset();
+    this.imageSrc = '';
+    this.imageSelected = false;
   }
 
   mostrarPrev(event: any): void {
