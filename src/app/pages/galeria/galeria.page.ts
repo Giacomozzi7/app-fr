@@ -50,12 +50,12 @@ export class GaleriaPage implements OnInit {
       this.galeria = this.galeria.filter(obj => obj.usuario_id === this.userId)
       this.myImg = true;
       this.myImgStr = 'Todos';
-      this.misImgs = false;
+      this.misImgs = true;
     } else{
       this.obtGaleria()
       this.myImg = false;
       this.myImgStr = 'Mis Imágenes'
-      this.misImgs = true;
+      this.misImgs = false;
     }
   }
 
