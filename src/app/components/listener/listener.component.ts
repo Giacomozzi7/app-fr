@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 @Component({
   selector: 'app-listener',
@@ -64,4 +65,8 @@ export class ListenerComponent implements OnInit {
       this.titulo = "Apunta al sur";
     }
   }
+
+  hapticsImpactMedium = async () => {
+    await Haptics.impact({ style: ImpactStyle.Medium });
+  };
 }
