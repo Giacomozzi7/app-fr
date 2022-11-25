@@ -28,6 +28,9 @@
                     >
                 </label> 
                 <img id="blah" [src]="imageSrc" />
+                <ion-button color="danger" size="small" *ngIf="imageSelected" (click)="cleanForm()">
+                  <ion-icon name="trash" ></ion-icon>
+                  </ion-button>
                 <label>
                   <ion-card-title>Descripción</ion-card-title>
                   <textarea
