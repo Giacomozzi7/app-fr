@@ -60,6 +60,11 @@ const routes: Routes = [
     path: 'agregar-imagen/:id/:type/:id_img',
     loadChildren: () => import('./pages/agregar-imagen/agregar-imagen.module').then( m => m.AgregarImagenPageModule)
   },
+  {
+    path: 'editar-imagen/:id/:type/:id_img',
+    loadChildren: () => import('./pages/editar-imagen/editar-imagen.module').then( m => m.EditarImagenPageModule)
+  },
+
 
 
 
