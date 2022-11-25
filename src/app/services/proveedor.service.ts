@@ -37,7 +37,7 @@ export class ProveedorService {
 
   //Obtiene los relatos
   obtenerRelatos(id:string){
-    return this.http.get('https://164.77.114.239:8129/api/app/page/relatos/' + id)
+    return this.http.get('https://164.77.114.239:8129/api/Relato/' + id)
   }
 
   //Obtiene datos de interes por evento

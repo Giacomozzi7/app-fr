@@ -60,6 +60,11 @@ const routes: Routes = [
     path: 'agregar-imagen/:id/:type/:id_img',
     loadChildren: () => import('./pages/agregar-imagen/agregar-imagen.module').then( m => m.AgregarImagenPageModule)
   },
+  {
+    path: 'agregar-relato/:id/:type/:id_rel',
+    loadChildren: () => import('./pages/agregar-relato/agregar-relato.module').then( m => m.AgregarRelatoPageModule)
+  },
+
 
 
 

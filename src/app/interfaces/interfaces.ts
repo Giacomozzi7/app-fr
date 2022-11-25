@@ -15,12 +15,15 @@ export interface PosEvento {
   alt: number;
 }
 
-export interface Track {
-  name: string;
-  path: string;
+export interface Relato {
+  titulo: string;
+  contenido: string;
   fecha_subida: string;
   usuario_id: string;
+  relato_id: string;
   likes: string[];
+  aceptado: boolean;
+  usuario_name?: string;
 }
 
 export interface DatosInteres {

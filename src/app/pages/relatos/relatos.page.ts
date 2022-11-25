@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { Howl } from 'howler';
 import { IonRange } from '@ionic/angular';
-import { Track } from 'src/app/interfaces/interfaces';
+import { Relato} from 'src/app/interfaces/interfaces';
+import { WebElementCondition } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-relatos',
@@ -14,11 +15,14 @@ import { Track } from 'src/app/interfaces/interfaces';
 export class RelatosPage implements OnInit {
   profileId: string;
   refMemoria:string;
-  evento;
+  relatos: Relato[];
   audioUrl: string;
-  playlist: Track[] = [];
+  myRelStr: string = 'Mis Relatos';
+  myRel : boolean = false;
+  refAgregarRelato: string;
+  userId = "632a072930305800b2d85221"
 
-  activeTrack: Track = null;
+  activeTrack: Relato = null;
   player: Howl = null;
   isPlaying = false;
   progress = 0;
@@ -29,17 +33,63 @@ export class RelatosPage implements OnInit {
     public proveedor: ProveedorService,
   ) { }
 
-  start(track: Track){
+  ngOnInit() {
+    this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.refMemoria = 'memoria/'+ this.profileId;
+    this.refAgregarRelato = 'agregar-relato/' + this.profileId + '/agregar/""'
+    this.obtRelatos()
+
+  }
+
+  obtRelatos(){
+    this.proveedor.obtenerRelatos(this.profileId)
+    .subscribe((data) => {
+      this.relatos = data[0].relatos;
+      this.buscarUsuarios()
+    });
+
+  }
+
+  toggleRelatos(){
+    console.log('a')
+    if (this.myRel === false){
+      this.relatos = this.relatos.filter(obj => obj.usuario_id === this.userId)
+      this.myRel= true;
+      this.myRelStr = 'Todos';
+    } else{
+      this.obtRelatos()
+      this.myRel = false;
+      this.myRelStr = 'Mis Relatos'
+    }
+  }
+
+  buscarUsuarios(){
+    this.relatos.forEach((element:Relato) =>{
+      let userId = element['usuario_id']
+      this.proveedor.obtenerUsuario(userId)
+        .subscribe((usuario) =>{
+          element['usuario_name'] = 
+            usuario[0]['nombre'] +
+            " " +
+            usuario[0]['apellido']
+        })
+    }) 
+  }
+
+
+
+  //Funciones para el control del reproductor
+  start(relato: Relato){
     if (this.player){ //si hay algo reproduciendose, se detiene
       this.player.stop()
     }
     this.player = new Howl({
-      src: [track.path],
+      src: [relato.contenido],
       html5: true,
       onplay: () =>{
         console.log('onplay')
         this.isPlaying = true;
-        this.activeTrack = track;
+        this.activeTrack = relato;
         this.updateProgress();
       },
       onend: () =>{
@@ -62,20 +112,20 @@ export class RelatosPage implements OnInit {
   }
 
   next(){
-    let index = this.playlist.indexOf(this.activeTrack)
-    if (index!= this.playlist.length - 1){
-      this.start(this.playlist[index + 1])
+    let index = this.relatos.indexOf(this.activeTrack)
+    if (index!= this.relatos.length - 1){
+      this.start(this.relatos[index + 1])
     } else{
-      this.start(this.playlist[0])
+      this.start(this.relatos[0])
     }
   }
 
   prev(){
-    let index = this.playlist.indexOf(this.activeTrack);
+    let index = this.relatos.indexOf(this.activeTrack);
     if (index > 0){
-      this.start(this.playlist[index - 1]);    
+      this.start(this.relatos[index - 1]);    
     } else {
-      this.start(this.playlist[this.playlist.length - 1])
+      this.start(this.relatos[this.relatos.length - 1])
     }
   }
 
@@ -95,46 +145,11 @@ export class RelatosPage implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.refMemoria = 'memoria/'+ this.profileId;
+  
 
-    this.proveedor.obtenerRelatos(this.profileId)
-    .subscribe((data) => {
-      this.evento = data[0];
-      this.generarPlaylist();
-      this.buscarUsuarios()
-    });
-  }
+  
 
-  buscarUsuarios(){
-    for (let i = 0; i < this.playlist.length; i++) {
-      let userId = this.playlist[i]['usuario_id']
-      console.log(userId)
-      this.proveedor.obtenerUsuario(userId)
-        .subscribe((usuario) => {
-          let strNombre = usuario[0]['nombre'] + " "+ usuario[0]['apellido']
-          this.playlist[i]['usuario_id'] = strNombre
-        })
-   }
-
-  }
-
-  generarPlaylist(){
-    this.evento.relatos.forEach(relato => {
-      if (relato.aceptado === true){
-        let objRelato = {
-          "name" : relato.titulo,
-          "path": relato.contenido,
-          "fecha_subida": relato.fecha_subida,
-          "usuario_id": relato.usuario_id,
-          "likes": relato.likes
-        }
-        this.playlist.push(objRelato);
-      }
-    });
-
-  }
+ 
 }
 
 
