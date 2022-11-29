@@ -16,6 +16,9 @@ export class GaleriaPage implements OnInit {
   myImgStr: string = 'Mis Imágenes';
   myImg : boolean = false;
   userId = "632a072930305800b2d85221"
+  refEditarImagen: string;
+
+  misImgs: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -26,6 +29,8 @@ export class GaleriaPage implements OnInit {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refMemoria = 'memoria/'+ this.profileId;
     this.refAgregarImagen = 'agregar-imagen/' + this.profileId + '/agregar/""'
+    this.refEditarImagen = 'editar-imagen/' + this.profileId + '/editar/""'
+    
     this.obtGaleria()
     
   }
@@ -45,10 +50,12 @@ export class GaleriaPage implements OnInit {
       this.galeria = this.galeria.filter(obj => obj.usuario_id === this.userId)
       this.myImg = true;
       this.myImgStr = 'Todos';
+      this.misImgs = true;
     } else{
       this.obtGaleria()
       this.myImg = false;
       this.myImgStr = 'Mis Imágenes'
+      this.misImgs = false;
     }
   }
 
