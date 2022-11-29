@@ -29,7 +29,7 @@ export class GaleriaPage implements OnInit {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refMemoria = 'memoria/'+ this.profileId;
     this.refAgregarImagen = 'agregar-imagen/' + this.profileId + '/agregar/""'
-    this.refEditarImagen = 'editar-imagen/' + this.profileId + '/editar/""'
+    this.refEditarImagen = 'agregar-imagen/' + this.profileId + '/editar/'
     
     this.obtGaleria()
     

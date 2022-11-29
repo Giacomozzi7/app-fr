@@ -24,6 +24,8 @@ export class AgregarImagenPage implements OnInit {
   imageSrc: String | ArrayBuffer;
   isImg!: boolean;
   imageSelected: boolean
+  myImagen
+  idGal
 
   constructor(
     private router: Router,
@@ -37,10 +39,23 @@ export class AgregarImagenPage implements OnInit {
   ngOnInit(): void {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.accion = this.activatedRoute.snapshot.paramMap.get('type');
+    this.idGal = this.activatedRoute.snapshot.paramMap.get('id_img');
     this.refGaleria = 'galeria/' + this.profileId;
 
+
+
+    if(this.accion === 'editar'){
+      this.editarImagen();
+    }
+
     this.createFormGroup();
+    console.log(this.accion)
+
+
+    
+
   }
+
 
   createFormGroup(): void {
     this.imagen = new FormGroup({
@@ -64,6 +79,19 @@ export class AgregarImagenPage implements OnInit {
     this.imagen.reset();
     this.imageSrc = '';
     this.imageSelected = false;
+  }
+
+  editarImagen(){
+    console.log("la imagen será editada")
+    this.proveedor.obtenerGaleria(this.profileId).subscribe((data) => {
+      this.myImagen = data[0].galeria.filter((img) => {
+        return (
+          img.usuario_id === this.userId && img.galeria_id === this.idGal
+        );});[0];
+      console.log(this.myImagen)
+      this.imagen.patchValue(this.myImagen);
+    });
+  
   }
 
   mostrarPrev(event: any): void {

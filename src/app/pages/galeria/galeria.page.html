@@ -34,12 +34,6 @@
                 </ion-card-content>
                 <ion-card-header>
                     <ion-grid class="ion-no-padding">
-                      <ion-row *ngIf="misImgs">
-                        <ion-col size="1">
-                          <ion-button size="small" [href]="refEditarImagen"><ion-icon name="create"></ion-icon></ion-button>
-                          </ion-col>
-                      </ion-row>
-
                       <ion-row>
                         <ion-col size="1">
                           <ion-icon name="heart-outline" class="icon"></ion-icon>
@@ -55,7 +49,16 @@
                   <ion-card-subtitle><b> Por: </b> {{gal.usuario_name}}</ion-card-subtitle>
                   <ion-card-subtitle><b> Fecha: </b> {{gal.fecha_subida}}</ion-card-subtitle>
                   <p style="margin-top:0.7vh">{{gal.descripcion}}</p>
-
+                  <ion-row *ngIf="misImgs">
+                    <ion-col>
+                      <ion-button color="danger" size="small" style="float:right">
+                        <ion-icon slot="icon-only" name="trash" style="font-size:2vh"></ion-icon>
+                      </ion-button>
+                      <ion-button size="small" style="float:right" [href]="refEditarImagen + gal.galeria_id">
+                        <ion-icon slot="icon-only" name="create" style="font-size:2vh"></ion-icon>
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
                 </ion-card-content>
               </ion-card>
             </ion-col>
