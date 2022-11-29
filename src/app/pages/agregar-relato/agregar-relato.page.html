@@ -27,7 +27,7 @@
                     (change)="changeFile($event)"
                     >
                 </label> 
-                <audio #figAudio controls autoplay muted>
+                <audio #figAudio controls muted>
                   <source [src]="relatoSrc" type="audio/mpeg">
                 </audio>
                 <label>
@@ -41,7 +41,7 @@
                     formControlName = "titulo">
                 </label>
                 <div style="text-align: center;margin-top:1vh;">
-                <ion-button color="success" type="submit" class="btn-agregar">{{accion}} Imágen</ion-button>
+                <ion-button color="success" type="submit" class="btn-agregar">{{accion}} Relato</ion-button>
                 </div>
               </form>
             </ion-card-content>

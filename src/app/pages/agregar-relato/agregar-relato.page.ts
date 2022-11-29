@@ -41,7 +41,7 @@ export class AgregarRelatoPage implements OnInit {
   createFormGroup(): void {
     this.relato = new FormGroup({
       file: this.fb.control(null),
-      titulo: new FormControl('asd', [
+      titulo: new FormControl('', [
         Validators.required,
         Validators.minLength(2),
       ]),
@@ -79,7 +79,68 @@ export class AgregarRelatoPage implements OnInit {
   }
 
   onSubmit():void{
-    console.log('hola')
+    if (this.isAudio === true && this.relato.valid) {
+      const fd = this.createFormData();
+
+      this.proveedor.postRelato(this.profileId,fd)
+        .subscribe( (success) =>{
+          this.mostrarAlert('Agregado','El relato ha sido agregado exitosamente')
+        })
+
+    } else {
+      !this.isAudio &&
+        this.mostrarToast('Es necesario subir un archivo de audio válido');
+
+      !this.relato.valid &&
+        this.mostrarToast('Todos los campos deben ser llenados');
+    }
+  }
+
+  createFormData(): FormData {
+    const fd = new FormData();
+    fd.append('archivo', this.fileToUpload);
+    fd.append('usuario_id', this.userId);
+    fd.append('titulo', this.relato.get('titulo').value);
+    fd.append('fecha_subida', this.crearFecha());
+    return fd;
+  }
+
+
+  //Genera la fecha actual en formato DD-MM-YYYY
+  crearFecha(): string {
+    const date = new Date();
+    return [date.getDate(), date.getMonth() + 1, date.getFullYear()].join('-');
+  }
+
+  //Toast validacion
+  async mostrarToast(msg: string): Promise<void> {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 1500,
+      icon: 'close-circle',
+    });
+
+    await toast.present();
+  }
+
+  async mostrarAlert(h: string, sh: string) : Promise<void>{
+    const alert = await this.alertController.create({
+      header: h,
+      subHeader: sh,
+      backdropDismiss: false,
+      buttons: [
+        ,
+        {
+          text: 'Aceptar',
+          role: 'confirm',
+          handler: () => {
+            this.router.navigate(['/relatos/' + this.profileId]);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
 }

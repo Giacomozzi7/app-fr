@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Comentarios } from 'src/app/interfaces/interfaces';
+import { Comentario } from 'src/app/interfaces/interfaces';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { AlertController } from '@ionic/angular';
 
@@ -14,7 +14,7 @@ export class ComentariosPage implements OnInit {
   refMemoria:string;
   refAgregarComentario: string;
   refEditarComentario: string;
-  comentarios: Comentarios[];
+  comentarios: Comentario[];
   userId = "632a072930305800b2d85221"
   myCom: boolean = false;
   myComStr: string = 'Mis Comentarios';
@@ -36,11 +36,30 @@ export class ComentariosPage implements OnInit {
 
   }
 
+  fillLikes(){
+    this.comentarios = this.comentarios.map((element: Comentario) =>{
+      if (element.likes.includes(this.userId)){
+        return {
+          ...element,
+          like_name: 'heart'
+        }
+      } 
+      else {
+        return {
+          ...element,
+          like_name: 'heart-outline'
+        }
+      }
+    })
+    console.log(this.comentarios)
+  }
+
   obtComentarios(){
     this.proveedor.obtenerComentarios(this.profileId)
       .subscribe((data) =>{
         this.comentarios = data[0].comentarios;
         this.buscarUsuarios()
+        this.fillLikes()
       })
   }
 
@@ -63,6 +82,44 @@ export class ComentariosPage implements OnInit {
         console.log(success)
         this.obtComentarios();
       })
+  }
+
+  //Toggle Like, Dislike
+  toggleLike(likeName: string, comId: string): void{
+    //CASO LIKE
+    if(likeName==='heart-outline'){
+      this.comentarios = this.comentarios.map((element: Comentario)=>{
+        if (element.comentario_id===comId){
+          return{
+            ...element,
+            like_name:'heart',
+            likes: [...element.likes, this.userId]
+          }
+        } else {return element}
+      })
+
+      this.proveedor.postLike(comId,this.userId)
+        .subscribe((success)=>{
+          console.log('success')
+        })
+    
+    // CASO DISLIKE
+    } else{
+      this.comentarios = this.comentarios.map((element: Comentario)=>{
+        if (element.comentario_id===comId){
+          let newLikes = element.likes.filter(ele => ele!==this.userId)
+          return{
+            ...element,
+            like_name:'heart-outline',
+            likes: newLikes
+          }
+        } else {return element}
+      })
+      this.proveedor.deleteLike(comId,this.userId)
+        .subscribe((success)=>{
+          console.log('success')
+        })
+    }
   }
 
   toggleComentarios(){

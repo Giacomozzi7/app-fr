@@ -54,7 +54,7 @@ export interface LatLngEscenario {
   lng: number;
 }
 
-export interface Comentarios {
+export interface Comentario {
   titulo: string;
   contenido: string;
   fecha_subida: string;
@@ -63,6 +63,7 @@ export interface Comentarios {
   likes: string[];
   aceptado: boolean;
   usuario_name?: string;
+  like_name?: string;
 }
 
 export interface Galeria {
