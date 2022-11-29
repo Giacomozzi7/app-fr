@@ -49,6 +49,7 @@
                   <ion-card-subtitle><b> Por: </b> {{gal.usuario_name}}</ion-card-subtitle>
                   <ion-card-subtitle><b> Fecha: </b> {{gal.fecha_subida}}</ion-card-subtitle>
                   <p style="margin-top:0.7vh">{{gal.descripcion}}</p>
+                  <ion-grid>
                   <ion-row *ngIf="misImgs">
                     <ion-col>
                       <ion-button color="danger" size="small" style="float:right">
@@ -59,6 +60,7 @@
                       </ion-button>
                     </ion-col>
                   </ion-row>
+                </ion-grid>
                 </ion-card-content>
               </ion-card>
             </ion-col>

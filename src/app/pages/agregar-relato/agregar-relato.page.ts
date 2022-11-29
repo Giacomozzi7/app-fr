@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 
+
 @Component({
   selector: 'app-agregar-relato',
   templateUrl: './agregar-relato.page.html',
@@ -18,6 +19,8 @@ export class AgregarRelatoPage implements OnInit {
   relatoSrc: String | ArrayBuffer;
   userId: string = '632a072930305800b2d85221';
   isAudio!: boolean;
+  idRel
+  myRelato
 
   @ViewChild('figAudio') figAudio: ElementRef;
 
@@ -33,7 +36,12 @@ export class AgregarRelatoPage implements OnInit {
   ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.accion = this.activatedRoute.snapshot.paramMap.get('type');
+    this.idRel = this.activatedRoute.snapshot.paramMap.get('id_com');
     this.refRelatos = 'relatos/' + this.profileId;
+
+    if(this.accion === 'editar'){
+      console.log('editar')
+    }
 
     this.createFormGroup()
   }
@@ -47,6 +55,12 @@ export class AgregarRelatoPage implements OnInit {
       ]),
     });
   }
+
+  findMyRelato(){
+    // this.proveedor.obtenerRelatos(this.profileId).subscribe((data) => {
+    //   this.myRelato = data[0].relatos
+  }
+
 
   changeFile(event: any): void {
     if (event.target.files.length > 0) {

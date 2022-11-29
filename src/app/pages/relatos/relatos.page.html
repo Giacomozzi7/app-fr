@@ -49,6 +49,18 @@
                       <ion-icon name="heart-outline" class="icon" color="danger" style="font-size:2.5vh; font-weight: bold; margin-right:1vh; margin-top:0.5vh;" ></ion-icon>
                     </ion-label>
                     <p><b>{{relato.likes.length}}</b></p>
+                    <ion-grid *ngIf="misRelatos">
+                      <ion-row>
+                        <ion-col>
+                          <ion-button color="danger" size="small" style="float:right">
+                            <ion-icon slot="icon-only" name="trash" style="font-size:2vh"></ion-icon>
+                          </ion-button>
+                          <ion-button size="small" style="float:right" [href]="refEditarRelato + relato.relato_id">
+                            <ion-icon slot="icon-only" name="create" style="font-size:2vh"></ion-icon>
+                          </ion-button>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
                 </ion-item>
               </ion-list>
             </ion-card-content>

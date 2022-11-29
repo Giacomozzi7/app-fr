@@ -21,6 +21,8 @@ export class RelatosPage implements OnInit {
   myRel : boolean = false;
   refAgregarRelato: string;
   userId = "632a072930305800b2d85221"
+  misRelatos: boolean = false;
+  refEditarRelato: string;
 
   activeTrack: Relato = null;
   player: Howl = null;
@@ -37,6 +39,7 @@ export class RelatosPage implements OnInit {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refMemoria = 'memoria/'+ this.profileId;
     this.refAgregarRelato = 'agregar-relato/' + this.profileId + '/agregar/""'
+    this.refEditarRelato = 'agregar-relato/' + this.profileId + '/editar/'
     this.obtRelatos()
 
   }
@@ -52,14 +55,17 @@ export class RelatosPage implements OnInit {
 
   toggleRelatos(){
     console.log('a')
+    
     if (this.myRel === false){
       this.relatos = this.relatos.filter(obj => obj.usuario_id === this.userId)
       this.myRel= true;
       this.myRelStr = 'Todos';
+      this.misRelatos = true
     } else{
       this.obtRelatos()
       this.myRel = false;
       this.myRelStr = 'Mis Relatos'
+      this.misRelatos = false
     }
   }
 
