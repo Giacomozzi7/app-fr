@@ -27,9 +27,14 @@
 }
 
 #semaforo{
-    font-size:15vh;
+    position:absolute;
+    font-size:12vh;
     margin-top: 3vh;
-    margin-bottom: 6vh;
+    margin-right: 45vh;
+}
+
+#first-icon{
+    margin-top:5vh;
 }
 
 .col-icon{

@@ -109,6 +109,13 @@ export class ProveedorService {
   }
   //---------------------------
 
+  //LIKES----------------
+  postVisita(id:string, obj){
+    return this.http.post('https://164.77.114.239:8129/api/Visita/' + id, obj)
+  }
+
+  //---------------------------
+
   obtenerEscenario(id:string){
     return this.http.get('https://164.77.114.239:8129/api/Escenario/' + id)
   }

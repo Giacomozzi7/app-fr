@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WebcamImage } from 'ngx-webcam';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { ProveedorService } from '../../services/proveedor.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-camara',
@@ -14,6 +16,7 @@ export class CamaraPage implements OnInit {
   public colorBotones: string[] = ['success', 'warning', 'warning'];
   public updatedImage: string;
   public webcamImage:  WebcamImage = null;
+  userId: string = '632a072930305800b2d85221';
   public valueSlider;
 
   public sonidos: HTMLAudioElement[] = [ new Audio(), new Audio() ]
@@ -33,7 +36,9 @@ export class CamaraPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private screenOrientation: ScreenOrientation
+    private screenOrientation: ScreenOrientation,
+    private proveedor: ProveedorService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -63,6 +68,34 @@ export class CamaraPage implements OnInit {
     this.colorBotones = ['warning', 'warning', 'warning'];
     this.colorBotones[index] = 'success';
     
+  }
+
+  registrarVisita(){
+    let objVisita = {
+      usuario_id: this.userId,
+      fecha_visita: this.crearFecha()
+    }
+    this.proveedor.postVisita(this.profileId, objVisita)
+      .subscribe((success) =>{
+        this.presentToast();
+      })
+  }
+
+  //Genera la fecha actual en formato DD-MM-YYYY
+  crearFecha() {
+    const date = new Date();
+    return [date.getDate(), date.getMonth() + 1, date.getFullYear()].join('-');
+  }
+
+  //Toast confirmación
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Visita registrada exitosamente',
+      duration: 1500,
+      icon: 'checkmark-circle',
+    });
+
+    await toast.present();
   }
 
   setAudio(): void{

@@ -30,8 +30,13 @@
             <ion-icon id="semaforo" name="checkmark-circle" class="icon" color="success"></ion-icon>
         </ion-row>
         <ion-row>
+          <ion-button fill="clear" id="first-icon" expand="block" color="light" size="large" (click)="registrarVisita()">
+            <ion-icon name="location" class="icon"></ion-icon>
+          </ion-button>
+        </ion-row>
+        <ion-row>
           <ion-button fill="clear" expand="block" color="light" size="large" id="open-modal">
-            <ion-icon name="alert-circle" class="icon"></ion-icon>
+            <ion-icon name="ribbon" class="icon"></ion-icon>
           </ion-button>
         </ion-row>
         <ion-row>
@@ -49,11 +54,11 @@
             <ion-icon [name]="nameDefault[1]" class="icon"></ion-icon>
           </ion-button>
         </ion-row>
-        <ion-row>
+        <!-- <ion-row>
             <ion-button fill="clear" expand="block" color="light" size="large" id="open-modal-brujula">
               <ion-icon name="compass" class="icon"></ion-icon>
             </ion-button>
-        </ion-row>
+        </ion-row> -->
       </ion-col>
     </ion-row>
   </ion-grid>
