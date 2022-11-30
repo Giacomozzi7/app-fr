@@ -5,6 +5,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 
 
+
 @Component({
   selector: 'app-agregar-relato',
   templateUrl: './agregar-relato.page.html',
@@ -13,7 +14,7 @@ import { ProveedorService } from 'src/app/services/proveedor.service';
 export class AgregarRelatoPage implements OnInit {
   refRelatos: string;
   profileId: string;
-  relato;
+  relato
   accion: string;
   fileToUpload!: Blob;
   relatoSrc: String | ArrayBuffer;
@@ -36,11 +37,12 @@ export class AgregarRelatoPage implements OnInit {
   ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.accion = this.activatedRoute.snapshot.paramMap.get('type');
-    this.idRel = this.activatedRoute.snapshot.paramMap.get('id_com');
+    this.idRel = this.activatedRoute.snapshot.paramMap.get('id_rel');
     this.refRelatos = 'relatos/' + this.profileId;
 
     if(this.accion === 'editar'){
       console.log('editar')
+      this.findMyRelato();
     }
 
     this.createFormGroup()
@@ -57,8 +59,17 @@ export class AgregarRelatoPage implements OnInit {
   }
 
   findMyRelato(){
-    // this.proveedor.obtenerRelatos(this.profileId).subscribe((data) => {
-    //   this.myRelato = data[0].relatos
+    this.proveedor.obtenerRelatos(this.profileId).subscribe((data) => {
+      console.log(data)
+      this.myRelato = data[0].relatos.filter((rel) => {
+        return(
+          rel.usuario_id === this.userId && rel.relato_id === this.idRel
+        );
+      })[0];
+
+      console.log(this.myRelato)
+      this.relato.patchValue(this.myRelato);
+    });
   }
 
 

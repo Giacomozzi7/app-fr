@@ -18,7 +18,7 @@ export class AgregarImagenPage implements OnInit {
   refGaleria: string;
   profileId: string;
   accion: string;
-  imagen;
+  imagen: FormGroup;
   fileToUpload!: Blob;
   userId: string = '632a072930305800b2d85221';
   imageSrc: String | ArrayBuffer;
@@ -43,17 +43,11 @@ export class AgregarImagenPage implements OnInit {
     this.refGaleria = 'galeria/' + this.profileId;
 
 
-
     if(this.accion === 'editar'){
       this.editarImagen();
     }
 
     this.createFormGroup();
-    console.log(this.accion)
-
-
-    
-
   }
 
 
