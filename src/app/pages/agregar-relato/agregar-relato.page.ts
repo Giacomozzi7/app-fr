@@ -20,8 +20,11 @@ export class AgregarRelatoPage implements OnInit {
   relatoSrc: String | ArrayBuffer;
   userId: string = '632a072930305800b2d85221';
   isAudio!: boolean;
-  idRel
+  idRel: string
   myRelato
+  conte: string;
+
+
 
   @ViewChild('figAudio') figAudio: ElementRef;
 
@@ -66,7 +69,9 @@ export class AgregarRelatoPage implements OnInit {
         );
       })[0];
 
-      console.log(typeof(this.relato))
+      console.log(this.myRelato)
+      this.conte = this.myRelato.contenido
+      console.log(this.conte)
       this.relato.patchValue(this.myRelato);
     });
   }
@@ -84,6 +89,7 @@ export class AgregarRelatoPage implements OnInit {
     this.isAudio = this.validarFormato(event.target.files[0].name);
     if (this.isAudio) {
       this.relatoSrc = URL.createObjectURL(event.target.files[0])
+      console.log(this.relatoSrc)
       this.figAudio.nativeElement.src = this.relatoSrc
     } else {
       this.relatoSrc = '';
@@ -110,16 +116,7 @@ export class AgregarRelatoPage implements OnInit {
       console.log(this.accion)
       if(this.accion === 'editar'){
 
-        let objRelato = {
-          ...this.relato.value,
-          relato_id: this.userId,
-          fecha_subida: this.crearFecha(),
-          aceptado: true,
-          contenido: ""
-        };
-        console.log(objRelato)
-
-        this.proveedor.putRelato(this.profileId, objRelato)
+        this.proveedor.putRelato(this.profileId, fd)
         .subscribe((data) => {
           this.mostrarAlert('Editado', 'Se ha editado el relato exitosamente');
         });
@@ -144,10 +141,20 @@ export class AgregarRelatoPage implements OnInit {
 
   createFormData(): FormData {
     const fd = new FormData();
+
+    if(this.accion === 'editar'){
+      fd.append('relato_id', this.idRel);
+      fd.append('titulo', this.relato.get('titulo').value);
+      fd.append('contenido', this.conte);
+      fd.append('archivo', this.fileToUpload);
+      fd.append('fecha_subida', this.crearFecha());
+    }
+
     fd.append('archivo', this.fileToUpload);
     fd.append('usuario_id', this.userId);
     fd.append('titulo', this.relato.get('titulo').value);
     fd.append('fecha_subida', this.crearFecha());
+  
     return fd;
   }
 
