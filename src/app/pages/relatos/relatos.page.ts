@@ -49,8 +49,26 @@ export class RelatosPage implements OnInit {
     .subscribe((data) => {
       this.relatos = data[0].relatos;
       this.buscarUsuarios()
+      this.fillLikes()
     });
 
+  }
+
+  fillLikes(){
+    this.relatos = this.relatos.map((element: Relato) =>{
+      if (element.likes.includes(this.userId)){
+        return {
+          ...element,
+          like_name: 'heart'
+        }
+      } 
+      else {
+        return {
+          ...element,
+          like_name: 'heart-outline'
+        }
+      }
+    })
   }
 
   toggleRelatos(){

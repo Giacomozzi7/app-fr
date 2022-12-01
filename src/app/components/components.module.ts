@@ -11,6 +11,7 @@ import { SwiperModule } from 'swiper/angular';
 import { ModalBrujulaComponent } from './modal-brujula/modal-brujula.component';
 import { ListenerComponent } from './listener/listener.component';
 import { CardResumenComponent } from './card-resumen/card-resumen.component';
+import { LikeComponent } from './like/like.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CardResumenComponent } from './card-resumen/card-resumen.component';
     DatosInteresComponent,
     ModalBrujulaComponent,
     ListenerComponent,
-    CardResumenComponent
+    CardResumenComponent,
+    LikeComponent
   ],
   exports: [
     HeaderComponent,
@@ -31,7 +33,8 @@ import { CardResumenComponent } from './card-resumen/card-resumen.component';
     DatosInteresComponent,
     ModalBrujulaComponent,
     ListenerComponent,
-    CardResumenComponent
+    CardResumenComponent,
+    LikeComponent
   ],
   imports: [
     CommonModule,

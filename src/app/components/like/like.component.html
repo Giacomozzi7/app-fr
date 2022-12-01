@@ -1,0 +1,30 @@
+<ion-label
+  color="dark"
+  style="
+    font-size: 2vh;
+    text-align: center;
+    vertical-align: center;
+    float:right;
+  "
+>
+  <ion-button
+    fill="clear"
+    (click)="toggleLike()"
+    style="width: 6.5vh; margin-top: -0.5vh; padding: 0px"
+  >
+    <ion-icon
+      [name]="likeName"
+      class="icon"
+      color="danger"
+      slot="icon-only"
+      style="
+        font-size: 3vh;
+        font-weight: bold;
+        padding: 0px;
+      "
+    ></ion-icon>
+  </ion-button>
+  <p style="display: inline;float:right; color: black; padding-top:0.5vh">
+    {{likeCount}}
+  </p>
+</ion-label>

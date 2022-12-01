@@ -35,11 +35,29 @@ export class GaleriaPage implements OnInit {
     
   }
 
+  fillLikes(){
+    this.galeria = this.galeria.map((element: Galeria) =>{
+      if (element.likes.includes(this.userId)){
+        return {
+          ...element,
+          like_name: 'heart'
+        }
+      } 
+      else {
+        return {
+          ...element,
+          like_name: 'heart-outline'
+        }
+      }
+    })
+  }
+
   obtGaleria(){
     this.proveedor.obtenerGaleria(this.profileId)
       .subscribe((data) => {
         this.galeria = data[0].galeria;
         this.buscarUsuarios()
+        this.fillLikes()
       });
 
   }
@@ -70,7 +88,5 @@ export class GaleriaPage implements OnInit {
    }
 
   }
-
-
 
 }

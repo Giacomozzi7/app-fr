@@ -100,12 +100,12 @@ export class ProveedorService {
   //---------------------------
 
   //LIKES----------------
-  postLike(id_com: string ,id_user:string){
-    return this.http.post('https://164.77.114.239:8129/api/Comentario/like/' + id_com + '/' + id_user,'')
+  postLike(tipoData: string,id_com: string ,id_user:string){
+    return this.http.post('https://164.77.114.239:8129/api/'+ tipoData +'/like/' + id_com + '/' + id_user,'')
   }
 
-  deleteLike(id_com: string ,id_user:string){
-    return this.http.delete('https://164.77.114.239:8129/api/Comentario/dlike/' + id_com + '/' + id_user)
+  deleteLike(tipoData: string,id_com: string ,id_user:string){
+    return this.http.delete('https://164.77.114.239:8129/api/' + tipoData + '/dlike/' + id_com + '/' + id_user)
   }
   //---------------------------
 

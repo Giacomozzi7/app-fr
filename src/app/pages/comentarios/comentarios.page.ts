@@ -51,7 +51,6 @@ export class ComentariosPage implements OnInit {
         }
       }
     })
-    console.log(this.comentarios)
   }
 
   obtComentarios(){
@@ -82,44 +81,6 @@ export class ComentariosPage implements OnInit {
         console.log(success)
         this.obtComentarios();
       })
-  }
-
-  //Toggle Like, Dislike
-  toggleLike(likeName: string, comId: string): void{
-    //CASO LIKE
-    if(likeName==='heart-outline'){
-      this.comentarios = this.comentarios.map((element: Comentario)=>{
-        if (element.comentario_id===comId){
-          return{
-            ...element,
-            like_name:'heart',
-            likes: [...element.likes, this.userId]
-          }
-        } else {return element}
-      })
-
-      this.proveedor.postLike(comId,this.userId)
-        .subscribe((success)=>{
-          console.log('success')
-        })
-    
-    // CASO DISLIKE
-    } else{
-      this.comentarios = this.comentarios.map((element: Comentario)=>{
-        if (element.comentario_id===comId){
-          let newLikes = element.likes.filter(ele => ele!==this.userId)
-          return{
-            ...element,
-            like_name:'heart-outline',
-            likes: newLikes
-          }
-        } else {return element}
-      })
-      this.proveedor.deleteLike(comId,this.userId)
-        .subscribe((success)=>{
-          console.log('success')
-        })
-    }
   }
 
   toggleComentarios(){

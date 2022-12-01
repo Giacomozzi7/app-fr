@@ -3,71 +3,111 @@
 <ion-content padding *ngIf="relatos">
   <app-card-resumen [profileId]="profileId"></app-card-resumen>
   <ion-grid class="ion-no-padding" id="grilla">
-      <ion-row class="ion-no-padding">
-          <ion-col>
-              <ion-card color="light" style="border:1px solid;">
-                  <ion-card-header style="text-align:center">
-                      <ion-icon name="megaphone" style="font-size:4vh"></ion-icon>
-                  </ion-card-header>
-                  <ion-card-content>
-                      <p>En esta sección puedes escuchar todos los relatos subidos por los usuarios asociadas al punto de interés.</p>
-                  </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
+    <ion-row class="ion-no-padding">
+      <ion-col>
+        <ion-card color="light" style="border: 1px solid">
+          <ion-card-header style="text-align: center">
+            <ion-icon name="megaphone" style="font-size: 4vh"></ion-icon>
+          </ion-card-header>
+          <ion-card-content>
+            <p>
+              En esta sección puedes escuchar todos los relatos subidos por los
+              usuarios asociadas al punto de interés.
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
 
-        <ion-row style="margin-left:1vh; margin-right:1vh;">
-          <ion-col size="6" class="ion-text-center">
-            <ion-button class="button-contenido" color="warning" fill="solid" (click) = "toggleRelatos()">{{myRelStr}}</ion-button>
-          </ion-col>
-          <ion-col size="6"  class="ion-text-center">
-            <ion-button class="button-contenido"  color="success" fill="solid"  [href]="refAgregarRelato">Agregar Relato</ion-button>
-          </ion-col>
-        </ion-row>
+    <ion-row style="margin-left: 1vh; margin-right: 1vh">
+      <ion-col size="6" class="ion-text-center">
+        <ion-button
+          class="button-contenido"
+          color="warning"
+          fill="solid"
+          (click)="toggleRelatos()"
+          >{{myRelStr}}</ion-button
+        >
+      </ion-col>
+      <ion-col size="6" class="ion-text-center">
+        <ion-button
+          class="button-contenido"
+          color="success"
+          fill="solid"
+          [href]="refAgregarRelato"
+          >Agregar Relato</ion-button
+        >
+      </ion-col>
+    </ion-row>
 
-        <ion-row>
-          <ion-col size="12">
-            <ion-card color="light" class="card-foto">
-              <ion-card-header>
-                <p style="display:inline">Haz click sobre el <b>ícono</b> </p>
-                <ion-icon name="volume-off" style="font-size:4vh;" ></ion-icon>
-                <p style="display:inline">para reproducir el relato.</p>
-              </ion-card-header>
-              <ion-card-content class="ion-no-padding">
-              <ion-list style="width:100%">
-                <ion-item *ngFor="let relato of relatos" >
-                    <ion-button fill="clear" 
-                                (click)="start(relato)"
-                                [color]="relato== activeTrack? 'success' : 'dark'">
-                      <ion-icon [name]="relato== activeTrack? 'volume-low' : 'volume-off'" 
-                                style="font-size:4vh; margin-right:1vh"></ion-icon>
-                    </ion-button>
-                    <ion-label [color]="relato == activeTrack? 'success' : 'dark'"  style="font-size:2vh;" >
-                      {{relato.titulo}}
-                    </ion-label>
-                    <ion-label color="medium"  style="font-size:2vh; text-align: right; " >
-                      <ion-icon name="heart-outline" class="icon" color="danger" style="font-size:2.5vh; font-weight: bold; margin-right:1vh; margin-top:0.5vh;" ></ion-icon>
-                    </ion-label>
-                    <p><b>{{relato.likes.length}}</b></p>
-                    <br>
-                    <ion-grid *ngIf="misRelatos">
-                      <ion-row>
-                        <ion-col>
-                          <ion-button color="danger" size="small" style="float:right">
-                            <ion-icon slot="icon-only" name="trash" style="font-size:2vh"></ion-icon>
-                          </ion-button>
-                          <ion-button size="small" style="float:right" [href]="refEditarRelato + relato.relato_id">
-                            <ion-icon slot="icon-only" name="create" style="font-size:2vh"></ion-icon>
-                          </ion-button>
-                        </ion-col>
-                      </ion-row>
-                    </ion-grid>
-                </ion-item>
-              </ion-list>
-            </ion-card-content>
-            </ion-card>
-        </ion-col>
-        </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card color="light" class="card-foto">
+          <ion-card-header>
+            <p style="display: inline">Haz click sobre el <b>ícono</b></p>
+            <ion-icon name="volume-off" style="font-size: 4vh"></ion-icon>
+            <p style="display: inline">para reproducir el relato.</p>
+          </ion-card-header>
+          <ion-card-content class="ion-no-padding">
+            <ion-list style="width: 100%">
+              <ion-item *ngFor="let relato of relatos">
+                <ion-button
+                  fill="clear"
+                  (click)="start(relato)"
+                  [color]="relato== activeTrack? 'success' : 'dark'"
+                >
+                  <ion-icon
+                    [name]="relato== activeTrack? 'volume-low' : 'volume-off'"
+                    style="font-size: 4vh; margin-right: 1vh"
+                  ></ion-icon>
+                </ion-button>
+                <ion-label
+                  [color]="relato == activeTrack? 'success' : 'dark'"
+                  style="font-size: 2vh"
+                >
+                  {{relato.titulo}}
+                </ion-label>
+                <app-like
+                  *ngIf="relato"
+                  categoria="relato"
+                  [iter]="relato"
+                  [userId]="userId"
+                ></app-like>
+                <br />
+                <ion-grid *ngIf="misRelatos">
+                  <ion-row>
+                    <ion-col>
+                      <ion-button
+                        color="danger"
+                        size="small"
+                        style="float: right"
+                      >
+                        <ion-icon
+                          slot="icon-only"
+                          name="trash"
+                          style="font-size: 2vh"
+                        ></ion-icon>
+                      </ion-button>
+                      <ion-button
+                        size="small"
+                        style="float: right"
+                        [href]="refEditarRelato + relato.relato_id"
+                      >
+                        <ion-icon
+                          slot="icon-only"
+                          name="create"
+                          style="font-size: 2vh"
+                        ></ion-icon>
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
 
@@ -76,40 +116,52 @@
     <ion-row>
       <ion-col size="12" text-center class="ion-text-center">
         <ion-row class="data-track">
-        <b>{{activeTrack.titulo}}</b>
+          <b>{{activeTrack.titulo}}</b>
         </ion-row>
         <ion-row class="data-track">
-        <p style="margin:0px"><b>Por: </b>{{activeTrack.usuario_name}}</p>
+          <p style="margin: 0px"><b>Por: </b>{{activeTrack.usuario_name}}</p>
         </ion-row>
         <ion-row class="data-track">
-        <p style="margin:0px">{{activeTrack.fecha_subida}}</p>
+          <p style="margin: 0px">{{activeTrack.fecha_subida}}</p>
         </ion-row>
       </ion-col>
       <ion-col size="12">
-        <ion-range #range [(ngModel)]="progress" max="100" color="success" (touchend)="seek()" (mouseup)="seek()"></ion-range>
-      
+        <ion-range
+          #range
+          [(ngModel)]="progress"
+          max="100"
+          color="success"
+          (touchend)="seek()"
+          (mouseup)="seek()"
+        ></ion-range>
       </ion-col>
       <ion-col size="12" class="ion-text-center">
-
         <ion-button fill="clear" (click)="prev()" color="light">
           <ion-icon slot="icon-only" name="play-skip-back"></ion-icon>
         </ion-button>
 
-        <ion-button fill="clear" (click)="togglePlayer(false)" *ngIf="!isPlaying" color="light">
+        <ion-button
+          fill="clear"
+          (click)="togglePlayer(false)"
+          *ngIf="!isPlaying"
+          color="light"
+        >
           <ion-icon slot="icon-only" name="play"></ion-icon>
         </ion-button>
 
-        <ion-button fill="clear" (click)="togglePlayer(true)" *ngIf="isPlaying" color="light">
+        <ion-button
+          fill="clear"
+          (click)="togglePlayer(true)"
+          *ngIf="isPlaying"
+          color="light"
+        >
           <ion-icon slot="icon-only" name="pause"></ion-icon>
         </ion-button>
 
         <ion-button fill="clear" (click)="next()" color="light">
           <ion-icon slot="icon-only" name="play-skip-forward"></ion-icon>
         </ion-button>
-
-
       </ion-col>
     </ion-row>
   </ion-toolbar>
-
 </ion-footer>
