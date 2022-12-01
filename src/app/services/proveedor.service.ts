@@ -44,6 +44,10 @@ export class ProveedorService {
   postRelato(id: string, formData: FormData){
     return this.http.post('https://164.77.114.239:8129/api/Relato/' + id, formData )
   }
+
+  putRelato(id: string, formData: FormData){
+    return this.http.put('https://164.77.114.239:8129/api/Relato/' + id, formData)
+  }
   //---------------------------
 
 
