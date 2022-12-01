@@ -49,7 +49,7 @@ export class AgregarRelatoPage implements OnInit {
 
   createFormGroup(): void {
     this.relato = new FormGroup({
-      file: this.fb.control(null),
+      Archivo: this.fb.control(null),
       titulo: new FormControl('', [
         Validators.required,
         Validators.minLength(2),
@@ -66,7 +66,7 @@ export class AgregarRelatoPage implements OnInit {
         );
       })[0];
 
-      
+      console.log(typeof(this.relato))
       this.relato.patchValue(this.myRelato);
     });
   }
@@ -103,13 +103,35 @@ export class AgregarRelatoPage implements OnInit {
   }
 
   onSubmit():void{
+    console.log(this.relato)
     if (this.isAudio === true && this.relato.valid) {
       const fd = this.createFormData();
+
+      console.log(this.accion)
+      if(this.accion === 'editar'){
+
+        let objRelato = {
+          ...this.relato.value,
+          relato_id: this.userId,
+          fecha_subida: this.crearFecha(),
+          aceptado: true,
+          contenido: ""
+        };
+        console.log(objRelato)
+
+        this.proveedor.putRelato(this.profileId, objRelato)
+        .subscribe((data) => {
+          this.mostrarAlert('Editado', 'Se ha editado el relato exitosamente');
+        });
+
+      }
+      else{
 
       this.proveedor.postRelato(this.profileId,fd)
         .subscribe( (success) =>{
           this.mostrarAlert('Agregado','El relato ha sido agregado exitosamente')
         })
+      }
 
     } else {
       !this.isAudio &&
