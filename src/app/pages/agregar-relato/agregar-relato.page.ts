@@ -41,7 +41,6 @@ export class AgregarRelatoPage implements OnInit {
     this.refRelatos = 'relatos/' + this.profileId;
 
     if(this.accion === 'editar'){
-      console.log('editar')
       this.findMyRelato();
     }
 
@@ -67,7 +66,7 @@ export class AgregarRelatoPage implements OnInit {
         );
       })[0];
 
-      console.log(this.myRelato)
+      
       this.relato.patchValue(this.myRelato);
     });
   }
