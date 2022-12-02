@@ -61,6 +61,7 @@ export class GaleriaPage implements OnInit {
   obtGaleria() {
     this.proveedor.obtenerGaleria(this.profileId).subscribe((data) => {
       this.galeria = data[0].galeria;
+      console.log(this.galeria[9].contenido)
       this.buscarUsuarios();
       this.fillLikes();
     });

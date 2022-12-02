@@ -48,6 +48,10 @@ export class ProveedorService {
   putRelato(id: string, formData: FormData){
     return this.http.put('https://164.77.114.239:8129/api/Relato/' + id, formData)
   }
+
+  deleteRelato(id:string, id_r:string){
+    return this.http.delete('https://164.77.114.239:8129/api/Relato/' + id + "/" + id_r)
+  }
   //---------------------------
 
 
@@ -81,6 +85,11 @@ export class ProveedorService {
   postGaleria(id: string,formData: FormData){
     return this.http.post('https://164.77.114.239:8129/api/galeria/imagen/' + id, formData)
   }
+
+  putGaleria(id: string, formData: FormData){
+    return this.http.put('https://164.77.114.239:8129/api/Galeria/imagen/' + id, formData)
+  }
+
   //---------------------------
 
   

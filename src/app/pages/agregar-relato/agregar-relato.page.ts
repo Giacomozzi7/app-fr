@@ -69,7 +69,6 @@ export class AgregarRelatoPage implements OnInit {
         );
       })[0];
 
-      console.log(this.myRelato)
       this.conte = this.myRelato.contenido
       console.log(this.conte)
       this.relato.patchValue(this.myRelato);
@@ -148,14 +147,17 @@ export class AgregarRelatoPage implements OnInit {
       fd.append('contenido', this.conte);
       fd.append('archivo', this.fileToUpload);
       fd.append('fecha_subida', this.crearFecha());
-    }
 
+      return fd;
+    }
+    else{
     fd.append('archivo', this.fileToUpload);
     fd.append('usuario_id', this.userId);
     fd.append('titulo', this.relato.get('titulo').value);
     fd.append('fecha_subida', this.crearFecha());
   
     return fd;
+    }
   }
 
 

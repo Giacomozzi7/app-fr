@@ -24,8 +24,9 @@ export class AgregarImagenPage implements OnInit {
   imageSrc: String | ArrayBuffer;
   isImg!: boolean;
   imageSelected: boolean
-  myImagen
+  myImagen: FormData
   idGal
+  conte: string;
 
   constructor(
     private router: Router,
@@ -44,7 +45,7 @@ export class AgregarImagenPage implements OnInit {
 
 
     if(this.accion === 'editar'){
-      this.editarImagen();
+      this.findMyImagen();
     }
 
     this.createFormGroup();
@@ -75,14 +76,14 @@ export class AgregarImagenPage implements OnInit {
     this.imageSelected = false;
   }
 
-  editarImagen(){
-    console.log("la imagen será editada")
+  findMyImagen(){
     this.proveedor.obtenerGaleria(this.profileId).subscribe((data) => {
       this.myImagen = data[0].galeria.filter((img) => {
         return (
           img.usuario_id === this.userId && img.galeria_id === this.idGal
         );});[0];
-      console.log(this.myImagen)
+      console.log(this.myImagen);
+      this.conte = this.myImagen[0].contenido;
       this.imagen.patchValue(this.myImagen);
     });
   
@@ -115,10 +116,20 @@ export class AgregarImagenPage implements OnInit {
   onSubmit(): void {
     if (this.isImg === true && this.imagen.valid) {
       const fd = this.createFormData();
+
+      if(this.accion === 'editar'){
+        this.proveedor.putGaleria(this.profileId, fd).subscribe((data) => {
+          this.mostrarAlert('Imagen editada', 'La imagen se edito correctamente');
+        });
+      }
+
+      else{
       this.proveedor.postGaleria(this.profileId,fd)
         .subscribe( (success) =>{
           this.mostrarAlert('Agregado','La imágen ha sido agregada exitosamente')
         })
+
+      }
 
     } else {
       !this.isImg &&
@@ -131,13 +142,27 @@ export class AgregarImagenPage implements OnInit {
 
   createFormData(): FormData {
     const fd = new FormData();
-    fd.append('archivo', this.fileToUpload);
-    fd.append('tipo', 'img');
-    fd.append('usuario_id', this.userId);
-    fd.append('descripcion', this.imagen.get('descripcion').value);
-    fd.append('fecha_subida', this.crearFecha());
 
-    return fd;
+    if(this.accion === 'editar'){
+      fd.append('usuario_id', this.userId);
+      fd.append('galeria_id', this.idGal);
+      fd.append('descripcion', this.imagen.get('descripcion').value);
+      fd.append('fecha_subida', this.crearFecha());
+      fd.append('archivo', this.fileToUpload);
+      fd.append('contenido', this.conte);
+
+      return fd;
+    }
+
+    else{
+      fd.append('archivo', this.fileToUpload);
+      fd.append('tipo', 'img');
+      fd.append('usuario_id', this.userId);
+      fd.append('descripcion', this.imagen.get('descripcion').value);
+      fd.append('fecha_subida', this.crearFecha());
+
+      return fd;
+    }
   }
 
   //Genera la fecha actual en formato DD-MM-YYYY

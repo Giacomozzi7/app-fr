@@ -5,6 +5,7 @@ import { Howl } from 'howler';
 import { IonRange } from '@ionic/angular';
 import { Relato} from 'src/app/interfaces/interfaces';
 import { WebElementCondition } from 'selenium-webdriver';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-relatos',
@@ -33,6 +34,7 @@ export class RelatosPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     public proveedor: ProveedorService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -69,6 +71,15 @@ export class RelatosPage implements OnInit {
         }
       }
     })
+  }
+
+  eliminarComentario(id:string, id_r:string){
+    console.log(id)
+    this.proveedor.deleteRelato(id,id_r)
+      .subscribe((success)=>{
+        console.log(success)
+        this.obtRelatos();
+      })
   }
 
   toggleRelatos(){
@@ -167,6 +178,28 @@ export class RelatosPage implements OnInit {
       this.updateProgress();
     }, 1000)
 
+  }
+
+  async presentEliminar(id: string,id_r:string) {
+    console.log(id)
+    const alert = await this.alertController.create({
+      header: '¿Estás seguro que deseas eliminar el comentario?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          role: 'confirm',
+          handler: () => {
+            this.eliminarComentario(id,id_r)
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   
