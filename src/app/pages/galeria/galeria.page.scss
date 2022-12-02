@@ -11,6 +11,19 @@ ion-segment {
 
   }
 
+.icon-segment{
+    display:inline-block;
+    font-size:2.2vh;
+    vertical-align: middle;
+    margin-right:0.5vh;
+}
+
+.text-segment{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.7vh;
+}
+
 #grilla{
     padding:0.2vh;
 }

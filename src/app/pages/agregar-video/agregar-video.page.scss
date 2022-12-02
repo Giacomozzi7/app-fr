@@ -1,0 +1,36 @@
+textarea{
+    resize:none;
+}
+
+.card-foto{
+    margin: 1vh;
+    border:1px solid rgb(187, 187, 187);
+}
+
+form{
+    font-size: 2vh;
+}
+
+.input-file{
+    width:100%;
+    margin-top:0.7vh;
+    margin-bottom: 1vh;
+    font-size:1.8vh;
+    padding:1vh;
+}
+
+.input-contenido{
+    width:100%;
+    height:20vh;
+    margin-top:0.7vh;
+    font-size:1.8vh;
+    padding:1vh;
+}
+
+.input-contenido:focus{
+    outline:none;
+}
+
+.btn-agregar{
+    text-transform:capitalize;
+}

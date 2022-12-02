@@ -61,7 +61,6 @@ export class GaleriaPage implements OnInit {
   obtGaleria() {
     this.proveedor.obtenerGaleria(this.profileId).subscribe((data) => {
       this.galeria = data[0].galeria;
-      console.log(this.galeria[9].contenido)
       this.buscarUsuarios();
       this.fillLikes();
     });
@@ -103,11 +102,15 @@ export class GaleriaPage implements OnInit {
       this.strAgregar = 'Agregar Imágen'
       this.strParagraph = 'todas las imágenes subidas'
       this.strIcon = 'images'
+      this.refAgregar = 'agregar-imagen/' + this.profileId + '/agregar/""';
+      this.refEditar = 'agregar-imagen/' + this.profileId + '/editar/';
     } else{
       this.strMiGaleria = 'Mis Videos'
       this.strAgregar = 'Agregar Video'
       this.strParagraph = 'todos los videos subidos'
       this.strIcon = 'videocam'
+      this.refAgregar = 'agregar-video/' + this.profileId + '/agregar/""';
+      this.refEditar = 'agregar-video/' + this.profileId + '/editar/';
     }
 
   }

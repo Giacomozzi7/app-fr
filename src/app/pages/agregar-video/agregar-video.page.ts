@@ -1,32 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 
 @Component({
-  selector: 'app-agregar-imagen',
-  templateUrl: './agregar-imagen.page.html',
-  styleUrls: ['./agregar-imagen.page.scss'],
+  selector: 'app-agregar-video',
+  templateUrl: './agregar-video.page.html',
+  styleUrls: ['./agregar-video.page.scss'],
 })
-export class AgregarImagenPage implements OnInit {
+export class AgregarVideoPage implements OnInit {
   refGaleria: string;
   profileId: string;
   accion: string;
-  imagen: FormGroup;
+  video: FormGroup;
   fileToUpload!: Blob;
   userId: string = '632a072930305800b2d85221';
-  imageSrc: String | ArrayBuffer;
-  isImg!: boolean;
-  imageSelected: boolean
-  myImagen: FormData
+  videoSrc: String | ArrayBuffer = 'a.mp4';
+  isVid!: boolean;
+  vidSelected: boolean
+  myVid: FormData
   idGal
-
 
   constructor(
     private router: Router,
@@ -35,25 +29,23 @@ export class AgregarImagenPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toastController: ToastController,
     public proveedor: ProveedorService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.accion = this.activatedRoute.snapshot.paramMap.get('type');
-    this.idGal = this.activatedRoute.snapshot.paramMap.get('id_img');
+    this.idGal = this.activatedRoute.snapshot.paramMap.get('id_vid');
     this.refGaleria = 'galeria/' + this.profileId;
 
-
     if(this.accion === 'editar'){
-      this.findMyImagen();
+      this.findMyVideo();
     }
 
     this.createFormGroup();
   }
 
-
   createFormGroup(): void {
-    this.imagen = new FormGroup({
+    this.video = new FormGroup({
       file: this.fb.control(null),
       descripcion: new FormControl('', [
         Validators.required,
@@ -66,36 +58,37 @@ export class AgregarImagenPage implements OnInit {
     if (event.target.files.length > 0) {
       this.fileToUpload = event.target.files[0];
       this.mostrarPrev(event);
-      this.imageSelected = true;
+      this.vidSelected = true;
     }
   }
 
   cleanForm(){
-    this.imagen.reset();
-    this.imageSrc = '';
-    this.imageSelected = false;
+    this.video.reset();
+    this.videoSrc = '';
+    this.vidSelected = false;
   }
 
-  findMyImagen(){
+  findMyVideo(){
     this.proveedor.obtenerGaleria(this.profileId).subscribe((data) => {
-      this.myImagen = data[0].galeria.filter((img) => {
+      this.myVid = data[0].galeria.filter((img) => {
         return (
           img.usuario_id === this.userId && img.galeria_id === this.idGal
         );});[0];
-      this.imagen.patchValue(this.myImagen);
+      this.video.patchValue(this.myVid);
     });
   
   }
 
   mostrarPrev(event: any): void {
-    this.isImg = this.validarFormato(event.target.files[0].name);
-    if (this.isImg) {
+    this.isVid = this.validarFormato(event.target.files[0].name);
+    if (this.isVid) {
+      console.log('isvid')
       const reader = new FileReader();
-      reader.onload = (e) => (this.imageSrc = reader.result);
+      reader.onload = (e) => (this.videoSrc = reader.result);
       reader.readAsDataURL(this.fileToUpload);
-      console.log(this.imageSrc)
+      
     } else {
-      this.imageSrc = '';
+      this.videoSrc = '';
     }
   }
 
@@ -103,38 +96,38 @@ export class AgregarImagenPage implements OnInit {
     const parts = fileName.split('.');
     const ext = parts[parts.length - 1];
     switch (ext.toLowerCase()) {
-      case 'jpg':
-      case 'gif':
-      case 'bmp':
-      case 'png':
+      case 'mp4':
+      case 'wmv':
+      case 'mov':
+      case 'avi':
         return true;
     }
     return false;
   }
 
   onSubmit(): void {
-    if (this.isImg === true && this.imagen.valid) {
+    if (this.isVid === true && this.video.valid) {
       const fd = this.createFormData();
 
       if(this.accion === 'editar'){
-        this.proveedor.putGaleria('imagen',this.profileId, fd).subscribe((data) => {
-          this.mostrarAlert('Imagen editada', 'La imagen se edito correctamente');
+        this.proveedor.putGaleria('video',this.profileId, fd).subscribe((data) => {
+          this.mostrarAlert('Video editado', 'El video se editó correctamente');
         });
       }
 
       else{
-      this.proveedor.postGaleria('imagen',this.profileId,fd)
+      this.proveedor.postGaleria('video',this.profileId,fd)
         .subscribe( (success) =>{
-          this.mostrarAlert('Agregado','La imágen ha sido agregada exitosamente')
+          this.mostrarAlert('Agregado','El video ha sido agregada exitosamente')
         })
 
       }
 
     } else {
-      !this.isImg &&
-        this.mostrarToast('Es necesario subir un archivo de imágen válido');
+      !this.isVid &&
+        this.mostrarToast('Es necesario subir un archivo de video válido');
 
-      !this.imagen.valid &&
+      !this.video.valid &&
         this.mostrarToast('Todos los campos deben ser llenados');
     }
   }
@@ -144,8 +137,9 @@ export class AgregarImagenPage implements OnInit {
 
     if(this.accion === 'editar'){
       fd.append('usuario_id', this.userId);
+      fd.append('tipo', 'vid');
       fd.append('galeria_id', this.idGal);
-      fd.append('descripcion', this.imagen.get('descripcion').value);
+      fd.append('descripcion', this.video.get('descripcion').value);
       fd.append('fecha_subida', this.crearFecha());
       fd.append('archivo', this.fileToUpload);
 
@@ -154,9 +148,9 @@ export class AgregarImagenPage implements OnInit {
 
     else{
       fd.append('archivo', this.fileToUpload);
-      fd.append('tipo', 'img');
+      fd.append('tipo', 'vid');
       fd.append('usuario_id', this.userId);
-      fd.append('descripcion', this.imagen.get('descripcion').value);
+      fd.append('descripcion', this.video.get('descripcion').value);
       fd.append('fecha_subida', this.crearFecha());
 
       return fd;
@@ -199,4 +193,5 @@ export class AgregarImagenPage implements OnInit {
 
     await alert.present();
   }
+
 }

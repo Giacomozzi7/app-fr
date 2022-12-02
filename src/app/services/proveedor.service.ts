@@ -82,12 +82,12 @@ export class ProveedorService {
     return this.http.get('https://164.77.114.239:8129/api/Galeria/' + id)
   }
 
-  postGaleria(id: string,formData: FormData){
-    return this.http.post('https://164.77.114.239:8129/api/galeria/imagen/' + id, formData)
+  postGaleria(categoria: string,id: string,formData: FormData){
+    return this.http.post('https://164.77.114.239:8129/api/galeria/' + categoria + '/' + id, formData)
   }
 
-  putGaleria(id: string, formData: FormData){
-    return this.http.put('https://164.77.114.239:8129/api/Galeria/imagen/' + id, formData)
+  putGaleria(categoria: string,id: string, formData: FormData){
+    return this.http.put('https://164.77.114.239:8129/api/Galeria/' + categoria + '/' + id, formData)
   }
 
   //---------------------------

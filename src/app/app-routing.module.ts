@@ -63,7 +63,12 @@ const routes: Routes = [
   {
     path: 'agregar-relato/:id/:type/:id_rel',
     loadChildren: () => import('./pages/agregar-relato/agregar-relato.module').then( m => m.AgregarRelatoPageModule)
+  },
+  {
+    path: 'agregar-video/:id/:type/:id_vid',
+    loadChildren: () => import('./pages/agregar-video/agregar-video.module').then( m => m.AgregarVideoPageModule)
   }
+
   
 ];
 
