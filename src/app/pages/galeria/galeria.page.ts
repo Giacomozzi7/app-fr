@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Galeria } from 'src/app/interfaces/interfaces';
 import { ProveedorService } from 'src/app/services/proveedor.service';
-import { IonSlides } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-galeria',
   templateUrl: './galeria.page.html',
@@ -30,7 +31,8 @@ export class GaleriaPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    public proveedor: ProveedorService
+    public proveedor: ProveedorService,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -64,6 +66,14 @@ export class GaleriaPage implements OnInit {
       this.buscarUsuarios();
       this.fillLikes();
     });
+  }
+
+  eliminarGaleria(id:string, id_g:string){
+    this.proveedor.deleteGaleria(id,id_g)
+      .subscribe((success)=>{
+        console.log(success)
+        this.obtGaleria();
+      })
   }
 
   toggleImagenes() {
@@ -115,5 +125,25 @@ export class GaleriaPage implements OnInit {
 
   }
 
+  async presentEliminar(id: string,id_g:string) {
+    const alert = await this.alertController.create({
+      header: '¿Estás seguro que deseas eliminar la imagen?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          role: 'confirm',
+          handler: () => {
+            this.eliminarGaleria(id,id_g)
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 
 }

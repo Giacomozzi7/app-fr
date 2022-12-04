@@ -90,6 +90,10 @@ export class ProveedorService {
     return this.http.put('https://164.77.114.239:8129/api/Galeria/' + categoria + '/' + id, formData)
   }
 
+  deleteGaleria(id:string, id_g:string){
+    return this.http.delete('https://164.77.114.239:8129/api/Galeria/imagen/' + id + "/" + id_g)
+  }
+
   //---------------------------
 
   

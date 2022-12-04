@@ -183,7 +183,7 @@ export class RelatosPage implements OnInit {
   async presentEliminar(id: string,id_r:string) {
     console.log(id)
     const alert = await this.alertController.create({
-      header: '¿Estás seguro que deseas eliminar el comentario?',
+      header: '¿Estás seguro que deseas eliminar el relato?',
       buttons: [
         {
           text: 'Cancelar',
