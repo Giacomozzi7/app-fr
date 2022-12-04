@@ -26,6 +26,7 @@ export class AgregarImagenPage implements OnInit {
   imageSelected: boolean
   myImagen: FormData
   idGal
+  descripcionImg: string =''
 
 
   constructor(
@@ -55,7 +56,7 @@ export class AgregarImagenPage implements OnInit {
   createFormGroup(): void {
     this.imagen = new FormGroup({
       file: this.fb.control(null),
-      descripcion: new FormControl('', [
+      descripcion: new FormControl(this.descripcionImg, [
         Validators.required,
         Validators.minLength(2),
       ]),
@@ -74,6 +75,7 @@ export class AgregarImagenPage implements OnInit {
     this.imagen.reset();
     this.imageSrc = '';
     this.imageSelected = false;
+    this.descripcionImg = ''
   }
 
   findMyImagen(){
@@ -81,8 +83,15 @@ export class AgregarImagenPage implements OnInit {
       this.myImagen = data[0].galeria.filter((img) => {
         return (
           img.usuario_id === this.userId && img.galeria_id === this.idGal
-        );});[0];
+        );
+      });[0];
+      console.log(this.myImagen)
+      console.log(typeof(this.myImagen))
       this.imagen.patchValue(this.myImagen);
+      this.imagen.patchValue({descripcion : this.myImagen[0].descripcion})
+      this.descripcionImg = this.myImagen[0].descripcion
+      
+
     });
   
   }
