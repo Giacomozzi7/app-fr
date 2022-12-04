@@ -45,6 +45,7 @@ export class AgregarRelatoPage implements OnInit {
 
     if(this.accion === 'editar'){
       this.findMyRelato();
+      this.isAudio = true
     }
 
     this.createFormGroup()
@@ -109,7 +110,7 @@ export class AgregarRelatoPage implements OnInit {
 
   onSubmit():void{
     console.log(this.relato)
-    if (this.isAudio === true && this.relato.valid) {
+    if (this.isAudio === true /*&& this.relato.valid*/) {
       const fd = this.createFormData();
 
       console.log(this.accion)
@@ -121,7 +122,7 @@ export class AgregarRelatoPage implements OnInit {
         });
 
       }
-      else{
+      else if(this.relato.valid) {
 
       this.proveedor.postRelato(this.profileId,fd)
         .subscribe( (success) =>{

@@ -66,7 +66,7 @@
           </ion-card-header>
           <ion-card-content>
             <p>{{com.contenido}}</p>
-            <div *ngIf="com.usuario_id === userId" style="display: inline">
+            <div *ngIf="misComentarios" style="display: inline">
               <ion-card-subtitle style="display: inline"
                 ><p style="color: grey">
                   <b> Aceptado: </b> {{com.aceptado}}

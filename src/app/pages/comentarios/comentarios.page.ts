@@ -18,6 +18,7 @@ export class ComentariosPage implements OnInit {
   userId = "632a072930305800b2d85221"
   myCom: boolean = false;
   myComStr: string = 'Mis Comentarios';
+  misComentarios: boolean = false
   
 
   constructor(
@@ -88,10 +89,12 @@ export class ComentariosPage implements OnInit {
       this.comentarios = this.comentarios.filter(obj => obj.usuario_id === this.userId)
       this.myCom = true;
       this.myComStr = 'Todos';
+      this.misComentarios = true
     } else{
       this.obtComentarios()
       this.myCom = false;
       this.myComStr = 'Mis Comentarios'
+      this.misComentarios = false
     }
   }
 
