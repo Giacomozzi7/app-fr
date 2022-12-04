@@ -68,8 +68,8 @@ export class GaleriaPage implements OnInit {
     });
   }
 
-  eliminarGaleria(id:string, id_g:string){
-    this.proveedor.deleteGaleria(id,id_g)
+  eliminarGaleria(categoria: string, id:string, id_g:string){
+    this.proveedor.deleteGaleria(categoria,id,id_g)
       .subscribe((success)=>{
         console.log(success)
         this.obtGaleria();
@@ -125,7 +125,7 @@ export class GaleriaPage implements OnInit {
 
   }
 
-  async presentEliminar(id: string,id_g:string) {
+  async presentEliminar(categoria: string, id: string,id_g:string) {
     const alert = await this.alertController.create({
       header: '¿Estás seguro que deseas eliminar la imagen?',
       buttons: [
@@ -137,7 +137,7 @@ export class GaleriaPage implements OnInit {
           text: 'Eliminar',
           role: 'confirm',
           handler: () => {
-            this.eliminarGaleria(id,id_g)
+            this.eliminarGaleria(categoria,id,id_g)
           },
         },
       ],

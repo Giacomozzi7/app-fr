@@ -27,6 +27,7 @@ export class AgregarImagenPage implements OnInit {
   myImagen: FormData
   idGal
   descripcionImg: string =''
+  contenidoImg: string = '';
 
 
   constructor(
@@ -47,6 +48,7 @@ export class AgregarImagenPage implements OnInit {
 
     if(this.accion === 'editar'){
       this.findMyImagen();
+      this.isImg = true;
     }
 
     this.createFormGroup();
@@ -80,16 +82,17 @@ export class AgregarImagenPage implements OnInit {
 
   findMyImagen(){
     this.proveedor.obtenerGaleria(this.profileId).subscribe((data) => {
+      console.log(this.myImagen)
       this.myImagen = data[0].galeria.filter((img) => {
         return (
           img.usuario_id === this.userId && img.galeria_id === this.idGal
         );
       });[0];
       console.log(this.myImagen)
-      console.log(typeof(this.myImagen))
       this.imagen.patchValue(this.myImagen);
-      this.imagen.patchValue({descripcion : this.myImagen[0].descripcion})
-      this.descripcionImg = this.myImagen[0].descripcion
+      this.imagen.patchValue({descripcion : this.myImagen[0].descripcion});
+      this.descripcionImg = this.myImagen[0].descripcion;
+      this.contenidoImg = this.myImagen[0].contenido;
       
 
     });
@@ -122,7 +125,7 @@ export class AgregarImagenPage implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.isImg === true && this.imagen.valid) {
+    if (this.isImg === true /*&& this.imagen.valid*/) {
       const fd = this.createFormData();
 
       if(this.accion === 'editar'){
@@ -131,7 +134,7 @@ export class AgregarImagenPage implements OnInit {
         });
       }
 
-      else{
+      else if (this.imagen.valid){
       this.proveedor.postGaleria('imagen',this.profileId,fd)
         .subscribe( (success) =>{
           this.mostrarAlert('Agregado','La imágen ha sido agregada exitosamente')
@@ -157,6 +160,8 @@ export class AgregarImagenPage implements OnInit {
       fd.append('descripcion', this.imagen.get('descripcion').value);
       fd.append('fecha_subida', this.crearFecha());
       fd.append('archivo', this.fileToUpload);
+      fd.append('contenido', this.contenidoImg);
+      fd.append('tipo', 'img');
 
       return fd;
     }
