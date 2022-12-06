@@ -1,4 +1,4 @@
-<app-header titulo="Agregar Imágen" [refback]="refGaleria"></app-header>
+<app-header titulo="{{accion}} Imágen" [refback]="refGaleria"></app-header>
 <ion-content>
   <ion-grid class="ion-no-padding" id="grilla">
     <ion-row class="ion-no-padding">
@@ -42,7 +42,7 @@
                     formControlName = "descripcion"> </textarea>
                 </label>
                 <div style="text-align: center;margin-top:1vh;">
-                <ion-button color="success" type="submit" class="btn-agregar">{{accion}} Imágen</ion-button>
+                <ion-button color="success" type="submit" class="btn-agregar">{{accion}} Contenido</ion-button>
                 </div>
               </form>
             </ion-card-content>

@@ -50,7 +50,7 @@
           </ion-card-header>
           <ion-card-content class="ion-no-padding">
             <ion-list style="width: 100%">
-              <ion-item *ngFor="let relato of relatos">
+              <ion-item  *ngFor="let relato of relatos">
                 <ion-button
                   fill="clear"
                   (click)="start(relato)"
@@ -123,7 +123,7 @@
           <p style="margin: 0px"><b>Por: </b>{{activeTrack.usuario_name}}</p>
         </ion-row>
         <ion-row class="data-track">
-          <p style="margin: 0px">{{activeTrack.fecha_subida}}</p>
+          <p style="margin: 0px"><b>Fecha: </b> {{activeTrack.fecha_subida}}</p>
         </ion-row>
       </ion-col>
       <ion-col size="12">

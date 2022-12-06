@@ -127,7 +127,7 @@ export class GaleriaPage implements OnInit {
 
   async presentEliminar(categoria: string, id: string,id_g:string) {
     const alert = await this.alertController.create({
-      header: '¿Estás seguro que deseas eliminar la imagen?',
+      header: '¿Estás seguro que deseas eliminar el contenido?',
       buttons: [
         {
           text: 'Cancelar',

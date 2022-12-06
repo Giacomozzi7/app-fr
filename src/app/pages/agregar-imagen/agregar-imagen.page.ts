@@ -46,6 +46,7 @@ export class AgregarImagenPage implements OnInit {
     this.refGaleria = 'galeria/' + this.profileId;
 
 
+
     if(this.accion === 'editar'){
       this.findMyImagen();
       this.isImg = true;
@@ -87,14 +88,10 @@ export class AgregarImagenPage implements OnInit {
         return (
           img.usuario_id === this.userId && img.galeria_id === this.idGal
         );
-      });[0];
-      console.log(this.myImagen)
-      this.imagen.patchValue(this.myImagen);
-      this.imagen.patchValue({descripcion : this.myImagen[0].descripcion});
-      this.descripcionImg = this.myImagen[0].descripcion;
-      this.contenidoImg = this.myImagen[0].contenido;
-      
-
+      });
+      this.imagen.patchValue(this.myImagen[0]);
+      this.imageSrc = this.myImagen[0].contenido
+      this.contenidoImg = this.myImagen[0].contenido
     });
   
   }
@@ -153,6 +150,8 @@ export class AgregarImagenPage implements OnInit {
 
   createFormData(): FormData {
     const fd = new FormData();
+
+    console.log(this.idGal)
 
     if(this.accion === 'editar'){
       fd.append('usuario_id', this.userId);

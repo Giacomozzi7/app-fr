@@ -80,20 +80,24 @@
               ><b> Fecha: </b> {{gal.fecha_subida}}</ion-card-subtitle
             >
             <p style="margin-top: 0.7vh">{{gal.descripcion}}</p>
-            
 
             <ion-grid>
               <ion-col>
                 <app-like
-              *ngIf="galeria"
-              categoria="galeria"
-              [iter]="gal"
-              [userId]="userId"
-            ></app-like>
+                  *ngIf="galeria"
+                  categoria="galeria"
+                  [iter]="gal"
+                  [userId]="userId"
+                ></app-like>
               </ion-col>
               <ion-row *ngIf="misImgs">
                 <ion-col>
-                  <ion-button color="danger" (click)="presentEliminar('imagen',profileId,gal.galeria_id)" size="small" style="float: right">
+                  <ion-button
+                    color="danger"
+                    (click)="presentEliminar('imagen',profileId,gal.galeria_id)"
+                    size="small"
+                    style="float: right"
+                  >
                     <ion-icon
                       slot="icon-only"
                       name="trash"
@@ -125,9 +129,17 @@
           class="card-foto"
         >
           <ion-card-content class="card-content">
-            <video width="100%" height="100%" controls>
-              <source [src]="gal.contenido" type="video/mp4" />
-            </video>
+            <div *ngIf="gal.contenido">
+              <video
+                width="100%"
+                height="100%"
+                playsinline
+                preload="auto"
+                controls
+              >
+                <source [src]="gal.contenido" type="video/mp4" />
+              </video>
+            </div>
           </ion-card-content>
           <ion-card-content>
             <ion-card-subtitle
@@ -147,7 +159,12 @@
             <ion-grid>
               <ion-row *ngIf="misImgs">
                 <ion-col>
-                  <ion-button color="danger" size="small" style="float: right">
+                  <ion-button
+                    color="danger"
+                    size="small"
+                    style="float: right"
+                    (click)="presentEliminar('video',profileId,gal.galeria_id)"
+                  >
                     <ion-icon
                       slot="icon-only"
                       name="trash"

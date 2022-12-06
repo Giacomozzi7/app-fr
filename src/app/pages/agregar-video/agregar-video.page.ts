@@ -16,7 +16,7 @@ export class AgregarVideoPage implements OnInit {
   video: FormGroup;
   fileToUpload!: Blob;
   userId: string = '632a072930305800b2d85221';
-  videoSrc: String | ArrayBuffer = 'a.mp4';
+  videoSrc: String | ArrayBuffer;
   isVid!: boolean;
   vidSelected: boolean
   myVid: FormData
@@ -73,8 +73,9 @@ export class AgregarVideoPage implements OnInit {
       this.myVid = data[0].galeria.filter((img) => {
         return (
           img.usuario_id === this.userId && img.galeria_id === this.idGal
-        );});[0];
-      this.video.patchValue(this.myVid);
+        );});
+      console.log(this.myVid)
+      this.video.patchValue(this.myVid[0]);
     });
   
   }

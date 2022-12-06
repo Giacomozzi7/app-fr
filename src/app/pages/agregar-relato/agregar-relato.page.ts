@@ -71,8 +71,8 @@ export class AgregarRelatoPage implements OnInit {
       })[0];
 
       this.conte = this.myRelato.contenido
-      console.log(this.conte)
       this.relato.patchValue(this.myRelato);
+      this.relatoSrc = this.myRelato.contenido
     });
   }
 

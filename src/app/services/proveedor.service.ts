@@ -83,6 +83,7 @@ export class ProveedorService {
   }
 
   postGaleria(categoria: string,id: string,formData: FormData){
+    console.log(id)
     return this.http.post('https://164.77.114.239:8129/api/galeria/' + categoria + '/' + id, formData)
   }
 

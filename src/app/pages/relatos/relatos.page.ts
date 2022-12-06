@@ -30,6 +30,7 @@ export class RelatosPage implements OnInit {
   isPlaying = false;
   progress = 0;
   @ViewChild('range', {static: false}) range:IonRange;
+  isLoaded = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -46,12 +47,13 @@ export class RelatosPage implements OnInit {
 
   }
 
-  obtRelatos(){
+  obtRelatos() {
     this.proveedor.obtenerRelatos(this.profileId)
     .subscribe((data) => {
       this.relatos = data[0].relatos;
       this.buscarUsuarios()
       this.fillLikes()
+      this.isLoaded = true;
     });
 
   }
@@ -74,7 +76,6 @@ export class RelatosPage implements OnInit {
   }
 
   eliminarComentario(id:string, id_r:string){
-    console.log(id)
     this.proveedor.deleteRelato(id,id_r)
       .subscribe((success)=>{
         console.log(success)
@@ -98,20 +99,14 @@ export class RelatosPage implements OnInit {
     }
   }
 
-  buscarUsuarios(){
-    this.relatos.forEach((element:Relato) =>{
-      let userId = element['usuario_id']
-      this.proveedor.obtenerUsuario(userId)
-        .subscribe((usuario) =>{
-          element['usuario_name'] = 
-            usuario[0]['nombre'] +
-            " " +
-            usuario[0]['apellido']
-        })
-    }) 
+  buscarUsuarios() {
+    this.relatos.forEach((relato: Relato, idx: number) => {
+      this.proveedor.obtenerUsuario(relato['usuario_id'])
+        .subscribe((usuario) => {
+          this.relatos[idx]['usuario_name'] = usuario[0]['nombre'] + ' ' + usuario[0]['apellido'];
+      });
+    })
   }
-
-
 
   //Funciones para el control del reproductor
   start(relato: Relato){
@@ -201,11 +196,6 @@ export class RelatosPage implements OnInit {
 
     await alert.present();
   }
-
-  
-
-  
-
  
 }
 
