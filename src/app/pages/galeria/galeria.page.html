@@ -149,14 +149,16 @@
               ><b> Fecha: </b> {{gal.fecha_subida}}</ion-card-subtitle
             >
             <p style="margin-top: 0.7vh">{{gal.descripcion}}</p>
-            <app-like
-              *ngIf="galeria"
-              categoria="galeria"
-              [iter]="gal"
-              [userId]="userId"
-            ></app-like>
-
+            
             <ion-grid>
+              <ion-col>
+                <app-like
+                *ngIf="galeria"
+                categoria="galeria"
+                [iter]="gal"
+                [userId]="userId"
+              ></app-like>
+              </ion-col>
               <ion-row *ngIf="misImgs">
                 <ion-col>
                   <ion-button
