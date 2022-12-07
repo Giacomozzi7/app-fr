@@ -23,6 +23,7 @@ export class AgregarRelatoPage implements OnInit {
   idRel: string
   myRelato
   conte: string;
+  isLoad: boolean = false;
 
 
 
@@ -115,18 +116,20 @@ export class AgregarRelatoPage implements OnInit {
 
       console.log(this.accion)
       if(this.accion === 'editar'){
-
+        this.isLoad = true;
         this.proveedor.putRelato(this.profileId, fd)
         .subscribe((data) => {
+          this.isLoad = false;
           this.mostrarAlert('Editado', 'Se ha editado el relato exitosamente');
         });
 
       }
       else if(this.relato.valid) {
-
-      this.proveedor.postRelato(this.profileId,fd)
-        .subscribe( (success) =>{
-          this.mostrarAlert('Agregado','El relato ha sido agregado exitosamente')
+        this.isLoad = true;
+        this.proveedor.postRelato(this.profileId,fd)
+          .subscribe( (success) =>{
+            this.isLoad = false;
+            this.mostrarAlert('Agregado','El relato ha sido agregado exitosamente') 
         })
       }
 

@@ -21,6 +21,7 @@ export class AgregarVideoPage implements OnInit {
   vidSelected: boolean
   myVid: FormData
   idGal
+  isLoad = false;
 
   constructor(
     private router: Router,
@@ -111,15 +112,19 @@ export class AgregarVideoPage implements OnInit {
       const fd = this.createFormData();
 
       if(this.accion === 'editar'){
+        this.isLoad = true;
         this.proveedor.putGaleria('video',this.profileId, fd).subscribe((data) => {
+          this.isLoad = false;
           this.mostrarAlert('Video editado', 'El video se editó correctamente');
         });
       }
 
       else{
-      this.proveedor.postGaleria('video',this.profileId,fd)
-        .subscribe( (success) =>{
-          this.mostrarAlert('Agregado','El video ha sido agregada exitosamente')
+        this.isLoad = true;
+        this.proveedor.postGaleria('video',this.profileId,fd)
+          .subscribe( (success) =>{
+            this.isLoad = false;
+            this.mostrarAlert('Agregado','El video ha sido agregada exitosamente')
         })
 
       }

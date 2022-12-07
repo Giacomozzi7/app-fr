@@ -28,6 +28,7 @@ export class AgregarImagenPage implements OnInit {
   idGal
   descripcionImg: string =''
   contenidoImg: string = '';
+  isLoad = false;
 
 
   constructor(
@@ -122,18 +123,23 @@ export class AgregarImagenPage implements OnInit {
   }
 
   onSubmit(): void {
+    this.isLoad = true;
     if (this.isImg === true /*&& this.imagen.valid*/) {
       const fd = this.createFormData();
 
       if(this.accion === 'editar'){
+        this.isLoad = true;
         this.proveedor.putGaleria('imagen',this.profileId, fd).subscribe((data) => {
+          this.isLoad = false;
           this.mostrarAlert('Imagen editada', 'La imagen se edito correctamente');
         });
       }
 
       else if (this.imagen.valid){
+        this.isLoad = true;
       this.proveedor.postGaleria('imagen',this.profileId,fd)
         .subscribe( (success) =>{
+          this.isLoad = false;
           this.mostrarAlert('Agregado','La imágen ha sido agregada exitosamente')
         })
 

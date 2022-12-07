@@ -46,6 +46,11 @@
               </form>
             </ion-card-content>
           </ion-card>
+          <ion-card *ngIf="isLoad">
+            <ion-card-content>
+              <ion-progress-bar type="indeterminate"></ion-progress-bar>
+            </ion-card-content>
+          </ion-card>
         </ion-col>
       </ion-row>
   </ion-grid>
