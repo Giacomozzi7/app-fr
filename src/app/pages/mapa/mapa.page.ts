@@ -70,7 +70,6 @@ export class MapaPage implements OnInit {
       (data: Marker[]) => {  
         this.markers = data
         this.loadMap();
-        console.log(this.aMarkers)
         this.watcherPosition();
         }
         )

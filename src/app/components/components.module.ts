@@ -12,6 +12,7 @@ import { ModalBrujulaComponent } from './modal-brujula/modal-brujula.component';
 import { ListenerComponent } from './listener/listener.component';
 import { CardResumenComponent } from './card-resumen/card-resumen.component';
 import { LikeComponent } from './like/like.component';
+import { TopEventosComponent } from './top-eventos/top-eventos.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { LikeComponent } from './like/like.component';
     ModalBrujulaComponent,
     ListenerComponent,
     CardResumenComponent,
-    LikeComponent
+    LikeComponent,
+    TopEventosComponent
   ],
   exports: [
     HeaderComponent,
@@ -34,7 +36,8 @@ import { LikeComponent } from './like/like.component';
     ModalBrujulaComponent,
     ListenerComponent,
     CardResumenComponent,
-    LikeComponent
+    LikeComponent,
+    TopEventosComponent
   ],
   imports: [
     CommonModule,

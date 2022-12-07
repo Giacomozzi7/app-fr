@@ -22,6 +22,7 @@ export class AgregarVideoPage implements OnInit {
   myVid: FormData
   idGal
   isLoad = false;
+  contenidoVid: string = '';
 
   constructor(
     private router: Router,
@@ -77,6 +78,8 @@ export class AgregarVideoPage implements OnInit {
         );});
       console.log(this.myVid)
       this.video.patchValue(this.myVid[0]);
+      this.videoSrc = this.myVid[0].contenido
+      this.contenidoVid = this.myVid[0].contenido
     });
   
   }
@@ -124,7 +127,7 @@ export class AgregarVideoPage implements OnInit {
         this.proveedor.postGaleria('video',this.profileId,fd)
           .subscribe( (success) =>{
             this.isLoad = false;
-            this.mostrarAlert('Agregado','El video ha sido agregada exitosamente')
+            this.mostrarAlert('Agregado','El video ha sido agregado exitosamente')
         })
 
       }
@@ -146,6 +149,7 @@ export class AgregarVideoPage implements OnInit {
       fd.append('tipo', 'vid');
       fd.append('galeria_id', this.idGal);
       fd.append('descripcion', this.video.get('descripcion').value);
+      fd.append('contenido', this.contenidoVid);
       fd.append('fecha_subida', this.crearFecha());
       fd.append('archivo', this.fileToUpload);
 

@@ -75,7 +75,7 @@ export class ProveedorService {
   postValoraciones(id: string, obj){
     return this.http.post('https://164.77.114.239:8129/api/Valoracion/' + id, obj)
   }
-  //---------------------------
+
 
   //GALERIA----------------
   obtenerGaleria(id:string){
@@ -95,7 +95,7 @@ export class ProveedorService {
     return this.http.delete('https://164.77.114.239:8129/api/Galeria/' + categoria + '/' + id + "/" + formData)
   }
 
-  //---------------------------
+
 
   
   //COMENTARIOS----------------
@@ -115,7 +115,7 @@ export class ProveedorService {
     return this.http.post('https://164.77.114.239:8129/api/Comentario/' + id, obj)
   }
 
-  //---------------------------
+
 
   //LIKES----------------
   postLike(tipoData: string,id_com: string ,id_user:string){
@@ -125,14 +125,14 @@ export class ProveedorService {
   deleteLike(tipoData: string,id_com: string ,id_user:string){
     return this.http.delete('https://164.77.114.239:8129/api/' + tipoData + '/dlike/' + id_com + '/' + id_user)
   }
-  //---------------------------
 
-  //LIKES----------------
+
+  //VISITAS----------------
   postVisita(id:string, obj){
     return this.http.post('https://164.77.114.239:8129/api/Visita/' + id, obj)
   }
 
-  //---------------------------
+
 
   obtenerEscenario(id:string){
     return this.http.get('https://164.77.114.239:8129/api/Escenario/' + id)

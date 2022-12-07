@@ -1,0 +1,22 @@
+ion-modal {
+    --height: 70%;
+    --width:90%;
+    --border-radius: 16px;
+
+
+    ion-checkbox{
+        --background:white;
+        --background-checked: #6815ec;
+        --border-color:#6815ec;
+        --border-color-checked:#6815ec;
+    }
+
+    ion-toolbar{
+        display:inline-block;
+    }
+
+    .volver-modal{
+        margin-left:35%;
+    }
+
+}
