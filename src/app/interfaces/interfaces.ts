@@ -85,3 +85,12 @@ export interface ValUser {
   val_inmersion: number;
   fecha_val: string;
 }
+
+export interface ModEducativo {
+  titulo: string;
+  subtitulo?: string;
+  contenido: string;
+  icono: string;
+  iconoColor: string;
+  site?: string;
+}
