@@ -94,3 +94,12 @@ export interface ModEducativo {
   iconoColor: string;
   site?: string;
 }
+
+
+export interface Top{ 
+  icon: string;
+  nombre: string;
+  nombre_pi: string;
+  valor: number;
+}
+

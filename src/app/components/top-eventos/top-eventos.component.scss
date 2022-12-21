@@ -1,6 +1,6 @@
 ion-modal {
-    --height: 70%;
-    --width:90%;
+    --height: 75%;
+    --width:100%;
     --border-radius: 16px;
 
 
@@ -17,6 +17,31 @@ ion-modal {
 
     .volver-modal{
         margin-left:35%;
+    }
+
+    ion-grid{
+        font-size: 1.7vh;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+        padding:0px;
+
+    }
+
+    ion-row{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .top-row{
+        font-weight: bold;
+    }
+
+    .icon-segment{
+        display:inline-block;
+        font-size:2.2vh;
+        vertical-align: middle;
+        margin-right:0.5vh;
     }
 
 }
