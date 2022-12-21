@@ -15,6 +15,8 @@ export class TopEventosComponent implements OnInit {
   topVis;
   activeTop;
   labelTipo :  string = 'Visitas';
+  starsInm : string[] = []
+  starsInt : string[] = []
 
 
   constructor(
@@ -29,10 +31,34 @@ export class TopEventosComponent implements OnInit {
         this.topVis = data['visitas']
 
         this.activeTop = [...this.topVis]
+        
+        this.roundValoraciones()
+
       })
       
     
   }
+
+  roundValoraciones() {
+    for (let i = 0; i < this.topInm.length; i++) {
+      let inm = parseFloat((Math.round(this.topInm[i].valor * 2) / 2).toFixed(1))
+      let int = parseFloat((Math.round(this.topInt[i].valor * 2) / 2).toFixed(1))
+
+      this.topInm[i].valor = Array(Math.trunc(inm)).fill('star')
+      this.topInt[i].valor = Array(Math.trunc(int)).fill('star')
+      
+      
+      if(!Number.isInteger(inm)){
+        this.topInm[i].valor.push('star-half')
+      } 
+
+      if(!Number.isInteger(int)){
+        this.topInt[i].valor.push('star-half')
+      }
+
+    }
+  }
+
 
   async segmentChanged(e){
     if (e.detail.value == 0){
