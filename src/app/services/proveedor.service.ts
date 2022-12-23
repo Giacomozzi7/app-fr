@@ -148,7 +148,7 @@ export class ProveedorService {
     return this.http.get<any>("assets/preguntas.json");
   }
   obtenerTarjetas(){
-    return this.http.get("assets/mod-educativo.json")
+    return this.http.get("https://164.77.114.239:8131/api/InfoModuloEducativo/all")
   }
 
   obtenerResumen(id: string){

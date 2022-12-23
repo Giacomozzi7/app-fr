@@ -12,7 +12,9 @@ import { ModEducativo } from 'src/app/interfaces/interfaces';
 export class ModuloEducativoPage implements OnInit {
 
   tarjetaHead
-  tarjetas: ModEducativo[];
+  tarjetas
+  // tarjetas: ModEducativo[];
+
   card: any;
 
   constructor(
@@ -27,7 +29,10 @@ export class ModuloEducativoPage implements OnInit {
     
     this.proveedor.obtenerTarjetas()
     .subscribe((data) =>{
-      this.tarjetas = data[0]['data'];
+      console.log(data)
+      this.tarjetas = data;
+      console.log(this.tarjetas)
+      // this.tarjetas = data[0]['data'];
       this.tarjetaHead = this.tarjetas[0];
     })    
   }
