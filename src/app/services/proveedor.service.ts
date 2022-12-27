@@ -12,87 +12,87 @@ export class ProveedorService {
 
   //Obtiene marcadores para el GIS
   obtenerMapPins(){
-    return this.http.get('https://164.77.114.239:8129/api/app/page/mappins')
+    return this.http.get('https://www.vjs.cl:8129/api/app/page/mappins')
   }
 
   
   obtenerEvento(id:string){
-    return this.http.get('https://164.77.114.239:8129/api/Eventos/'+ id)
+    return this.http.get('https://www.vjs.cl:8129/api/Eventos/'+ id)
   } 
 
  
   obtenerUsuario(id:string){
-    return this.http.get('https://164.77.114.239:8129/api/UsuarioApp/'+ id)
+    return this.http.get('https://www.vjs.cl:8129/api/UsuarioApp/'+ id)
   } 
 
   // CATEGORIAS----------------
   obtenerCategorias(){
-    return this.http.get('https://164.77.114.239:8129/api/CategoriaEvento/')
+    return this.http.get('https://www.vjs.cl:8129/api/CategoriaEvento/')
   }
 
   obtenerCategoria(id:string){
-    return this.http.get('https://164.77.114.239:8129/api/CategoriaEvento/' + id)
+    return this.http.get('https://www.vjs.cl:8129/api/CategoriaEvento/' + id)
   }
   //---------------------------
 
 
   // RELATOS----------------
   obtenerRelatos(id:string){
-    return this.http.get('https://164.77.114.239:8129/api/Relato/' + id)
+    return this.http.get('https://www.vjs.cl:8129/api/Relato/' + id)
   }
 
   postRelato(id: string, formData: FormData){
-    return this.http.post('https://164.77.114.239:8129/api/Relato/' + id, formData )
+    return this.http.post('https://www.vjs.cl:8129/api/Relato/' + id, formData )
   }
 
   putRelato(id: string, formData: FormData){
-    return this.http.put('https://164.77.114.239:8129/api/Relato/' + id, formData)
+    return this.http.put('https://www.vjs.cl:8129/api/Relato/' + id, formData)
   }
 
   deleteRelato(id:string, id_r:string){
-    return this.http.delete('https://164.77.114.239:8129/api/Relato/' + id + "/" + id_r)
+    return this.http.delete('https://www.vjs.cl:8129/api/Relato/' + id + "/" + id_r)
   }
   //---------------------------
 
 
   //DATO INTERES----------------
   obtenerDatosInteres(id:string){
-    return this.http.get('https://164.77.114.239:8129/api/DatosInteres/' + id)
+    return this.http.get('https://www.vjs.cl:8129/api/DatosInteres/' + id)
   }
   //---------------------------
 
 
   //VALORACIONES----------------
   obtenerValoraciones(id:string){
-    return this.http.get('https://164.77.114.239:8129/api/Valoracion/' + id)
+    return this.http.get('https://www.vjs.cl:8129/api/Valoracion/' + id)
   }
 
   putValoraciones(id: string, obj){
-    return this.http.put('https://164.77.114.239:8129/api/Valoracion/' + id, obj)
+    return this.http.put('https://www.vjs.cl:8129/api/Valoracion/' + id, obj)
 
   }
 
   postValoraciones(id: string, obj){
-    return this.http.post('https://164.77.114.239:8129/api/Valoracion/' + id, obj)
+    return this.http.post('https://www.vjs.cl:8129/api/Valoracion/' + id, obj)
   }
 
 
   //GALERIA----------------
   obtenerGaleria(id:string){
-    return this.http.get('https://164.77.114.239:8129/api/Galeria/' + id)
+    return this.http.get('https://www.vjs.cl:8129/api/Galeria/' + id)
   }
 
   postGaleria(categoria: string,id: string,formData: FormData){
     console.log(id)
-    return this.http.post('https://164.77.114.239:8129/api/galeria/' + categoria + '/' + id, formData)
+    return this.http.post('https://www.vjs.cl:8129/api/galeria/' + categoria + '/' + id, formData)
   }
 
   putGaleria(categoria: string,id: string, formData: FormData){
-    return this.http.put('https://164.77.114.239:8129/api/Galeria/' + categoria + '/' + id, formData)
+    return this.http.put('https://www.vjs.cl:8129/api/Galeria/' + categoria + '/' + id, formData)
   }
 
   deleteGaleria(categoria: string, id:string, formData:string){
-    return this.http.delete('https://164.77.114.239:8129/api/Galeria/' + categoria + '/' + id + "/" + formData)
+    return this.http.delete('https://www.vjs.cl:8129/api/Galeria/' + categoria + '/' + id + "/" + formData)
   }
 
 
@@ -100,47 +100,47 @@ export class ProveedorService {
   
   //COMENTARIOS----------------
   obtenerComentarios(id:string){
-    return this.http.get('https://164.77.114.239:8129/api/Comentario/' + id)
+    return this.http.get('https://www.vjs.cl:8129/api/Comentario/' + id)
   }
 
   deleteComentario(id:string, id_c:string){
-    return this.http.delete('https://164.77.114.239:8129/api/Comentario/' + id + "/" + id_c)
+    return this.http.delete('https://www.vjs.cl:8129/api/Comentario/' + id + "/" + id_c)
   }
 
   updateComentario(id:string, obj){
-    return this.http.put('https://164.77.114.239:8129/api/Comentario/' + id, obj)
+    return this.http.put('https://www.vjs.cl:8129/api/Comentario/' + id, obj)
   }
 
   postComentario(id:string ,obj){
-    return this.http.post('https://164.77.114.239:8129/api/Comentario/' + id, obj)
+    return this.http.post('https://www.vjs.cl:8129/api/Comentario/' + id, obj)
   }
 
 
 
   //LIKES----------------
   postLike(tipoData: string,id_com: string ,id_user:string){
-    return this.http.post('https://164.77.114.239:8129/api/'+ tipoData +'/like/' + id_com + '/' + id_user,'')
+    return this.http.post('https://www.vjs.cl:8129/api/'+ tipoData +'/like/' + id_com + '/' + id_user,'')
   }
 
   deleteLike(tipoData: string,id_com: string ,id_user:string){
-    return this.http.delete('https://164.77.114.239:8129/api/' + tipoData + '/dlike/' + id_com + '/' + id_user)
+    return this.http.delete('https://www.vjs.cl:8129/api/' + tipoData + '/dlike/' + id_com + '/' + id_user)
   }
 
 
   //VISITAS----------------
   postVisita(id:string, obj){
-    return this.http.post('https://164.77.114.239:8129/api/Visita/' + id, obj)
+    return this.http.post('https://www.vjs.cl:8129/api/Visita/' + id, obj)
   }
 
   //TOP 10
   obtenerTop(){
-    return this.http.get('https://164.77.114.239:8131/api/app/page/top?top=10')
+    return this.http.get('https://www.vjs.cl:8131/api/app/page/top?top=10')
   }
 
 
 
   obtenerEscenario(id:string){
-    return this.http.get('https://164.77.114.239:8129/api/Escenario/' + id)
+    return this.http.get('https://www.vjs.cl:8129/api/Escenario/' + id)
   }
 
  // (?)
@@ -148,11 +148,11 @@ export class ProveedorService {
     return this.http.get<any>("assets/preguntas.json");
   }
   obtenerTarjetas(){
-    return this.http.get("https://164.77.114.239:8131/api/InfoModuloEducativo/all")
+    return this.http.get("https://www.vjs.cl:8131/api/InfoModuloEducativo/all")
   }
 
   obtenerResumen(id: string){
-    return this.http.get('https://164.77.114.239:8129/api/app/page/evento/' + id)
+    return this.http.get('https://www.vjs.cl:8129/api/app/page/evento/' + id)
     
   }
 
