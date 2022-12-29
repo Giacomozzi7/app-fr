@@ -148,7 +148,7 @@ export class ProveedorService {
     return this.http.get<any>("assets/preguntas.json");
   }
   obtenerTarjetas(){
-    return this.http.get("https://www.vjs.cl:8131/api/InfoModuloEducativo/all")
+    return this.http.get("https://www.vjs.cl:8134/api/InfoModuloEducativo/all")
   }
 
   obtenerResumen(id: string){
