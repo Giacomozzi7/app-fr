@@ -67,7 +67,12 @@ const routes: Routes = [
   {
     path: 'agregar-video/:id/:type/:id_vid',
     loadChildren: () => import('./pages/agregar-video/agregar-video.module').then( m => m.AgregarVideoPageModule)
+  },
+  {
+    path: 'slides/:id',
+    loadChildren: () => import('./pages/slides/slides.module').then( m => m.SlidesPageModule)
   }
+
 
   
 ];

@@ -76,6 +76,13 @@ img-comparison-slider:focus{
     background-color: #1f1f1f;
 }
 
-
+.text-segment{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.7vh;
+    text-transform: none;
+    padding:1vh;
+    
+}
 
 

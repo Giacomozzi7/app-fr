@@ -40,8 +40,10 @@ export class GaleriaPage implements OnInit {
     this.refMemoria = 'memoria/' + this.profileId;
     this.refAgregar = 'agregar-imagen/' + this.profileId + '/agregar/""';
     this.refEditar = 'agregar-imagen/' + this.profileId + '/editar/';
+    
 
     this.obtGaleria();
+    
   }
 
   fillLikes() {
@@ -63,6 +65,7 @@ export class GaleriaPage implements OnInit {
   obtGaleria() {
     this.proveedor.obtenerGaleria(this.profileId).subscribe((data) => {
       this.galeria = data[0].galeria;
+      console.log(this.galeria)
       this.buscarUsuarios();
       this.fillLikes();
     });

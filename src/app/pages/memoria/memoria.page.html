@@ -1,8 +1,4 @@
-<app-header
-  titulo="Memoria del Evento"
-  *ngIf="evento"
-  refback="mapa"
-></app-header>
+<app-header titulo="Museo Virtual" *ngIf="evento" refback="mapa"></app-header>
 
 <ion-content *ngIf="evento">
   <app-card-resumen [profileId]="profileId"></app-card-resumen>
@@ -34,22 +30,25 @@
       </ion-card>
     </ion-row>
 
+    <ion-row>
+      <div style="margin:0 auto">
+        <ion-button color="warning" [href]="refValoraciones">
+          <ion-icon class="icon-segment" name="star"></ion-icon>
+          <span class="text-segment"> Valorar Punto de Interés</span>
+        </ion-button>
+      </div>
+    </ion-row>
+
     <ion-row class="row-img">
       <ion-col size="12" class="col-slides">
         <ion-slides pager="true">
           <ion-slide *ngFor="let sl of evento.memoria; let ind=index">
             <ion-card color="light" class="card-foto">
               <ion-card-header>
-                <ion-card-subtitle style="text-align: left"
-                  ><b>Título:</b> {{sl.titulo}}</ion-card-subtitle
-                >
-                <ion-card-subtitle style="text-align: left"
-                  ><b>Subido por:</b> {{sl.usuario_id}}</ion-card-subtitle
-                >
-                <ion-card-subtitle style="text-align: left"
-                  ><b>Descripción:</b> Espacio para
-                  descripción</ion-card-subtitle
-                >
+                <ion-card-subtitle style="text-align: left"><b>Título:</b> {{sl.titulo}}</ion-card-subtitle>
+                <ion-card-subtitle style="text-align: left"><b>Subido por:</b> {{sl.usuario_id}}</ion-card-subtitle>
+                <ion-card-subtitle style="text-align: left"><b>Descripción:</b> Espacio para
+                  descripción</ion-card-subtitle>
               </ion-card-header>
               <ion-card-content class="card-content">
                 <ion-slides #mySlider scrollbar="true">
@@ -60,30 +59,18 @@
                 <ion-grid>
                   <ion-row class="buttons-row" #btnRow>
                     <ion-col size="3">
-                      <ion-button
-                        [color]="aColor[ind][0]"
-                        expand="block"
-                        class="btn-img"
-                        (click)="clickBtn(0,ind)"
-                        >Antes
+                      <ion-button [color]="aColor[ind][0]" expand="block" class="btn-img"
+                        (click)="clickBtn(0,ind)">Antes
                       </ion-button>
                     </ion-col>
                     <ion-col size="6">
-                      <ion-button
-                        [color]="aColor[ind][1]"
-                        expand="block"
-                        class="btn-img"
-                        (click)="clickBtn(1,ind)"
-                        >Justo después
+                      <ion-button [color]="aColor[ind][1]" expand="block" class="btn-img"
+                        (click)="clickBtn(1,ind)">Justo después
                       </ion-button>
                     </ion-col>
                     <ion-col size="3">
-                      <ion-button
-                        [color]="aColor[ind][2]"
-                        expand="block"
-                        class="btn-img"
-                        (click)="clickBtn(2,ind)"
-                        >Ahora
+                      <ion-button [color]="aColor[ind][2]" expand="block" class="btn-img"
+                        (click)="clickBtn(2,ind)">Ahora
                       </ion-button>
                     </ion-col>
                   </ion-row>
@@ -101,53 +88,28 @@
   <ion-grid class="ion-no-padding">
     <ion-row class=".ion-no-padding" style="height: 7vh">
       <ion-col size="3">
-        <ion-button
-          fill="clear"
-          expand="block"
-          color="light"
-          size="large"
-          [href]="refGaleria"
-          class="ion-no-margin"
-        >
+        <ion-button fill="clear" expand="block" color="light" size="large" [href]="refGaleria" class="ion-no-margin">
+          <ion-icon name="albums"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button fill="clear" expand="block" color="light" size="large" [href]="refSlides"
+          class="ion-no-margin">
           <ion-icon name="images"></ion-icon>
         </ion-button>
       </ion-col>
       <ion-col size="3">
-        <ion-button
-          fill="clear"
-          expand="block"
-          color="light"
-          size="large"
-          [href]="refRelatos"
-          class="ion-no-margin"
-        >
+        <ion-button fill="clear" expand="block" color="light" size="large" [href]="refRelatos" class="ion-no-margin">
           <ion-icon name="megaphone"></ion-icon>
         </ion-button>
       </ion-col>
       <ion-col size="3">
-        <ion-button
-          fill="clear"
-          expand="block"
-          color="light"
-          size="large"
-          [href]="refComentarios"
-          class="ion-no-margin"
-        >
+        <ion-button fill="clear" expand="block" color="light" size="large" [href]="refComentarios"
+          class="ion-no-margin">
           <ion-icon name="chatbox-ellipses"></ion-icon>
         </ion-button>
       </ion-col>
-      <ion-col size="3">
-        <ion-button
-          fill="clear"
-          expand="block"
-          color="light"
-          size="large"
-          [href]="refValoraciones"
-          class="ion-no-margin"
-        >
-          <ion-icon name="star"></ion-icon>
-        </ion-button>
-      </ion-col>
+      
     </ion-row>
   </ion-grid>
 </ion-footer>

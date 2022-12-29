@@ -17,6 +17,7 @@ export class MemoriaPage implements OnInit {
   refRelatos: string;
   refComentarios: string;
   refValoraciones: string;
+  refSlides: string;
   aColor: String[][] = [];
 
 
@@ -36,6 +37,7 @@ export class MemoriaPage implements OnInit {
     this.refRelatos = 'relatos/'+ this.profileId;
     this.refValoraciones = 'valoraciones/'+ this.profileId;
     this.refComentarios = 'comentarios/' + this.profileId;
+    this.refSlides = 'slides/'+ this.profileId;
     this.screenOrientation.lock('portrait').catch((error) => {
       console.log('Función Nativa : No permitida en Browser');
     });
