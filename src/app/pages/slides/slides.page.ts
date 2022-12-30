@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Slide } from 'src/app/interfaces/interfaces';
 import { ProveedorService } from 'src/app/services/proveedor.service';
+import { SwiperComponent } from 'swiper/angular';
 
 
 @Component({
@@ -197,6 +198,12 @@ export class SlidesPage implements OnInit {
   profileId: string;
   refMemoria: string;
   userId: string = '632a072930305800b2d85221';
+  labels: string[] = ['Antes','Durante','J. Después','Ahora']
+  labels_2: string[] = ['Antes','J. Después','Ahora']
+
+  aColor: String[][] = [];
+
+  @ViewChildren('mySwiper') components: QueryList<SwiperComponent>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -215,7 +222,40 @@ export class SlidesPage implements OnInit {
   obtSlides(){
     this.buscarUsuarios()
     this.fillLikes()
+    this.genButtonColors()
+    console.log(this.aColor)
 
+  }
+
+  //Genera los colores para todo el conjunto de botones
+  genButtonColors() {
+    this.aColor = [];
+    for (let i = 0; i < this.slides.length; i++) {
+      if (this.slides[i].img.length === 3){
+        this.aColor.push(['dark', 'tertiary', 'tertiary']);
+      } else {
+        this.aColor.push(['dark','tertiary','tertiary','tertiary'])
+      }
+    }
+  }
+
+  clickBtn(ind_slide: number, ind_btn: number) {
+    let aData = this.components.toArray();
+    if (this.slides[ind_slide].img.length === 3){
+      this.aColor[ind_slide] = ['tertiary', 'tertiary', 'tertiary'];
+    } else {
+      this.aColor[ind_slide] = ['tertiary', 'tertiary', 'tertiary','tertiary'];
+    }
+
+    this.aColor[ind_slide][ind_btn] = 'dark';
+
+    console.log(aData)
+
+    aData[ind_slide].swiperRef.slideTo(ind_btn)
+
+
+    
+    
   }
 
   buscarUsuarios() {

@@ -22,24 +22,51 @@
     <ion-row class="ion-no-padding" *ngFor="let slide of slides; let ind=index">
       <ion-col size="12">
         <ion-card color="light" class="card-foto">
-          <ion-button size="small">Antes</ion-button>
-          <ion-button size="small">Durante</ion-button>
-          <ion-button size="small">J. Después</ion-button>
-          <ion-button size="small">Ahora</ion-button>
-          <swiper [pagination]="true">
+          <ion-grid class="ion-no-padding">
+            <ion-row>
+              <div *ngIf="slide.img.length === 3; then treslabel else cuatrolabel"></div>
+
+              <ng-template #treslabel>
+                <ion-col size="4" *ngFor="let label of labels_2;let  i= index">
+                  <ion-button size="small" class="btn-slider" expand="full" [color]="aColor[ind][i]" (click)="clickBtn(ind, i)">{{label}}</ion-button>
+                </ion-col>
+              </ng-template>
+
+              <ng-template #cuatrolabel>
+                <ion-col size="3" *ngFor="let label of labels;let i= index">
+                  <ion-button size="small" class="btn-slider" expand="full" [color]="aColor[ind][i]" (click)="clickBtn(ind, i)">{{label}}</ion-button>
+                </ion-col>
+              </ng-template>
+            </ion-row>
+
+
+          </ion-grid>
+          <swiper #mySwiper [pagination]="true">
             <ng-template swiperSlide *ngFor="let image of slide.img; let ind=index">
-              <ion-card-content class="ion-no-padding" style="width:100%; margin-bottom:1vh">
+              <ion-card-content class="ion-no-padding" style="width:100%">
                 <ion-img [src]="image"></ion-img>
                 <p><b>Fecha de captura: </b> {{slide.fechas[ind]}}</p>
                 <p>{{slide.descripciones[ind]}}</p>
-              </ion-card-content> 
+              </ion-card-content>
             </ng-template>
           </swiper>
-          <div style="width:100%;background-color:#222428; margin-bottom:0px;">
-            <p style="margin:0px">aa</p>
+          <div class="hr"></div>
+          <ion-card-content>
+            <ion-card-subtitle>
+              <b>Título: </b>{{slide.titulo}}
+            </ion-card-subtitle>
+            <ion-card-subtitle>
+              <b> Por: </b> {{slide.usuario_name}}
+            </ion-card-subtitle>
+            <ion-card-subtitle>
+              <b> Fecha: </b> {{slide.fecha_subida}}
+            </ion-card-subtitle>
+            <app-like *ngIf="slides" categoria="slides" [iter]="slide" [userId]="userId">
+            </app-like>
 
-          </div>
-          
+
+          </ion-card-content>
+
         </ion-card>
       </ion-col>
 
