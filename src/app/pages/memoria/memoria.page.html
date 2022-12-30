@@ -31,6 +31,33 @@
     </ion-row>
 
     <ion-row>
+
+      <swiper [grabCursor]="true" [effect]="'creative'"
+      [creativeEffect]="{
+        prev: {
+          shadow: true,
+          translate: [0, 0, -400]
+        },
+        next: {
+          translate: ['100%', 0, 0]
+        }
+      }" class="mySwiper" [autoplay]="{
+        delay: 2500,
+        disableOnInteraction: false
+      }" 
+        [pagination]="true">
+        <ng-template swiperSlide *ngFor="let destacado of aDestacados">
+          <ion-card color="light" class="card-foto">
+            <img [src]="destacado.contenido" />
+            <p><b>Subido por:</b> {{destacado.usuario_name}}</p>
+          </ion-card>
+        </ng-template>
+
+      </swiper>
+
+    </ion-row>
+
+    <ion-row>
       <div style="margin:0 auto">
         <ion-button color="warning" [href]="refValoraciones">
           <ion-icon class="icon-segment" name="star"></ion-icon>
@@ -39,48 +66,7 @@
       </div>
     </ion-row>
 
-    <ion-row class="row-img">
-      <ion-col size="12" class="col-slides">
-        <ion-slides pager="true">
-          <ion-slide *ngFor="let sl of evento.memoria; let ind=index">
-            <ion-card color="light" class="card-foto">
-              <ion-card-header>
-                <ion-card-subtitle style="text-align: left"><b>Título:</b> {{sl.titulo}}</ion-card-subtitle>
-                <ion-card-subtitle style="text-align: left"><b>Subido por:</b> {{sl.usuario_id}}</ion-card-subtitle>
-                <ion-card-subtitle style="text-align: left"><b>Descripción:</b> Espacio para
-                  descripción</ion-card-subtitle>
-              </ion-card-header>
-              <ion-card-content class="card-content">
-                <ion-slides #mySlider scrollbar="true">
-                  <ion-slide *ngFor="let imagen of sl.img">
-                    <ion-img [src]="imagen"></ion-img>
-                  </ion-slide>
-                </ion-slides>
-                <ion-grid>
-                  <ion-row class="buttons-row" #btnRow>
-                    <ion-col size="3">
-                      <ion-button [color]="aColor[ind][0]" expand="block" class="btn-img"
-                        (click)="clickBtn(0,ind)">Antes
-                      </ion-button>
-                    </ion-col>
-                    <ion-col size="6">
-                      <ion-button [color]="aColor[ind][1]" expand="block" class="btn-img"
-                        (click)="clickBtn(1,ind)">Justo después
-                      </ion-button>
-                    </ion-col>
-                    <ion-col size="3">
-                      <ion-button [color]="aColor[ind][2]" expand="block" class="btn-img"
-                        (click)="clickBtn(2,ind)">Ahora
-                      </ion-button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-content>
-            </ion-card>
-          </ion-slide>
-        </ion-slides>
-      </ion-col>
-    </ion-row>
+
   </ion-grid>
 </ion-content>
 
@@ -93,8 +79,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="3">
-        <ion-button fill="clear" expand="block" color="light" size="large" [href]="refSlides"
-          class="ion-no-margin">
+        <ion-button fill="clear" expand="block" color="light" size="large" [href]="refSlides" class="ion-no-margin">
           <ion-icon name="images"></ion-icon>
         </ion-button>
       </ion-col>
@@ -109,7 +94,7 @@
           <ion-icon name="chatbox-ellipses"></ion-icon>
         </ion-button>
       </ion-col>
-      
+
     </ion-row>
   </ion-grid>
 </ion-footer>

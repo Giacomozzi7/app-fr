@@ -214,7 +214,6 @@ export class SlidesPage implements OnInit {
   ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
     this.refMemoria = 'memoria/' + this.profileId;
-
     this.obtSlides()
 
   }
@@ -254,8 +253,6 @@ export class SlidesPage implements OnInit {
     aData[ind_slide].swiperRef.slideTo(ind_btn)
 
 
-    
-    
   }
 
   buscarUsuarios() {
@@ -283,6 +280,9 @@ export class SlidesPage implements OnInit {
       }
     });
   }
+
+
+
 
 
 

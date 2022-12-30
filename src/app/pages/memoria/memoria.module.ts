@@ -8,6 +8,7 @@ import { MemoriaPageRoutingModule } from './memoria-routing.module';
 
 import { MemoriaPage } from './memoria.page';
 import { ComponentsModule } from '../../components/components.module';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ComponentsModule } from '../../components/components.module';
     FormsModule,
     IonicModule,
     MemoriaPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    SwiperModule
   ],
   declarations: [MemoriaPage],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

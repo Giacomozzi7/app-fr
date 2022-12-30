@@ -134,10 +134,14 @@ export class ProveedorService {
 
   //TOP 10
   obtenerTop(){
-    return this.http.get('https://www.vjs.cl:8131/api/app/page/top?top=10')
+    return this.http.get('https://vjs.cl:8134/api/app/page/top?top=10')
   }
 
+  //Obtener destacados
+  obtenerDestacados(){
+    return this.http.get('https://vjs.cl:8134/api/Galeria/top?t=7')
 
+  }
 
   obtenerEscenario(id:string){
     return this.http.get('https://www.vjs.cl:8129/api/Escenario/' + id)

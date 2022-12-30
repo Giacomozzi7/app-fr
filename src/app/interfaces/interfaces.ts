@@ -116,3 +116,10 @@ export interface Slide{
   usuario_name?: string;
 }
 
+
+export interface Destacado {
+  contenido: string;
+  id_usuario: string;
+  usuario_name?: string;
+}
+

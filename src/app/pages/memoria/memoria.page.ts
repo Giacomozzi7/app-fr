@@ -1,14 +1,22 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewEncapsulation } from '@angular/core';
 import { IonRow, IonSlides, NavController } from '@ionic/angular';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 //PErmite sacar informacion de la url
 import { ActivatedRoute } from '@angular/router';
 import { ProveedorService } from 'src/app/services/proveedor.service';
+import { Destacado } from 'src/app/interfaces/interfaces';
+
+// import Swiper core and required modules
+import SwiperCore, { EffectCreative, Autoplay, Pagination } from "swiper";
+
+// install Swiper modules
+SwiperCore.use([EffectCreative, Autoplay, Pagination]);
 
 @Component({
   selector: 'app-memoria',
   templateUrl: './memoria.page.html',
-  styleUrls: ['./memoria.page.css'],
+  styleUrls: ['./memoria.page.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MemoriaPage implements OnInit {
   profileId: string;
@@ -19,6 +27,7 @@ export class MemoriaPage implements OnInit {
   refValoraciones: string;
   refSlides: string;
   aColor: String[][] = [];
+  aDestacados: Destacado[]
 
 
   @ViewChildren('mySlider') components: QueryList<IonSlides>;
@@ -46,10 +55,18 @@ export class MemoriaPage implements OnInit {
       .subscribe((data) => {
         this.evento = data[0];
         console.log(this.evento)
-        this.genButtonColors();
-        this.lockSlides();
-        this.buscarUsuarios()
+        this.obtDestacados()
+        
+
       });
+  }
+
+  obtDestacados(){
+    this.proveedor.obtenerDestacados()
+      .subscribe((data: Destacado[]) => {
+        this.aDestacados = data
+        this.buscarUsuarios()
+      })
   }
 
   //Bloquea los slides para que solo sean controlables por botones
@@ -63,35 +80,18 @@ export class MemoriaPage implements OnInit {
     });
   }
 
-  //Genera los colores para todo el conjunto de botones
-  genButtonColors() {
-    this.aColor = [];
-    for (let i = 0; i < this.evento.memoria.length; i++) {
-      this.aColor.push(['dark', 'warning', 'warning']);
-    }
-  }
-
-  //Evento de click sobre cada boton
-  clickBtn(num: number, ind: number) {
-    let aData = this.components.toArray();
-    aData[ind].lockSwipes(false)
-    aData[ind].slideTo(num);
-    this.aColor[ind] = ['warning', 'warning', 'warning'];
-    this.aColor[ind][num] = 'dark';
-    aData[ind].lockSwipes(true)
-    
-  }
-
-  buscarUsuarios(){
-    for (let i = 0; i < this.evento.memoria.length; i++) {
-      let userId = this.evento.memoria[i]['usuario_id']
-      this.proveedor.obtenerUsuario(userId)
+  buscarUsuarios() {
+    this.aDestacados.forEach((destacado: Destacado , idx: number) => {
+      this.proveedor.obtenerUsuario(destacado['id_usuario'])
         .subscribe((usuario) => {
-          let strNombre = usuario[0]['nombre'] + " "+ usuario[0]['apellido']
-          this.evento.memoria[i]['usuario_id'] = strNombre
-        })
-   }
-
+          this.aDestacados[idx]['usuario_name'] = usuario[0]['nombre'] + ' ' + usuario[0]['apellido'];
+      });
+    })
   }
+
+
+
+
+  
 
 }
