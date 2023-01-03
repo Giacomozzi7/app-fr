@@ -1,6 +1,6 @@
 @import "~swiper/css";
-@import "~swiper/css/effect-creative";
 @import "~swiper/css/pagination";
+@import "~swiper/css/navigation";
 
 ion-toolbar{
     height:7vh;
@@ -89,14 +89,8 @@ img-comparison-slider:focus{
     
 }
 
-.swiper {
+.mySwiper{
+    width:100%;
 
 }
-
-.swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  color: #fff;
-}
+  

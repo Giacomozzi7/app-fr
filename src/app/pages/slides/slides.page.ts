@@ -205,11 +205,18 @@ export class SlidesPage implements OnInit {
 
   @ViewChildren('mySwiper') components: QueryList<SwiperComponent>;
 
+  strMisSlides: string = 'Mis Slides';
+  strAgregar: string = 'Agregar Slides'
+  mySld: boolean = false;
+  misSlds: boolean = false;
+  flagSlides:  boolean = true;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public proveedor: ProveedorService,
     private alertController: AlertController
   ) { }
+
 
   ngOnInit() {
     this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -279,6 +286,22 @@ export class SlidesPage implements OnInit {
         };
       }
     });
+  }
+
+  toggleSlides() {
+    if (this.mySld === false) {
+      this.slides = this.slides.filter(
+        (obj) => obj.usuario_id === this.userId
+      );
+      this.mySld = true;
+      this.strMisSlides = 'Todos';
+      this.misSlds = true;
+    } else {
+      this.obtSlides();
+      this.mySld = false;
+      this.strMisSlides = 'Mis Slides'
+      this.misSlds = false;
+    }
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { IonRow, IonSlides, NavController } from '@ionic/angular';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 //PErmite sacar informacion de la url
@@ -6,11 +6,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { Destacado } from 'src/app/interfaces/interfaces';
 
+
 // import Swiper core and required modules
-import SwiperCore, { EffectCreative, Autoplay, Pagination } from "swiper";
+import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
+import { SwiperComponent } from "swiper/angular";
 
 // install Swiper modules
-SwiperCore.use([EffectCreative, Autoplay, Pagination]);
+SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 @Component({
   selector: 'app-memoria',
@@ -18,7 +20,7 @@ SwiperCore.use([EffectCreative, Autoplay, Pagination]);
   styleUrls: ['./memoria.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class MemoriaPage implements OnInit {
+export class MemoriaPage implements OnInit{
   profileId: string;
   evento;
   refGaleria: string;
@@ -29,8 +31,7 @@ export class MemoriaPage implements OnInit {
   aColor: String[][] = [];
   aDestacados: Destacado[]
 
-
-  @ViewChildren('mySlider') components: QueryList<IonSlides>;
+  @ViewChild('swiperComponent') swiperComponent: SwiperComponent;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -66,18 +67,8 @@ export class MemoriaPage implements OnInit {
       .subscribe((data: Destacado[]) => {
         this.aDestacados = data
         this.buscarUsuarios()
+        this.swiperComponent.swiperRef.autoplay.start()
       })
-  }
-
-  //Bloquea los slides para que solo sean controlables por botones
-  lockSlides() {
-    //this.component asincrono
-    this.components.changes.subscribe((aSL) => {
-      let arraySlides = aSL.toArray();
-      arraySlides.forEach((slide) => {
-        slide.lockSwipes(true);
-      });
-    });
   }
 
   buscarUsuarios() {
@@ -88,6 +79,16 @@ export class MemoriaPage implements OnInit {
       });
     })
   }
+
+  slideTo(num: number){
+    num === -1
+      ? this.swiperComponent.swiperRef.slidePrev()
+      : this.swiperComponent.swiperRef.slideNext()
+    
+    this.swiperComponent.swiperRef.autoplay.start()
+  }
+
+
 
 
 
