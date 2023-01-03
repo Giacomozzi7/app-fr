@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import {HttpClientModule} from '@angular/common/http';
 
+
 import { IonicModule } from '@ionic/angular';
 
 import { MapaPageRoutingModule } from './mapa-routing.module';
@@ -18,7 +19,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     IonicModule,
     MapaPageRoutingModule,
     HttpClientModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [MapaPage],
   providers:[

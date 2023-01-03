@@ -4,7 +4,7 @@ import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/n
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.css'],
+  styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit{
 

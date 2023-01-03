@@ -42,7 +42,7 @@
         <app-leyenda [mapcolors]="mapcolors"></app-leyenda>
         <!-- Fin Modal -->
         <div id="map" size="10"></div>
-        <div id="indicators"></div>
+        <div id="indicators" size="20" style="position: absolute"></div>
         <!-- Modal Filtro -->
         <app-filtros [filtros]="filtros" [aMarkers]="aMarkers" [map]="map" (colorEmitter)="recibirColor($event)">
         </app-filtros>
@@ -52,20 +52,27 @@
     <ion-row class="icons_row">
       <ion-col size="3">
         <div>
-          <ion-button fill="clear" expand="block" [color]="colorFiltro" size="large" class="btn" id="open-modal"
-            [disabled]="navigationMode === true">
+          <ion-button *ngIf="!navigationMode"   fill="clear" expand="block" [color]="colorFiltro" size="large" class="btn" id="open-modal">
             <ion-icon name="funnel" class="icon"></ion-icon>
+          </ion-button>
+          <ion-button *ngIf="navigationMode"   fill="clear" expand="block" [color]="colorNavigation[0]" size="large" class="btn" (click)="setRuta('BICYCLING')">
+            <ion-icon name="bicycle" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
-      <ion-col size="2" class="col_filtro">
+      <ion-col size="3" class="col_filtro">
         <div>
+          <ion-button *ngIf="navigationMode"   fill="clear" expand="block" [color]="colorNavigation[1]" size="large" class="btn" (click)="setRuta('WALKING')">
+            <ion-icon name="walk" class="icon"></ion-icon>
+          </ion-button>
         </div>
       </ion-col>
-      <ion-col size="2" class="col_filtro">
-        <p>{{latitude}}</p>
-      </ion-col>
-      <ion-col size="2" class="col_filtro">
+      <ion-col size="3" class="col_filtro">
+        <div>
+          <ion-button *ngIf="navigationMode"   fill="clear" expand="block" [color]="colorNavigation[2]" size="large" class="btn" (click)="setRuta('DRIVING')">
+            <ion-icon name="car" class="icon"></ion-icon>
+          </ion-button>
+        </div>
       </ion-col>
       <ion-col size="3">
         <div>
