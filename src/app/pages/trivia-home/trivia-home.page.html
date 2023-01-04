@@ -1,0 +1,107 @@
+<app-header titulo="Trivia" refback="modulo-educativo" ></app-header>
+
+<ion-content>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Comenzar trivia!!</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-button expand=block href="trivia">
+                <ion-icon name="play"></ion-icon>
+                Comenzar
+            </ion-button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Ranking de Puntajes</ion-card-title>
+        </ion-card-header>
+
+        <ion-card>
+            <ion-segment value="1" mode="ios" color="tertiary">
+                <ion-segment-button value="1" (click)="cambioSegment('1')">
+                    <ion-icon class="icon-segment" name="star"></ion-icon>
+                  <span class="text-segment">Fácil</span>
+                </ion-segment-button>
+    
+                <ion-segment-button value="2" (click)="cambioSegment('2')">  
+                    <ion-row>
+                        <ion-icon class="icon-segment" name="star"></ion-icon>
+                        <ion-icon class="icon-segment" name="star"></ion-icon>
+                    </ion-row>
+                  <ion-label> 
+                    <span class="text-segment">Intermedio</span>
+                  </ion-label>
+                </ion-segment-button>
+    
+                <ion-segment-button value="3" (click)="cambioSegment('3')">
+                    <ion-row>
+                        <ion-icon class="icon-segment" name="star"></ion-icon>
+                        <ion-icon class="icon-segment" name="star"></ion-icon>
+                        <ion-icon class="icon-segment" name="star"></ion-icon>
+                    </ion-row>
+                    <ion-label>Dificil</ion-label>
+                  </ion-segment-button>
+              </ion-segment>
+        </ion-card>
+
+
+        <ion-card-content *ngIf="flagFacil">
+            <ion-list>
+                <ion-item *ngFor="let i of [1,1,1,1,1,1]">
+                    <ion-avatar slot="start">
+                        <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>Nombre</h2>
+                        <p>Dificultad: Facil</p>
+                    </ion-label>
+                    <ion-label slot="end">
+                        <h2>00:00</h2>
+                        <p>00/00</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list> 
+        </ion-card-content>
+
+        <ion-card-content *ngIf="flagMedio">
+            <ion-list>
+                <ion-item *ngFor="let i of [1,1,1,1,1,1]">
+                    <ion-avatar slot="start">
+                        <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>Nombre</h2>
+                        <p>Dificultad: Intermedio</p>
+                    </ion-label>
+                    <ion-label slot="end">
+                        <h2>00:00</h2>
+                        <p>00/00</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list> 
+        </ion-card-content>
+
+        <ion-card-content *ngIf="flagDificil">
+            <ion-list>
+                <ion-item *ngFor="let i of [1,1,1,1,1,1]">
+                    <ion-avatar slot="start">
+                        <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>Nombre</h2>
+                        <p>Dificultad: Dificil </p>
+                    </ion-label>
+                    <ion-label slot="end">
+                        <h2>00:00</h2>
+                        <p>00/00</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list> 
+        </ion-card-content>
+    </ion-card>
+
+
+</ion-content>

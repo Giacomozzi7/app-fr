@@ -71,7 +71,11 @@ const routes: Routes = [
   {
     path: 'slides/:id',
     loadChildren: () => import('./pages/slides/slides.module').then( m => m.SlidesPageModule)
+  },  {
+    path: 'trivia-home',
+    loadChildren: () => import('./pages/trivia-home/trivia-home.module').then( m => m.TriviaHomePageModule)
   }
+
 
 
   

@@ -77,55 +77,7 @@ export class TriviaPage implements OnInit {
     });
     toast.present();
   }
-  mostrarValor(){
-    if(this.ince)
-    console.log(this.ince);
-    this.presentToast("Has seleccionado "+ this.ince)
-    this.categoria = this.ince;
-    this.shareService.varService = this.ince;
-  }
-  mostrarValorTerremoto(){
-    console.log(this.terre);
-    this.presentToast("Has seleccionado "+ this.terre)
-    this.categoria = this.terre;
-    this.shareService.varService = this.terre;
-  }
-  mostrarValorTsunami(){
-    console.log(this.tsu);
-    this.presentToast("Has seleccionado "+ this.tsu)
-    this.categoria = this.tsu;
-    this.shareService.varService = this.tsu;
-  }
-  mostrarValorInundacion(){
-    console.log(this.inun);
-    this.presentToast("Has seleccionado "+ this.inun)
-    this.categoria = this.inun;
-    this.shareService.varService = this.inun;
-  }
-  mostrarValorHuracan(){
-    console.log(this.hur);
-    this.presentToast("Has seleccionado "+ this.hur)
-    this.categoria = this.hur;
-    this.shareService.varService = this.hur
-  }
-  mostrarValorSequia(){
-    console.log(this.seq);
-    this.presentToast("Has seleccionado "+ this.seq)
-    this.categoria = this.seq;
-    this.shareService.varService = this.seq
-  }
-  mostrarValorAvalancha(){
-    console.log(this.aval);
-    this.presentToast("Has seleccionado "+ this.aval)
-    this.categoria = this.aval;
-    this.shareService.varService = this.aval
-  }
-  mostrarValorDeslizamiento(){
-    console.log(this.des);
-    this.presentToast("Has seleccionado "+ this.des)
-    this.categoria = this.des;
-    this.shareService.varService = this.des
-  }
+  
   pagPreguntas(){
     this.setDificultad = false;
     this.showPreguntas = true;

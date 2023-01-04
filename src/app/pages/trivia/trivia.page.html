@@ -1,12 +1,10 @@
-<app-header titulo="Trivia" refback="home" ></app-header>
+<app-header titulo="Trivia" refback="trivia-home" ></app-header>
 
 <ion-content *ngIf="setDificultad">
   <ion-card>
-    <br><br><br><br>
     <ion-card-header>
-      <ion-card-title>Seleccione la dificultad</ion-card-title>
+      <ion-card-title>Seleccione la dificultad:</ion-card-title>
     </ion-card-header>
-  <br>
     <ion-card-content>
           <ion-row class="ion-text-center">
             <ion-col>
@@ -26,67 +24,28 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Selecciona la categoría</ion-card-title>
+      <ion-card-title *ngIf="bajoFlag==false && medioFlag==false && altoFlag==false"> Dificultad no seleccionada </ion-card-title>
+      <ion-card-title *ngIf="bajoFlag==true || medioFlag==true || altoFlag==true"> Has seleccionado la dificultad: {{dif}}</ion-card-title>
+      
     </ion-card-header>
   
     <ion-card-content>
-      <div class="ion-text-center">
-      <ion-row>
-        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
-          <ion-button color="medium" size="small" expand="block" (click)="mostrarValor()" [id]="ince">Incendio
-            <ion-icon name="flame"></ion-icon>
-          </ion-button>
-        </ion-col>
-        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
-          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorTerremoto()" [id]="terre">Terremoto 
-            <ion-icon name="pulse"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-      
-      <ion-row>
-        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
-          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorTsunami()" [id]="tsu">Tsunami
-            <ion-icon name="flag"></ion-icon>
-          </ion-button>
-        </ion-col>
-        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
-          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorInundacion()" [id]="inun">Inundación
-            <ion-icon name="thunderstorm"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    
-      <ion-row>
-        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
-          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorHuracan()" [id]="hur">Huracán
-            <ion-icon name="cloudy-night"></ion-icon>
-          </ion-button>
-        </ion-col>
-        <ion-col sizeLg="4" sizeMd="6" sizeXs="6">
-          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorSequia()" [id]="seq">Sequía
-            <ion-icon name="sunny"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
+      <div class="ion-text-center" *ngIf="bajoFlag">
+        <p>Tendrás 20 segundos para responder un total de 12 preguntas</p>
+        <img src="../../../assets/img/volcan1.jpg">
+      </div>
 
-      <ion-row>
-        <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
-          <ion-button color="medium" size="small" expand="block" (click)="mostrarValorAvalancha()" [id]="aval">Avalancha
-            <ion-icon name="snow"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
+      <div class="ion-text-center" *ngIf="medioFlag">
+        <p>Tendrás 15 segundos para responder un total de 12 preguntas</p>
+        <img src="../../../assets/img/volcan2.jpg">
 
-      <ion-row>
-        <ion-col>
-          <ion-button color="medium" expand="block" size="small" (click)="mostrarValorDeslizamiento()" [id]="des"> Deslizamiento de Tierra 
-            <ion-icon name="alert-circle"></ion-icon>
-          </ion-button>
-        </ion-col>
+      </div>
 
-      </ion-row>
-    </div>
+      <div class="ion-text-center" *ngIf="altoFlag">
+        <p>Tendrás 10 segundos para responder un total de 12 preguntas</p>
+        <img src="../../../assets/img/volcan3.jpg">
+
+      </div>
 
     </ion-card-content>
   </ion-card>
