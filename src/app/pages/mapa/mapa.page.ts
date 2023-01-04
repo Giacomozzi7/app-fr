@@ -48,7 +48,7 @@ export class MapaPage implements OnInit {
   longitude
   myMarker;
 
-  filtros = { Tipo: [], Zona: [], Fecha: [] };
+  filtros = { Tipo: [], Zona: [], Fecha: [], Escenario: [] };
   mapcolors = {
     "Mi ubicación": "my_location",
     "Terremoto": 'purple',
@@ -89,6 +89,20 @@ export class MapaPage implements OnInit {
         for (let i = 0; i < 5; i++) {
           if (dataN[i]['id'] === marker.categoria) {
             marker.categoria = dataN[i]['tipo']
+          }
+        }
+      })
+    })
+    return;
+  }
+
+  async obtainEscenario() {
+    this.proveedor.obtenerEscenarios().subscribe((data) => {
+      let dataN = data
+      this.markers.forEach(marker => {
+        for (let i = 0; i < 6; i++) {
+          if (dataN[i]['id'] === marker.escenario_id) {
+            marker.escenario_id = dataN[i]['titulo']
           }
         }
       })
@@ -140,6 +154,7 @@ export class MapaPage implements OnInit {
   //Creacion del mapa
   async loadMap() {
     await this.obtainCategoria();
+    await this.obtainEscenario();
     // Definicion del mapa y zoom
     this.mapEle = document.getElementById('map');
     this.indicatorsEle = document.getElementById('indicators');
@@ -155,6 +170,7 @@ export class MapaPage implements OnInit {
   renderMarkers() {
     this.markers.forEach((marker) => {
       this.addMarker(marker);
+      console.log(marker)
     });
   }
 
@@ -181,13 +197,18 @@ export class MapaPage implements OnInit {
     this.aMarkers.push(marcadorGoogle);
     this.setInfoWindow(marcadorGoogle);
 
-    //Se agrega tipo, zona y fecha a los filtros sin repeticion
+
+    //Se agrega tipo, zona, escenario y fecha a los filtros sin repeticion
     if (this.filtros.Tipo.filter(e => e.valor === marcadorGoogle.categoria).length === 0) {
       this.filtros.Tipo.push({ valor: marcadorGoogle.categoria, isChecked: true });
     }
 
     if (this.filtros.Zona.filter(e => e.valor === marcadorGoogle.zona).length === 0) {
       this.filtros.Zona.push({ valor: marcadorGoogle.zona, isChecked: true });
+    }
+
+    if (this.filtros.Escenario.filter(e => e.valor === marcadorGoogle.escenario_id).length === 0) {
+      this.filtros.Escenario.push({ valor: marcadorGoogle.escenario_id, isChecked: true });
     }
 
     this.filtrarFecha(marcadorGoogle)

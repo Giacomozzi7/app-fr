@@ -21,10 +21,12 @@ export class FiltrosComponent implements OnInit {
   @ViewChildren('itemTipo') itemTipo: QueryList<IonItem>;
   @ViewChildren('itemZona') itemZona: QueryList<IonItem>;
   @ViewChildren('itemFecha') itemFecha: QueryList<IonItem>;
+  @ViewChildren('itemEscenario') itemEscenario: QueryList<IonItem>;
   @ViewChild('modal') modal: IonModal;
 
   constructor() { }
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   //Handler select 
   handleChange(ev){
@@ -33,6 +35,7 @@ export class FiltrosComponent implements OnInit {
     if (change=='categoria') this.mySlider.slideTo(0);
     if (change == 'fecha')   this.mySlider.slideTo(2);
     if (change=='zona')      this.mySlider.slideTo(1);
+    if (change=='escenario') this.mySlider.slideTo(3);
     this.mySlider.lockSwipes(true)
   }
 
@@ -54,8 +57,10 @@ export class FiltrosComponent implements OnInit {
         parseInt(e.valor.split('-')[1]) >= parseInt(mk.fecha.split('-')[2])
         &&
         e.isChecked === "true").length > 0
+      
+      let d = this.filtros.Escenario.filter(e => e.valor === mk.escenario_id && e.isChecked === "true").length > 0
 
-      if (a && b && c) mk.setMap(this.map);  
+      if (a && b && c && d) mk.setMap(this.map);  
     });
   }
 
@@ -65,7 +70,8 @@ export class FiltrosComponent implements OnInit {
     let arrayFiltros = [
       this.itemTipo.toArray(),
       this.itemZona.toArray(),
-      this.itemFecha.toArray()
+      this.itemFecha.toArray(),
+      this.itemEscenario.toArray()
     ]
     this.modal.dismiss()
 
