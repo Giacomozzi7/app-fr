@@ -44,7 +44,7 @@
         <div id="map" size="10"></div>
         <div id="indicators" size="20" style="position: absolute"></div>
         <!-- Modal Filtro -->
-        <app-filtros [filtros]="filtros" [aMarkers]="aMarkers" [map]="map" (colorEmitter)="recibirColor($event)">
+        <app-filtros [filtros]="filtros" [aMarkers]="aMarkers" [map]="map" [miPos]="miPos" [labelDistancia]="labelDistancia" (colorEmitter)="recibirColor($event)">
         </app-filtros>
         <!-- Fin Modal -->
       </ion-col>
@@ -62,6 +62,9 @@
       </ion-col>
       <ion-col size="3" class="col_filtro">
         <div>
+          <ion-button *ngIf="!navigationMode" color="light" size="tiny" class="btn"  style="width:6vh; height:4vh;" (click)="changeDistance()">
+            <ion-label style="font-size: 1.5vh; text-transform: none;">{{labelDistancia[0]}}</ion-label>
+          </ion-button>
           <ion-button *ngIf="navigationMode"   fill="clear" expand="block" [color]="colorNavigation[1]" size="large" class="btn" (click)="setRuta('WALKING')">
             <ion-icon name="walk" class="icon"></ion-icon>
           </ion-button>

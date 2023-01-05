@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild, ViewChildren, QueryList, Output, EventEmitter } from '@angular/core';
 import { IonSlides, IonItem, IonModal } from '@ionic/angular';
+import haversine from 'haversine-distance';
 
 @Component({
   selector: 'app-filtros',
@@ -12,6 +13,8 @@ export class FiltrosComponent implements OnInit {
   @Input() filtros;
   @Input() aMarkers;
   @Input() map;
+  @Input() labelDistancia;
+  @Input() miPos;
 
   //Output para color icono filtros
   @Output() colorEmitter = new EventEmitter<string>();
@@ -60,8 +63,19 @@ export class FiltrosComponent implements OnInit {
       
       let d = this.filtros.Escenario.filter(e => e.valor === mk.escenario_id && e.isChecked === "true").length > 0
 
-      if (a && b && c && d) mk.setMap(this.map);  
+
+      if (a && b && c && d) {
+        let marker_coordinate = { latitude : mk.pos_evento.lat, longitude : mk.pos_evento.lng}
+        if (this.calcDistancia(marker_coordinate, this.miPos) < this.labelDistancia[1]){
+          mk.setMap(this.map)
+        }
+      };  
     });
+  }
+
+  //Distancia entre marcadores
+  calcDistancia(punto_a, punto_b){
+    return haversine(punto_a,punto_b)
   }
 
   aplicarFiltro(){

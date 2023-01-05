@@ -4,6 +4,8 @@ import { ProveedorService } from '../../services/proveedor.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 import { ToastController } from '@ionic/angular';
+import haversine from 'haversine-distance';
+import { Coordinates } from '@awesome-cordova-plugins/geolocation/ngx';
 
 
 declare var google;
@@ -26,6 +28,7 @@ export class MapaPage implements OnInit {
   navigationMode: boolean = false;
   toastNavText: string = 'activado'
   colorNavigation: string[] = ['light','light','success']
+  labelDistancia = ['100km',100000]
 
 
 
@@ -142,7 +145,7 @@ export class MapaPage implements OnInit {
 
       google.maps.event.addListenerOnce(this.map, 'idle', () => {
         this.mapEle.classList.add('show-map');
-        this.renderMarkers();
+        this.renderMarkers(100000);
         this.filtros.Fecha.sort((a, b) => { return parseInt(a.valor.split(' ')[0]) - parseInt(b.valor.split(' ')[0]) });
       });
     })
@@ -166,11 +169,15 @@ export class MapaPage implements OnInit {
 
   }
 
+
   //Renderiza marcadores a partir de arreglo de marcadores
-  renderMarkers() {
+  renderMarkers(distancia: number) {
     this.markers.forEach((marker) => {
-      this.addMarker(marker);
-      console.log(marker)
+      let marker_coordinate = { latitude : marker.pos_evento.lat, longitude : marker.pos_evento.lng}
+      if (this.calcDistancia(marker_coordinate, this.miPos) < distancia){
+        this.addMarker(marker);
+      }
+ 
     });
   }
 
@@ -181,6 +188,13 @@ export class MapaPage implements OnInit {
       if (marker != this.currentMarcador) {
         marker.setVisible(!h);
       }
+    });
+  }
+
+  //Quita los marcadores del mapa
+  quitarMarkers() {
+    this.aMarkers.forEach((mk) => {
+      mk.setMap(null);
     });
   }
 
@@ -228,6 +242,40 @@ export class MapaPage implements OnInit {
     if (this.filtros.Fecha.filter(e => e.valor === finalDecade).length === 0) {
       this.filtros.Fecha.push({ valor: finalDecade, isChecked: true });
     }
+  }
+
+  changeDistance(){
+    console.log('cambiado')
+    this.quitarMarkers()
+    this.filtros = { Tipo: [], Zona: [], Fecha: [], Escenario: [] };
+    this.colorFiltro = 'light'
+
+    if(this.labelDistancia[0] === 'Todos'){
+      this.renderMarkers(100000)
+      this.labelDistancia = ['100km', 100000]
+
+    }
+
+    else if (this.labelDistancia[0] === '100km'){
+      this.renderMarkers(300000)
+      this.labelDistancia = ['300km', 300000]
+    }
+
+    else if (this.labelDistancia[0] === '300km'){
+      this.renderMarkers(500000)
+      this.labelDistancia = ['500km', 500000]
+    }
+
+    else {
+      this.renderMarkers(10000000)
+      this.labelDistancia = ['Todos', 10000000]
+    }
+    
+  }
+
+  //Distancia entre marcadores
+  calcDistancia(punto_a, punto_b){
+    return haversine(punto_a,punto_b)
   }
 
   //Permite obtener la decada de cada fecha
