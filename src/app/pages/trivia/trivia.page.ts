@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { interval } from 'rxjs';
 import { ProveedorService } from '../../services/proveedor.service';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -16,7 +17,9 @@ export class TriviaPage implements OnInit {
   constructor(
     private alertController: AlertController,
     private shareService: ProveedorService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public router: Router,
+    public nav: NavController
     ) { }
 
   categoria: any;
@@ -28,8 +31,7 @@ export class TriviaPage implements OnInit {
   showPreguntas: boolean = false;
   dif: string;
 
-  ince = "Incendio"; terre = "Terremoto"; tsu = "Tsunami"; inun = "Inundacion"; hur = "Huracan"; 
-  seq = "Sequia"; aval = "Avalancha"; des = "Deslizamiento de Tierra";
+  exit: string = "trivia-home"
 
 
   //Variables de logica portal 
@@ -66,6 +68,52 @@ export class TriviaPage implements OnInit {
     await alert.present();
   }
 
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: '¿Desea salir de la trivia?',
+      subHeader: 'Instrucciones',
+      buttons:[{
+        text: 'Si',
+        cssClass: 'alert-button-confirm',
+        role: 'confirm',
+        handler: () => {
+          // this.router.navigate(['trivia-home']);
+          this.nav.navigateBack('trivia-home');
+          console.log('Confirm Okay');
+          // this.showPreguntas = false;
+          // this.setDificultad = true;
+
+        }
+      },
+      {
+        text: 'No',
+        cssClass: 'alert-button-confirm',
+        role: 'cancel',
+        
+
+      }
+    ],
+      cssClass: 'custom-alert'
+    });
+    await alert.present();
+    
+
+  }
+
+
+
+  verificarSalir(){
+    if(this.showPreguntas === false){
+      this.setDificultad = false;
+      this.showPreguntas = false;
+      this.exit = "trivia-home";
+    }
+    else{
+      this.exit = "";
+      this.presentAlertConfirm();
+    }
+  }
+
   
 
   //Llamada a un toast 
@@ -82,6 +130,8 @@ export class TriviaPage implements OnInit {
     this.setDificultad = false;
     this.showPreguntas = true;
     this.startTrivia();
+    //Se desactiva la navegacion del header
+    this.exit = "";
   }
   setAltoFlag(){
     this.altoFlag = true;
@@ -122,8 +172,9 @@ export class TriviaPage implements OnInit {
   }
 
   getAllPreguntas(){
-    this.shareService.getQuestionJson().subscribe((res: any) => {
-      this.preguntasList = res.preguntas;
+    this.shareService.obtenerPreguntas().subscribe((res: any) => {
+      console.log(res);
+      this.preguntasList = res[0].preguntas;
     });
   }
 

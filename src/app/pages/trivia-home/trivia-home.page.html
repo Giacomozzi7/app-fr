@@ -2,7 +2,7 @@
 
 <ion-content>
 
-    <ion-card>
+    <ion-card class="cards">
         <ion-card-header>
             <ion-card-title>Comenzar trivia!!</ion-card-title>
         </ion-card-header>
@@ -14,13 +14,13 @@
         </ion-card-content>
     </ion-card>
 
-    <ion-card>
+    <ion-card class="cards">
         <ion-card-header>
             <ion-card-title>Ranking de Puntajes</ion-card-title>
         </ion-card-header>
 
-        <ion-card>
-            <ion-segment value="1" mode="ios" color="tertiary">
+        <div>
+            <ion-segment value="1" mode="ios" color="dark">
                 <ion-segment-button value="1" (click)="cambioSegment('1')">
                     <ion-icon class="icon-segment" name="star"></ion-icon>
                   <span class="text-segment">Fácil</span>
@@ -45,12 +45,12 @@
                     <ion-label>Dificil</ion-label>
                   </ion-segment-button>
               </ion-segment>
-        </ion-card>
+        </div>
 
 
         <ion-card-content *ngIf="flagFacil">
             <ion-list>
-                <ion-item *ngFor="let i of [1,1,1,1,1,1]">
+                <ion-item *ngFor="let i of [1,1,1,1,1,1]" class ="cards">
                     <ion-avatar slot="start">
                         <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
                     </ion-avatar>
@@ -59,8 +59,8 @@
                         <p>Dificultad: Facil</p>
                     </ion-label>
                     <ion-label slot="end">
-                        <h2>00:00</h2>
-                        <p>00/00</p>
+                        <h2>Puntaje: 00:00</h2>
+                        <p>Correctas: 00/00</p>
                     </ion-label>
                 </ion-item>
             </ion-list> 
@@ -68,7 +68,7 @@
 
         <ion-card-content *ngIf="flagMedio">
             <ion-list>
-                <ion-item *ngFor="let i of [1,1,1,1,1,1]">
+                <ion-item *ngFor="let i of [1,1,1,1,1,1]" class ="cards">
                     <ion-avatar slot="start">
                         <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
                     </ion-avatar>
@@ -86,7 +86,7 @@
 
         <ion-card-content *ngIf="flagDificil">
             <ion-list>
-                <ion-item *ngFor="let i of [1,1,1,1,1,1]">
+                <ion-item *ngFor="let i of [1,1,1,1,1,1]" class ="cards">
                     <ion-avatar slot="start">
                         <img src="https://ionicframework.com/docs/img/demos/avatar.svg">
                     </ion-avatar>
