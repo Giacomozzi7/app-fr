@@ -1,9 +1,82 @@
 
-#map {
-    height:80vh;
-    opacity: 0;
-    transition: opacity 150ms ease-in;
+@media (orientation: portrait){
+    .icons_row{
+        background-color: #1f1f1f;
+        height:10vh;
+        align-items: center;
+    }
+
+    #map {
+        height:80vh;
+        opacity: 0;
+        transition: opacity 150ms ease-in;
+    }
+    .icon{
+        font-size:4vh;
+    }
+
+    .label-distancia{
+        font-size: 1.5vh; 
+        text-transform: none
+    }
+
+    .col_filtro{
+        padding:1px;
+    }
+
+    #button-distancia{
+        width:6vh;
+        height:4vh;
+    }
+    
+
+} 
+@media (orientation: landscape){
+    .icons_row{
+        background-color: #1f1f1f;
+        height:12vh;
+        align-items: center;
+        
+    }
+
+    .icons_col{
+        display:flex;
+         align-items:center; 
+         justify-content:center
+    }
+
+    #map {
+        height:76vh;
+        opacity: 0;
+        transition: opacity 150ms ease-in;
+    }
+
+    .icon{
+        font-size:8vh;
+    }
+
+    ion-button{
+        height:8vh;
+        width:18vh;
+    }
+
+    .label-distancia{
+        font-size: 4vh; 
+        text-transform: none
+    }
+
+    .col_filtro{
+        padding:1px;
+    }
+
+    #button-distancia{
+        width:15vh;
+        height:7vh;
+    }
+    
+
 }
+
 
 #map.show-map{
     opacity: 1;
@@ -18,15 +91,10 @@
     padding:0px;
 }
 
-.icons_row{
-    background-color: #1f1f1f;
-    height:10vh;
-    align-items: center;
-}
 
-.icon{
-    font-size:4vh;
-}
+
+
+
 
 .coord{
     font-size: 1.2vh;
@@ -40,9 +108,6 @@
     
 }
 
-.col_filtro{
-    padding:1px;
-}
 
 
 ion-modal {

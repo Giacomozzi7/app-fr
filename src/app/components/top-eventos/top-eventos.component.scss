@@ -1,7 +1,66 @@
 ion-modal {
-    --height: 75%;
-    --width:100%;
-    --border-radius: 16px;
+
+    @media (orientation: portrait){
+        --height: 75%;
+        --width:100%;
+        --border-radius: 16px;
+
+        ion-grid{
+            font-size: 1.7vh;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            padding:0px;
+    
+        }
+
+        .icon-segment{
+            display:inline-block;
+            font-size:2.2vh;
+            vertical-align: middle;
+            margin-right:0.5vh;
+        }
+
+        .icon-stars{
+            display:inline-block;
+            font-size:1.7vh;
+            vertical-align: middle;
+        }
+
+        .imagen-icono{
+            width:3.5vh
+        }
+    }
+
+    @media (orientation: landscape){
+        --height: 100%;
+        --width:100%;
+
+        ion-grid{
+            font-size: 4vh;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            padding:0px;
+    
+        }
+
+        .icon-segment{
+            display:inline-block;
+            font-size:4.2vh;
+            vertical-align: middle;
+            margin-right:0.5vh;
+        }
+
+        .icon-stars{
+            display:inline-block;
+            font-size:4vh;
+            vertical-align: middle;
+        }
+
+        .imagen-icono{
+            width:6vh
+        }
+
+    }
 
 
     ion-checkbox{
@@ -19,13 +78,7 @@ ion-modal {
         margin-left:35%;
     }
 
-    ion-grid{
-        font-size: 1.7vh;
-        margin-top: 1vh;
-        margin-bottom: 1vh;
-        padding:0px;
-
-    }
+    
 
     ion-row{
         display: flex;
@@ -37,17 +90,8 @@ ion-modal {
         font-weight: bold;
     }
 
-    .icon-segment{
-        display:inline-block;
-        font-size:2.2vh;
-        vertical-align: middle;
-        margin-right:0.5vh;
-    }
+    
 
-    .icon-stars{
-        display:inline-block;
-        font-size:1.7vh;
-        vertical-align: middle;
-    }
+    
 
 }

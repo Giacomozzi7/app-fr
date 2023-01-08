@@ -1,14 +1,14 @@
 <ion-content fullscreen="true" scrollY="false">
   <ion-grid class="ion-no-padding" id="grilla">
     <ion-row class="icons_row">
-      <ion-col>
+      <ion-col class="icons_col">
         <div>
           <ion-button fill="clear" expand="block" color="light" size="large" class="btn" href="home">
             <ion-icon name="arrow-back-circle" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col class="icons_col" >
         <div>
           <ion-button fill="clear" expand="block" color="light" size="large" class="btn" id="open-modal-leyenda"
             [disabled]="navigationMode === true">
@@ -16,7 +16,7 @@
           </ion-button>
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col class="icons_col"  >
         <div>
           <ion-button fill="clear" expand="block" color="light" size="large" class="btn" href="mapa"
             [disabled]="navigationMode === true">
@@ -24,7 +24,7 @@
           </ion-button>
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col class="icons_col" >
         <div>
           <ion-button fill="clear" expand="block" color="light" size="large" class="btn" id="open-modal-top"
             [disabled]="navigationMode === true">
@@ -34,23 +34,14 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row class="row-mapa">
       <ion-col class="col_mapa">
-        <!-- Modal Top Eventos -->
-        <app-top-eventos></app-top-eventos>
-        <!-- Modal Leyenda -->
-        <app-leyenda [mapcolors]="mapcolors"></app-leyenda>
-        <!-- Fin Modal -->
         <div id="map" size="10"></div>
         <div id="indicators" size="20" style="position: absolute"></div>
-        <!-- Modal Filtro -->
-        <app-filtros [filtros]="filtros" [aMarkers]="aMarkers" [map]="map" [miPos]="miPos" [labelDistancia]="labelDistancia" (colorEmitter)="recibirColor($event)">
-        </app-filtros>
-        <!-- Fin Modal -->
       </ion-col>
     </ion-row>
     <ion-row class="icons_row">
-      <ion-col size="3">
+      <ion-col size="3" class="icons_col" >
         <div>
           <ion-button *ngIf="!navigationMode"   fill="clear" expand="block" [color]="colorFiltro" size="large" class="btn" id="open-modal">
             <ion-icon name="funnel" class="icon"></ion-icon>
@@ -60,24 +51,24 @@
           </ion-button>
         </div>
       </ion-col>
-      <ion-col size="3" class="col_filtro">
+      <ion-col size="3" class="col_filtro" class="icons_col" >
         <div>
-          <ion-button *ngIf="!navigationMode" color="light" size="tiny" class="btn"  style="width:6vh; height:4vh;" (click)="changeDistance()">
-            <ion-label style="font-size: 1.5vh; text-transform: none;">{{labelDistancia[0]}}</ion-label>
+          <ion-button *ngIf="!navigationMode" color="light" size="tiny" class="btn" id="button-distancia"  (click)="changeDistance()">
+            <ion-label class=label-distancia >{{labelDistancia[0]}}</ion-label>
           </ion-button>
           <ion-button *ngIf="navigationMode"   fill="clear" expand="block" [color]="colorNavigation[1]" size="large" class="btn" (click)="setRuta('WALKING')">
             <ion-icon name="walk" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
-      <ion-col size="3" class="col_filtro">
+      <ion-col size="3" class="col_filtro" class="icons_col" >
         <div>
           <ion-button *ngIf="navigationMode"   fill="clear" expand="block" [color]="colorNavigation[2]" size="large" class="btn" (click)="setRuta('DRIVING')">
             <ion-icon name="car" class="icon"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
-      <ion-col size="3">
+      <ion-col size="3" class="icons_col" >
         <div>
           <ion-button *ngIf="flagCurrent === 1" fill="clear" expand="block" [color]="buttonRuta[1]" size="large"
             class="btn" (click)="calculateRoute()" (click)="presentToast()">
@@ -88,3 +79,14 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+
+<!-- Modal Top Eventos -->
+<app-top-eventos></app-top-eventos>
+<!-- Modal Leyenda -->
+<app-leyenda [mapcolors]="mapcolors"></app-leyenda>
+<!-- Modal Filtro -->
+<app-filtros [filtros]="filtros" [aMarkers]="aMarkers" [map]="map" [miPos]="miPos" [labelDistancia]="labelDistancia" (colorEmitter)="recibirColor($event)">
+</app-filtros>
+<!-- Fin Modal -->
+

@@ -29,6 +29,8 @@ export class MapaPage implements OnInit {
   toastNavText: string = 'activado'
   colorNavigation: string[] = ['light','light','success']
   labelDistancia = ['100km',100000]
+  flagPortrait: boolean = false;
+  flagLandscape: boolean = false;
 
 
 
@@ -69,9 +71,14 @@ export class MapaPage implements OnInit {
 
   //Init
   ngOnInit() {
-    this.screenOrientation.lock('portrait').catch((error) => {
-      console.log('Función Nativa : No permitida en Browser');
-    });
+    this.checkOrientation()
+    this.screenOrientation.onChange().subscribe( (value) =>{
+      console.log('orientation changed')
+      this.checkOrientation()
+    }, (error) =>{
+      console.log('Función Nativa : No permitida en Browser')
+    })
+    
     this.proveedor.obtenerMapPins().subscribe(
       (data: Marker[]) => {
         this.markers = data
@@ -83,6 +90,17 @@ export class MapaPage implements OnInit {
       (error) => {
         console.log(error);
       }
+  }
+
+  checkOrientation(){
+    if (this.screenOrientation.type === 'portrait-primary'){
+      this.flagPortrait = true;
+      this.flagLandscape = false
+    } else {
+      this.flagLandscape = true;
+      this.flagPortrait = false;
+    }
+
   }
 
   async obtainCategoria() {
