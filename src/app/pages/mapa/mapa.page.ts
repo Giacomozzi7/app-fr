@@ -123,7 +123,7 @@ export class MapaPage implements OnInit {
       this.markers.forEach(marker => {
         for (let i = 0; i < 6; i++) {
           if (dataN[i]['id'] === marker.escenario_id) {
-            marker.escenario_id = dataN[i]['titulo']
+            marker.escenario_nombre = dataN[i]['titulo']
           }
         }
       })
@@ -193,6 +193,7 @@ export class MapaPage implements OnInit {
     this.markers.forEach((marker) => {
       let marker_coordinate = { latitude : marker.pos_evento.lat, longitude : marker.pos_evento.lng}
       if (this.calcDistancia(marker_coordinate, this.miPos) < distancia){
+        console.log(marker)
         this.addMarker(marker);
       }
  
@@ -239,8 +240,8 @@ export class MapaPage implements OnInit {
       this.filtros.Zona.push({ valor: marcadorGoogle.zona, isChecked: true });
     }
 
-    if (this.filtros.Escenario.filter(e => e.valor === marcadorGoogle.escenario_id).length === 0) {
-      this.filtros.Escenario.push({ valor: marcadorGoogle.escenario_id, isChecked: true });
+    if (this.filtros.Escenario.filter(e => e.valor === marcadorGoogle.escenario_nombre).length === 0) {
+      this.filtros.Escenario.push({ valor: marcadorGoogle.escenario_nombre, isChecked: true });
     }
 
     this.filtrarFecha(marcadorGoogle)

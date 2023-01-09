@@ -61,7 +61,7 @@ export class FiltrosComponent implements OnInit {
         &&
         e.isChecked === "true").length > 0
       
-      let d = this.filtros.Escenario.filter(e => e.valor === mk.escenario_id && e.isChecked === "true").length > 0
+      let d = this.filtros.Escenario.filter(e => e.valor === mk.escenario_nombre && e.isChecked === "true").length > 0
 
 
       if (a && b && c && d) {

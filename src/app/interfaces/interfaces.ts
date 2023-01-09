@@ -7,6 +7,7 @@ export interface Marker {
   zona: string;
   fecha: string;
   pos_evento: PosEvento;
+  escenario_nombre ?: string
 }
 
 export interface PosEvento {
