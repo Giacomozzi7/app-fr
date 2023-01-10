@@ -31,7 +31,7 @@ export class TriviaPage implements OnInit {
   showPreguntas: boolean = false;
   dif: string;
 
-  exit: string = "trivia-home"
+  exit: string = "modulo-educativo"
 
 
   //Variables de logica portal 
@@ -78,7 +78,7 @@ export class TriviaPage implements OnInit {
         role: 'confirm',
         handler: () => {
           // this.router.navigate(['trivia-home']);
-          this.nav.navigateBack('trivia-home');
+          this.nav.navigateBack('modulo-educativo');
           console.log('Confirm Okay');
           // this.showPreguntas = false;
           // this.setDificultad = true;
