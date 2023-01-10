@@ -22,14 +22,14 @@
         <div>
             <ion-segment value="1" mode="ios" color="dark">
                 <ion-segment-button value="1" (click)="cambioSegment('1')">
-                    <ion-icon class="icon-segment" name="star"></ion-icon>
+                    <ion-icon class="icon-segment" name="star" color="success"></ion-icon>
                   <span class="text-segment">Fácil</span>
                 </ion-segment-button>
     
                 <ion-segment-button value="2" (click)="cambioSegment('2')">  
                     <ion-row>
-                        <ion-icon class="icon-segment" name="star"></ion-icon>
-                        <ion-icon class="icon-segment" name="star"></ion-icon>
+                        <ion-icon class="icon-segment" name="star" color="warning"></ion-icon>
+                        <ion-icon class="icon-segment" name="star" color="warning"></ion-icon>
                     </ion-row>
                   <ion-label> 
                     <span class="text-segment">Intermedio</span>
@@ -38,9 +38,9 @@
     
                 <ion-segment-button value="3" (click)="cambioSegment('3')">
                     <ion-row>
-                        <ion-icon class="icon-segment" name="star"></ion-icon>
-                        <ion-icon class="icon-segment" name="star"></ion-icon>
-                        <ion-icon class="icon-segment" name="star"></ion-icon>
+                        <ion-icon class="icon-segment" name="star" color="danger"></ion-icon>
+                        <ion-icon class="icon-segment" name="star" color="danger"></ion-icon>
+                        <ion-icon class="icon-segment" name="star" color="danger"></ion-icon>
                     </ion-row>
                     <ion-label>Dificil</ion-label>
                   </ion-segment-button>
@@ -60,7 +60,7 @@
                     </ion-label>
                     <ion-label slot="end">
                         <h2>Puntaje: 00:00</h2>
-                        <p>Correctas: 00/00</p>
+                        <p>Correctas: 00/10</p>
                     </ion-label>
                 </ion-item>
             </ion-list> 
