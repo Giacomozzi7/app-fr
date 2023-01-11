@@ -159,6 +159,10 @@ export class ProveedorService {
     return this.http.get("https://www.vjs.cl:8134/api/InfoModuloEducativo/all")
   }
 
+  obtenerRanking(){
+    return this.http.get('/assets/ranking.json')
+  }
+
   obtenerResumen(id: string){
     return this.http.get('https://www.vjs.cl:8129/api/app/page/evento/' + id)
     

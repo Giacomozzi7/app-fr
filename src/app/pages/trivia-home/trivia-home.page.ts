@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProveedorService } from 'src/app/services/proveedor.service';
+
 @Component({
   selector: 'app-trivia-home',
   templateUrl: './trivia-home.page.html',
@@ -7,10 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TriviaHomePage implements OnInit {
 
-  constructor() { }
+  datos: any = [] 
+  users: string[] = []
+
+  constructor(
+    public proveedor: ProveedorService
+  ) { }
 
   ngOnInit() {
+    this.proveedor.obtenerRanking()
+    .subscribe((data) =>{
+      this.datos = data
+      console.log(data)
+      this.buscarUsuarios()
+    }) 
   }
+
 
   flagFacil: boolean = true;
   flagMedio: boolean = false;
@@ -39,5 +53,18 @@ export class TriviaHomePage implements OnInit {
       this.flagDificil = true;
     }
   }
+
+  buscarUsuarios(){
+    for (let i = 0; i < this.datos.length; i++) {
+      let userId = this.datos[i].user_id
+      this.proveedor.obtenerUsuario(userId)
+        .subscribe((usuario) => {
+          let strNombre = usuario[0]['nombre'] + " "+ usuario[0]['apellido']
+          // this.comentarios[i]['usuario_name'] = strNombre
+          console.log(strNombre)
+          this.users.push(strNombre)
+        })
+      }
+   }
 
 }
