@@ -31,18 +31,18 @@
   
     <ion-card-content>
       <div class="ion-text-center" *ngIf="bajoFlag">
-        <p>Tendrás 20 segundos para responder un total de 12 preguntas</p>
+        <p>Tendrás 20 segundos por cada pregunta para responder un total de 10 preguntas</p>
         <img src="../../../assets/img/volcan1.jpg">
       </div>
 
       <div class="ion-text-center" *ngIf="medioFlag">
-        <p>Tendrás 15 segundos para responder un total de 12 preguntas</p>
+        <p>Tendrás 15 segundos por cada pregunta para responder un total de 10 preguntas</p>
         <img src="../../../assets/img/volcan2.jpg">
 
       </div>
 
       <div class="ion-text-center" *ngIf="altoFlag">
-        <p>Tendrás 10 segundos para responder un total de 12 preguntas</p>
+        <p>Tendrás 10 segundos por cada pregunta para responder un total de 10 preguntas</p>
         <img src="../../../assets/img/volcan3.jpg">
 
       </div>
@@ -67,14 +67,14 @@
 
 <ion-content *ngIf="showPreguntas">
   <ion-card>
-    <ion-card-header>
+    <!-- <ion-card-header> -->
       <!-- <ion-card-title>Pregunta</ion-card-title> -->
-    </ion-card-header>
+    <!-- </ion-card-header> -->
     <ion-card-content>
       <ion-grid>
         <ion-row class="ion-text-center" >
           <ion-col size="4">
-            <ion-label>Puntaje: {{puntaje}}</ion-label>
+            <ion-label color="dark">Puntaje: {{puntaje}}</ion-label>
           </ion-col>
 
           <ion-col size="4">
@@ -87,35 +87,28 @@
           </ion-col>
         </ion-row>
 
-        <ion-row>
-          <ion-col>
+        <!-- <ion-row> -->
+          <!-- <ion-col> -->
             <!-- <ion-progress-bar color="secondary"></ion-progress-bar> -->
-            <div role="progressbar" [ngStyle]="{'width':progreso+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-
-          </ion-col>
-        </ion-row>
+            <!-- <div role="progressbar" [ngStyle]="{'width':progreso+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
+          <!-- </ion-col> -->
+        <!-- </ion-row> -->
       </ion-grid>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Pregunta</ion-card-title>
-    </ion-card-header>
+  <ion-card class="principal-card">
     <ion-card-content>
       <ion-grid>
         <ion-row >
           <ion-col class="ion-text-center">
-            <img src="https://images.assetsdelivery.com/compings_v2/startstock/startstock1902/startstock190200018.jpg" alt="">
+            <img class="img-card" src="data:image/jpeg;base64,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" alt="">
           </ion-col>
         </ion-row>
-
+        
         <ion-row>
-          <ion-col size="8">
+          <ion-col class="ion-text-center">
             <ion-label>{{preguntasList[preguntaActual]?.preguntaText}}</ion-label>
-          </ion-col>
-
-          <ion-col size="4">
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -137,7 +130,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-content>
       <ion-grid>
         <ion-row class="ion-text-center">
@@ -165,7 +158,7 @@
         </ion-row>
       </ion-grid>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 </ion-content>
 
 <ion-content *ngIf="isQuizCompleted">
@@ -225,3 +218,32 @@
   </ion-card>
   
 </ion-content>
+
+<ion-footer *ngIf="showPreguntas">
+  <ion-grid>
+    <ion-row class="ion-text-center">
+      <ion-col size="6">
+        <ion-button (click)="resetQuiz()" color="danger">
+          <ion-icon name="refresh-circle" size="large" ></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button [disabled]="preguntaActual===preguntasList.length-1"class="btn" (click)="nextQuestion()" color="light">
+          <ion-icon name="play-skip-forward" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-label>Reset Trivia</ion-label>
+      </ion-col>
+
+      <ion-col>
+        <ion-label>Saltar Pregunta</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-footer>
