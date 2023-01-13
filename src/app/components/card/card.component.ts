@@ -12,6 +12,7 @@ export class CardComponent implements OnInit {
   @Input() contenido: string;
   @Input() icono: string;
   @Input() iconoColor: string;
+  @Input() cardColor: string;
 
     constructor() { }
 

@@ -153,7 +153,7 @@ export class ProveedorService {
 
  // Obtener preguntas trivia
   obtenerPreguntas(){
-    return this.http.get("https://164.77.114.239:8129/api/moduloeducativo");
+    return this.http.get("https://vjs.cl:8129/api/moduloeducativo");
   }
   obtenerTarjetas(){
     return this.http.get("https://www.vjs.cl:8134/api/InfoModuloEducativo/all")

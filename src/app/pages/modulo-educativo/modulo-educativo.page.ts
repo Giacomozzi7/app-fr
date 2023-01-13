@@ -16,6 +16,7 @@ export class ModuloEducativoPage implements OnInit {
   // tarjetas: ModEducativo[];
 
   card: any;
+  cardColors: string[] = ["grey-custom", "red-light-custom","grey-light-custom", "red-custom", "grey-custom", "blue-dark-custom"]
 
   constructor(
     private screenOrientation: ScreenOrientation,

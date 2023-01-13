@@ -2,12 +2,13 @@
 
 <ion-content>
 
-  <app-card *ngFor="let tar of tarjetas"
+  <app-card *ngFor="let tar of tarjetas; index as i"
             titulo={{tar.titulo}}
             subtitulo={{tar.subtitulo}}
             contenido={{tar.contenido}}    
             icono={{tar.icono}} 
-            iconoColor={{tar.iconoColor}} 
+            iconoColor={{tar.iconoColor}}
+            cardColor={{cardColors[i]}} 
             (click)="abrirSite(tar.site)">
   </app-card>
 
