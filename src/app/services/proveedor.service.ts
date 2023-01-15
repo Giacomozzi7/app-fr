@@ -148,7 +148,7 @@ export class ProveedorService {
   }
 
   obtenerEscenarios(){
-    return this.http.get('https://164.77.114.239:8129/api/Escenario')
+    return this.http.get('https://www.vjs.cl:8129/api/Escenario')
   }
 
  // Obtener preguntas trivia
