@@ -26,6 +26,7 @@ export class TriviaPage implements OnInit {
   altoFlag: boolean = false;
   medioFlag: boolean = false;
   bajoFlag: boolean = false;
+  start: boolean = true;
 
   setDificultad: boolean = true;
   showPreguntas: boolean = false;
@@ -134,6 +135,7 @@ export class TriviaPage implements OnInit {
     this.altoFlag = true;
     this.medioFlag = false;
     this.bajoFlag = false;
+    this.start = false;
     this.dif = "Dificil";
 
   }
@@ -141,12 +143,14 @@ export class TriviaPage implements OnInit {
     this.altoFlag = false;
     this.medioFlag = true;
     this.bajoFlag = false;
+    this.start = false;
     this.dif = "Intermedio";
   }
   setBajoFlag(){  
     this.altoFlag = false;
     this.medioFlag = false;
     this.bajoFlag = true;
+    this.start = false;
     this.dif = "Facil";
   }
 
