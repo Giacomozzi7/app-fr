@@ -137,6 +137,7 @@ export class MapaPage implements OnInit {
     },
       (coordinates) => {
         if (coordinates !== null) {
+          console.log(coordinates)
           this.myMarker.setPosition(
             new google.maps.LatLng(coordinates.coords.latitude, coordinates.coords.longitude)
           )

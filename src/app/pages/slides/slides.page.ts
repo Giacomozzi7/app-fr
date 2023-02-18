@@ -30,7 +30,7 @@ export class SlidesPage implements OnInit {
         "02/02/2020"
       ],
       descripciones: [
-        "Esta es una descripcion para la imágen del antes.",
+        "Momentos previos al suceso",
         "Esta es una descripcion para la imágen del justo después.",
         "Esta es una descripción para la imágen del ahora."
       ],

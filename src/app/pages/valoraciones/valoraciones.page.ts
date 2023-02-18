@@ -47,7 +47,7 @@ export class ValoracionesPage implements OnInit {
       console.log(this.valoracion)
       if (Object.keys(this.valoracion).length > 0){
         this.setPreviousVal()
-        this.enviarTexto = 'Re-Valorar'
+        this.enviarTexto = 'Volver a valorar'
       }
 
     });

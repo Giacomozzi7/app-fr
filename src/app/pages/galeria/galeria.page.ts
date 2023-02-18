@@ -120,7 +120,7 @@ export class GaleriaPage implements OnInit {
     } else{
       this.strMiGaleria = 'Mis Videos'
       this.strAgregar = 'Agregar Video'
-      this.strParagraph = 'todos los videos subidos'
+      this.strParagraph = 'todos los videos'
       this.strIcon = 'videocam'
       this.refAgregar = 'agregar-video/' + this.profileId + '/agregar/""';
       this.refEditar = 'agregar-video/' + this.profileId + '/editar/';
