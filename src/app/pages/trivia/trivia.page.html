@@ -55,7 +55,7 @@
       <ion-grid>
         <ion-row>
           <ion-col sizeLg="4" sizeMd="4" sizeXs="12">
-            <ion-button expand="block" (click)="pagPreguntas()">Jugar!!!</ion-button>
+            <ion-button expand="block" disabled="{{start}}" (click)="pagPreguntas()">Jugar!!!</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -129,36 +129,6 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
-
-  <!-- <ion-card>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row class="ion-text-center">
-          <ion-col size="6">
-            <ion-button (click)="resetQuiz()" color="danger">
-              <ion-icon name="refresh-circle" size="large" ></ion-icon>
-            </ion-button>
-          </ion-col>
-
-          <ion-col size="6">
-            <ion-button [disabled]="preguntaActual===preguntasList.length-1"class="btn" (click)="nextQuestion()" color="light">
-              <ion-icon name="play-skip-forward" size="large"></ion-icon>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-
-        <ion-row class="ion-text-center">
-          <ion-col>
-            <ion-label>Reset Trivia</ion-label>
-          </ion-col>
-
-          <ion-col>
-            <ion-label>Saltar Pregunta</ion-label>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card> -->
 </ion-content>
 
 <ion-content *ngIf="isQuizCompleted">
@@ -207,6 +177,12 @@
             <ion-label>Puntaje: {{puntaje}} puntos</ion-label>
           </ion-col>
         </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-label>Preguntas No Respondidas: {{respuestaNoRespondida}} </ion-label>
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
@@ -229,7 +205,7 @@
       </ion-col>
 
       <ion-col size="6">
-        <ion-button [disabled]="preguntaActual===preguntasList.length-1"class="btn" (click)="nextQuestion()" color="light">
+        <ion-button class="btn" (click)="nextQuestion()" color="light">
           <ion-icon name="play-skip-forward" size="large"></ion-icon>
         </ion-button>
       </ion-col>

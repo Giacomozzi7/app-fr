@@ -26,6 +26,7 @@ export class TriviaPage implements OnInit {
   altoFlag: boolean = false;
   medioFlag: boolean = false;
   bajoFlag: boolean = false;
+  start: boolean = true;
 
   setDificultad: boolean = true;
   showPreguntas: boolean = false;
@@ -45,6 +46,7 @@ export class TriviaPage implements OnInit {
 
   respuestaCorrecta: number = 0;
   respuestaIncorrecta: number = 0;
+  respuestaNoRespondida: number = 0;
   interval$: any;
   progreso: string = "0";
   isQuizCompleted : boolean = false;
@@ -77,20 +79,14 @@ export class TriviaPage implements OnInit {
         cssClass: 'alert-button-confirm',
         role: 'confirm',
         handler: () => {
-          // this.router.navigate(['trivia-home']);
           this.nav.navigateBack('modulo-educativo');
           console.log('Confirm Okay');
-          // this.showPreguntas = false;
-          // this.setDificultad = true;
-
         }
       },
       {
         text: 'No',
         cssClass: 'alert-button-confirm',
         role: 'cancel',
-        
-
       }
     ],
       cssClass: 'custom-alert'
@@ -117,11 +113,13 @@ export class TriviaPage implements OnInit {
   
 
   //Llamada a un toast 
-  async presentToast(data: string) {
+  async presentToast(data: string, Color: string) {
     const toast = await this.toastController.create({
       message: data,
-      duration: 1500,
-      animated: true
+      duration: 400,
+      animated: true,
+      color: Color,
+      cssClass: 'my-custom-toast'
     });
     toast.present();
   }
@@ -137,6 +135,7 @@ export class TriviaPage implements OnInit {
     this.altoFlag = true;
     this.medioFlag = false;
     this.bajoFlag = false;
+    this.start = false;
     this.dif = "Dificil";
 
   }
@@ -144,12 +143,14 @@ export class TriviaPage implements OnInit {
     this.altoFlag = false;
     this.medioFlag = true;
     this.bajoFlag = false;
+    this.start = false;
     this.dif = "Intermedio";
   }
   setBajoFlag(){  
     this.altoFlag = false;
     this.medioFlag = false;
     this.bajoFlag = true;
+    this.start = false;
     this.dif = "Facil";
   }
 
@@ -180,28 +181,42 @@ export class TriviaPage implements OnInit {
 
   nextQuestion(){
     this.preguntaActual++;
+    this.notAnswered();
+    this.resetCounter();
+
+    if(this.preguntaActual === this.preguntasList.length){
+      this.isQuizCompleted = true;
+      this.showPreguntas = false;
+      // this.presentToast("¡Has terminado la trivia!", "");
+      this.stopCounter();
+    }
+
   }
 
   previousQuestion(){
     this.preguntaActual--;
   }
 
+  notAnswered(){
+    this.respuestaNoRespondida++;
+  }
+
   answer(currentQno: number, option:any){
     if(currentQno === this.preguntasList.length){
       this.isQuizCompleted = true;
       this.showPreguntas = false;
-      this.presentToast("¡Has terminado la trivia!");
+      // this.presentToast("¡Has terminado la trivia!", "");
       this.stopCounter();
     }
 
     if(option.correcto){
       this.puntaje += 10;
       this.respuestaCorrecta++;
-      this.presentToast("¡Respuesta correcta!"); 
+      this.presentToast("¡Respuesta correcta!", "success"); 
 
       setTimeout(() => {
         this.preguntaActual++;
-        this.presentToast("¡Siguiente pregunta!");
+        // this.presentToast("¡Siguiente pregunta!", "danger");
         this.resetCounter();
         this.getProgressPercent();
       }, 1000);
@@ -209,7 +224,7 @@ export class TriviaPage implements OnInit {
     }else{
       setTimeout(() => {
         this.preguntaActual++;
-        this.presentToast("Respuesta incorrecta");
+        this.presentToast("Respuesta incorrecta", "danger");
         this.respuestaIncorrecta++;
         this.resetCounter();
         this.getProgressPercent();
@@ -229,7 +244,18 @@ export class TriviaPage implements OnInit {
         this.preguntaActual++;
         this.contador = this.contador2;
         this.puntaje -= 10;
+        //aqui va contador de preguntas no respondidas
+        console.log("Respuesta no respondida");
+        this.notAnswered()
+        console.log(this.respuestaNoRespondida);
+
+        if(this.preguntaActual === this.preguntasList.length){
+          this.isQuizCompleted = true;
+          this.showPreguntas = false;
+          this.stopCounter();
         }
+
+      }
       });
 
     setTimeout(() => {
@@ -255,6 +281,9 @@ export class TriviaPage implements OnInit {
     this.contador = this.contador2;
     this.preguntaActual = 0;
     this.progreso = "0";
+    this.respuestaCorrecta = 0;
+    this.respuestaIncorrecta = 0;
+    this.respuestaNoRespondida = 0;
   }
 
   getProgressPercent(){
