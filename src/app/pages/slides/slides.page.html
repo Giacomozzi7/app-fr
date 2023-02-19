@@ -64,7 +64,7 @@
           <swiper #mySwiper>
             <ng-template swiperSlide *ngFor="let image of slide.img; let ind=index">
               <ion-card-content class="ion-no-padding" style="width:100%">
-                <ion-img [src]="image"></ion-img>
+                <img [lazyLoad]="image">
                 <p><b>Fecha de captura: </b> {{slide.fechas[ind]}}</p>
                 <p>{{slide.descripciones[ind]}}</p>
               </ion-card-content>

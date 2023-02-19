@@ -70,7 +70,7 @@
           class="card-foto"
         >
           <ion-card-content class="card-content">
-            <ion-img [src]="gal.contenido"></ion-img>
+            <img [lazyLoad]="gal.contenido">
           </ion-card-content>
           <ion-card-content>
             <ion-card-subtitle><b> Por: </b> {{gal.usuario_name}}</ion-card-subtitle

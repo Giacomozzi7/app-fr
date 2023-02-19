@@ -38,6 +38,9 @@
         <ion-card-content *ngIf="flagFacil">
             <ion-list>
                 <ion-item *ngFor="let dat of datos; index as i"  lines="full">
+                    <ion-label class="indice">
+                        <h2>{{i+1}}</h2>
+                    </ion-label>
                     <ion-label>
                         <h2>{{users[i]}}</h2>
                         <p>Fecha: {{dat.fecha}}</p>
@@ -53,6 +56,9 @@
         <ion-card-content *ngIf="flagMedio">
             <ion-list>
                 <ion-item *ngFor="let dat of datos; index as i"  lines="full">
+                    <ion-label class="indice">
+                        <h2>{{i+1}}</h2>
+                    </ion-label>
                     <ion-label>
                         <h2>{{users[i]}}</h2>
                         <p>Fecha: {{dat.fecha}}</p>
@@ -68,6 +74,9 @@
         <ion-card-content *ngIf="flagDificil">
             <ion-list>
                 <ion-item *ngFor="let dat of datos; index as i"  lines="full">
+                    <ion-label class="indice">
+                        <h2>{{i+1}}</h2>
+                    </ion-label>
                     <ion-label>
                         <h2>{{users[i]}}</h2>
                         <p>Fecha: {{dat.fecha}}</p>
